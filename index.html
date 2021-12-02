@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Solid Hello Worlds">
+    <meta name="keywords" content="Solid, Hello World">
+    <meta name="author" content="Timea Turdean">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solid Hello Worlds</title>
+    <link rel="shortcut icon" type="image/png" href="/images/solid-emblem.svg">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css"> 
+</head>
+<body class="first-page">
+    
+    <header>
+        <img class="logo-img" src="/images/solid-emblem.svg" /> 
+        <h1>Hello! Welcome to Solidverse</h1>
+        <span>On this page you will find different starter Solid code examples to fit your knowledge level.</span>
+    </header>
+
+    <div class="main">
+        <p>Choose from:</p>
+        <!-- Similar to React components, we load the ExampleTable component. Just that this componens are written in RDF (Turtle syntax) -->
+        <div data-solid_ui_component="/components/tables.ttl#ExamplesTable"></div>
+    </div>
+
+    <footer>
+        <a href="">source code</a> | <span class="footer-span">prototype v0.1</span>
+    </footer>
+
+    <script src="https://rdf.js.org/comunica-browser/versions/1/packages/actor-init-sparql/comunica-browser.js"></script>
+    <script src="https://solidcommunity.net/mashlib.js"></script>
+    <script src="https://jeff-zucker.solidcommunity.net/sp/src/solid-ui-components.js"></script>
+    <script>solidUI.init();</script>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+@prefix csw: <http://semantic-web.at/ontologies/csw.owl#> .
+@prefix ctag: <http://commontag.org/ns#> .
+@prefix cyc: <http://sw.cyc.com/concept/> .
+@prefix cycAnnot: <http://sw.cyc.com/CycAnnotations_v1#> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix freebase: <http://rdf.freebase.com/ns/> .
+@prefix opencyc: <http://sw.opencyc.org/concept/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix swc: <http://schema.semantic-web.at/ppt/> .
+@prefix tags: <http://www.holygoat.co.uk/owl/redwood/0.1/tags/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology> a owl:Ontology;
+  dcterms:created "2021-12-01T13:26:10.093Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  swc:BaseUrl "https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology";
+  swc:ResourceSeparator "#";
+  swc:containsAttributeProperty <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#author>,
+    <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#linkToDemo>, <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#linkToRepo>,
+    <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#linkToTutorial>;
+  swc:containsCustomType <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Code-Stack>,
+    <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Example-Application>, <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Semantic-Web-Library>,
+    <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Solid-Library>, <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Technical-Use-Case>;
+  swc:containsDirectedProperty <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usesSemWebLibrary>,
+    <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usesSolidLibrary>;
+  swc:containsPropertyWithInverse <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#exemplifiedInApplication>,
+    <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#showcasesUseCase>, <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usedInApplication>,
+    <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usesCodeStack>;
+  swc:hasLanguagePreference <urn:node1fh8aoltax8205438>;
+  swc:identifier "SolidHelloWorldOntology";
+  rdfs:label "SolidHelloWorldOntology"@en .
+
+<urn:node1fh8aoltax8205438> a swc:LanguagePreference;
+  swc:languagePreferencePriority "0"^^xsd:int;
+  swc:languagePreferenceValue "en" .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Example-Application> a owl:Class;
+  dcterms:created "2021-12-01T13:26:49.271Z"^^xsd:dateTime;
+  rdfs:label "Example Application" .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Semantic-Web-Library> a owl:Class;
+  dcterms:created "2021-12-01T13:32:38.273Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:label "Semantic Web Library";
+  rdfs:subClassOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Code-Stack> .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Code-Stack> a owl:Class;
+  dcterms:created "2021-12-01T13:27:02.710Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:label "Code Stack" .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Solid-Library> a owl:Class;
+  dcterms:created "2021-12-01T13:32:53.989Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:label "Solid Library";
+  rdfs:subClassOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Code-Stack> .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Technical-Use-Case> a owl:Class;
+  dcterms:created "2021-12-01T13:27:09.574Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:label "Technical Use Case" .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usesSemWebLibrary> a owl:ObjectProperty;
+  dcterms:created "2021-12-01T13:35:34.141Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:domain <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Example-Application>;
+  rdfs:label "usesSemWebLibrary"@en;
+  rdfs:range <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Semantic-Web-Library> .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usesSolidLibrary> a owl:ObjectProperty;
+  dcterms:created "2021-12-01T13:35:13.203Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:domain <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Example-Application>;
+  rdfs:label "usesSolidLibrary"@en;
+  rdfs:range <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Solid-Library> .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#showcasesUseCase> a owl:ObjectProperty;
+  dcterms:created "2021-12-01T13:29:15.881Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:domain <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Example-Application>;
+  rdfs:label "showcasesUseCase"@en;
+  rdfs:range <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Technical-Use-Case>;
+  owl:inverseOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#exemplifiedInApplication> .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#exemplifiedInApplication> a owl:ObjectProperty;
+  dcterms:created "2021-12-01T13:29:15.881Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:domain <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Technical-Use-Case>;
+  rdfs:label "exemplifiedInApplication"@en;
+  rdfs:range <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Example-Application>;
+  owl:inverseOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#showcasesUseCase> .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usesCodeStack> a owl:ObjectProperty;
+  dcterms:created "2021-12-01T13:28:29.436Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:domain <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Example-Application>;
+  rdfs:label "usesCodeStack"@en;
+  rdfs:range <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Code-Stack>;
+  owl:inverseOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usedInApplication> .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usedInApplication> a owl:ObjectProperty;
+  dcterms:created "2021-12-01T13:28:29.437Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:domain <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Code-Stack>;
+  rdfs:label "usedInApplication"@en;
+  rdfs:range <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Example-Application>;
+  owl:inverseOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usesCodeStack> .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#linkToTutorial> a owl:DatatypeProperty;
+  dcterms:created "2021-12-01T13:39:22.022Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:label "linkToTutorial"@en;
+  rdfs:range rdfs:Resource .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#author> a owl:DatatypeProperty;
+  dcterms:created "2021-12-01T13:38:41.113Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:label "author"@en;
+  rdfs:range xsd:string .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#linkToDemo> a owl:DatatypeProperty;
+  dcterms:created "2021-12-01T13:38:56.864Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:label "linkToDemo"@en;
+  rdfs:range rdfs:Resource .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#linkToRepo> a owl:DatatypeProperty;
+  dcterms:created "2021-12-01T13:39:05.636Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:label "linkToRepo"@en;
+  rdfs:range rdfs:Resource .

@@ -1,0 +1,33 @@
+body {
+    max-width: 70rem !important;
+}
+
+.first-page h1 {
+    text-align: center;
+}
+
+.first-page .logo-img {
+    width: 7vw;
+  }
+
+.first-page .registration {
+    font-size: 1rem;
+}
+
+.first-page table th {
+    color: black;
+    background-color: grey;
+}
+
+.first-column {
+    width: 28%;
+}
+
+.footer-span {
+    color: var(--accent);
+}
+
+footer a {
+    text-decoration: none;
+}
+
