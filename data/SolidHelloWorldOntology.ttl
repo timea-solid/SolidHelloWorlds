@@ -30,6 +30,7 @@
     <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#linkToDemo>, <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#linkToRepo>,
     <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#linkToTutorial>;
   swc:containsCustomType <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Code-Stack>,
+    <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Full-Code-Stack>,
     <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Example-Application>, <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Semantic-Web-Library>,
     <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Solid-Library>, <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Technical-Use-Case>;
   swc:containsDirectedProperty <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usesSemWebLibrary>,
@@ -59,7 +60,7 @@
   rdfs:label "Semantic Web Library";
   rdfs:subClassOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Full-Code-Stack> .
 
-<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Full-code-stack> a owl:Class;
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Full-Code-Ctack> a owl:Class;
   dcterms:created "2021-12-01T13:27:02.710Z"^^xsd:dateTime;
   dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
   rdfs:label "Full Code Stack" .
@@ -67,7 +68,7 @@
 <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Code-Stack> a owl:Class;
   dcterms:created "2021-12-01T13:27:02.710Z"^^xsd:dateTime;
   dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
-  rdfs:label "Code Stack" .
+  rdfs:label "Code Stack" ;
   rdfs:subClassOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Full-Code-Stack> .
 
 <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Solid-Library> a owl:Class;
