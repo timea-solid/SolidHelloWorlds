@@ -40,10 +40,11 @@
     So:linkToRepo wko:hellosolid;
     So:showcasesUseCase
         :Authentication-on-Solid-using-library, :Read-from-Solid-Pod,
-        :Write-to-Solid-Pod;
-    So:usesCodeStack :Bulma-CSS, :HTML, :JavaScript, :JQuery;
-    So:usesSemWebLibrary :rdflib, :Solid-query-ldflex;
-    So:usesSolidLibrary :Solid-solid-auth-client.
+        :Write-to-Solid-Pod, :Update-on-Solid-Pod;
+    So:usesFullCodeStack :Bulma-CSS, :HTML, :JavaScript, :JQuery, :CSS, :rdflib, :Solid-solid-auth-client, :Solid-query-ldflex;
+    So:usesCodeStack :Bulma-CSS, :HTML, :JavaScript, :JQuery, :CSS;
+    So:usesSemWebLibrary :rdflib, :Solid-solid-auth-client, :Solid-query-ldflex ;
+    So:usesSolidLibrary :Solid-solid-auth-client, :Solid-query-ldflex.
 :0data-Solid-Hello-World
     a skos:Concept, So:Example-Application;
     skos:definition "Task Manager in Solid, Fission and remoteStorage"@en;
@@ -54,8 +55,9 @@
     So:linkToRepo n1:hello;
     So:showcasesUseCase
     :Authentication-on-Solid-using-library, :CRUD-operations-on-Solid;
-    So:usesCodeStack :HTML, :JavaScript, :Simple-CSS;
-    So:usesSemWebLibrary :N3-rdfjs;
+    So:usesFullCodeStack :HTML, :JavaScript, :Simple-CSS, :CSS, :N3-rdfjs, :Inrupt-solid-client-authn;
+    So:usesCodeStack :HTML, :JavaScript, :Simple-CSS, :CSS;
+    So:usesSemWebLibrary :N3-rdfjs, :Inrupt-solid-client-authn;
     So:usesSolidLibrary :Inrupt-solid-client-authn.
 :Solid-To-Do-App-with-React
     a skos:Concept, So:Example-Application;
@@ -68,8 +70,11 @@
     So:linkToTutorial blog:tutorial;
     So:showcasesUseCase
     :Authentication-using-React-library, :CRUD-operations-on-Solid;
+    So:usesFullCodeStack :CSS, :React, :Inrupt-solid-client-authn, :Inrupt-solid-client-js, :Inrupt-solid-ui-react;
     So:usesCodeStack :CSS, :React;
     So:usesSolidLibrary
+    :Inrupt-solid-client-authn, :Inrupt-solid-client-js, :Inrupt-solid-ui-react;
+    So:usesSemWebLibrary
     :Inrupt-solid-client-authn, :Inrupt-solid-client-js, :Inrupt-solid-ui-react.
 :Ramen
     a skos:Concept, So:Example-Application;
@@ -82,8 +87,10 @@
     So:showcasesUseCase
         :Authentication-on-Solid-using-library, :Usage-of-typeIndex,
         :Write-to-Solid-Pod;
-    So:usesCodeStack :Soukai-Solid, :Vuejs;
-    So:usesSolidLibrary :Inrupt-solid-client-authn, :Solid-solid-auth-client.
+    So:usesFullCodeStack :Vuejs, :Inrupt-solid-client-authn, :Solid-solid-auth-client, :Soukai-Solid;
+    So:usesCodeStack :Vuejs;
+    So:usesSolidLibrary :Inrupt-solid-client-authn, :Solid-solid-auth-client, :Soukai-Solid;
+    So:usesSemWebLibrary :Inrupt-solid-client-authn, :Solid-solid-auth-client, :Soukai-Solid.
 :Svelte-Solid-App
     a skos:Concept, So:Example-Application;
     skos:definition "Read/Write on a Pod with Svelte"@en;
@@ -95,126 +102,134 @@
     So:showcasesUseCase
         :Authentication-on-Solid-using-library, :Read-from-Solid-Pod,
         :Write-to-Solid-Pod;
+    So:usesFullCodeStack :Nodejs, :Svelte, :Inrupt-solid-client-authn, :Inrupt-solid-client-js;
     So:usesCodeStack :Nodejs, :Svelte;
-    So:usesSolidLibrary :Inrupt-solid-client-authn, :Inrupt-solid-client-js.
+    So:usesSolidLibrary :Inrupt-solid-client-authn, :Inrupt-solid-client-js;
+    So:usesSemWebLibrary :Inrupt-solid-client-authn, :Inrupt-solid-client-js.
 
 ################
 # Code Stacks  #
 ################
 
+:Full-code-stack
+    a skos:ConceptScheme, So:Full-code-stack;
+    dct:title "Full code stack"@en;
+    skos:hasTopConcept
+        :CSS, :HTML, :JavaScript, :JQuery, :Nodejs, :React, :Svelte, :Vuejs, :Bulma-CSS, :Simple-CSS,
+        :N3-rdfjs, :rdflib, :Inrupt-solid-client-authn, :Inrupt-solid-client-js,
+        :Inrupt-solid-ui-react, :Solid-solid-auth-client, :Solid-query-ldflex, :Soukai-Solid.
+
 :Code-stack
     a skos:ConceptScheme, So:Code-Stack;
     dct:title "Code stack"@en;
     skos:hasTopConcept
-        :CSS, :HTML, :JavaScript, :JQuery, :Nodejs, :React, :Semantic-Web,
-        :Solid, :Soukai-Solid, :Svelte, :Vuejs.
+        :CSS, :HTML, :JavaScript, :JQuery, :Nodejs, :React, :Svelte, :Vuejs, :Bulma-CSS, :Simple-CSS.
 :CSS
-    a skos:Concept, So:Code-Stack;
-    skos:narrower :Bulma-CSS, :Simple-CSS;
+    a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "CSS"@en;
-    skos:topConceptOf :Code-stack.
+    skos:topConceptOf :Code-stack;
+    So:usedInApplication :Solid-To-Do-App-with-React.
 :Bulma-CSS
-    a skos:Concept, So:Code-Stack;
-    skos:broader :CSS;
+    a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "Bulma CSS"@en;
+    skos:topConceptOf :Code-stack;
     So:usedInApplication :Hello-Solid.
 :Simple-CSS
-    a skos:Concept, So:Code-Stack;
-    skos:broader :CSS;
+    a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "Simple CSS"@en;
+    skos:topConceptOf :Code-stack;
     So:usedInApplication :0data-Solid-Hello-World.
-
 :HTML
-    a skos:Concept, So:Code-Stack;
+    a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "HTML"@en;
     skos:topConceptOf :Code-stack;
     So:usedInApplication :0data-Solid-Hello-World, :Hello-Solid.
 :JavaScript
-    a skos:Concept, So:Code-Stack;
+    a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:exactMatch dbpedia:JavaScript;
     skos:prefLabel "JavaScript"@en;
     skos:topConceptOf :Code-stack;
     So:usedInApplication :0data-Solid-Hello-World, :Hello-Solid.
 :JQuery
-    a skos:Concept, So:Code-Stack;
+    a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:exactMatch dbpedia:JQuery;
     skos:prefLabel "JQuery"@en;
     skos:topConceptOf :Code-stack;
     So:usedInApplication :Hello-Solid.
 :Svelte
-    a skos:Concept, So:Code-Stack;
+    a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:exactMatch dbpedia:Svelte;
     skos:prefLabel "Svelte"@en;
     skos:topConceptOf :Code-stack;
     So:usedInApplication :Svelte-Solid-App.
 :Vuejs
-    a skos:Concept, So:Code-Stack;
+    a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "Vuejs"@en;
     skos:topConceptOf :Code-stack;
     So:usedInApplication :Ramen.
 :Nodejs
-    a skos:Concept, So:Code-Stack;
+    a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "Nodejs"@en;
     skos:topConceptOf :Code-stack;
     So:usedInApplication :Svelte-Solid-App.
 :React
-    a skos:Concept, So:Code-Stack;
+    a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "React"@en;
-    skos:topConceptOf :Code-stack.
+    skos:topConceptOf :Code-stack;
+    So:usedInApplication :Solid-To-Do-App-with-React.
 
 ###
 # Semantic web libraries
+# TODO: missing inverse relatios for So:usesSemWebLibrary
 ###
 :Semantic-Web
-    a skos:Concept, So:Code-Stack, So:Semantic-Web-Library;
-    skos:narrower :N3-rdfjs, :rdflib, :Solid-query-ldflex;
-    skos:prefLabel "Semantic Web"@en;
-    skos:topConceptOf :Code-stack.
+    a skos:Concept, So:Semantic-Web-Library, So:Full-code-stack;
+    skos:narrower :N3-rdfjs, :rdflib;
+    skos:prefLabel "Semantic web library"@en.
 :rdflib
-    a skos:Concept, So:Code-Stack, So:Semantic-Web-Library;
+    a skos:Concept, So:Semantic-Web-Library, So:Full-code-stack;
     skos:broader :Semantic-Web;
     skos:prefLabel "rdflib"@en.
 :N3-rdfjs
-    a skos:Concept, So:Code-Stack, So:Semantic-Web-Library;
+    a skos:Concept, So:Semantic-Web-Library, So:Full-code-stack;
     skos:broader :Semantic-Web;
     skos:prefLabel "N3 rdfjs"@en;
     So:linkToRepo <https://github.com/rdfjs/N3.js>.
 
 ###
 # Solid libraries
+# TODO: missing inverse relatios for So:usesSolidLibrary
 ###
 :Solid
-    a skos:Concept, So:Code-Stack, So:Solid-Library;
+    a skos:Concept, So:Solid-Library, So:Full-code-stack;
     skos:narrower
         :Inrupt-solid-client-authn, :Inrupt-solid-client-js,
-        :Inrupt-solid-ui-react, :Solid-solid-auth-client;
-    skos:prefLabel "Solid"@en;
-    skos:topConceptOf :Code-stack.
+        :Inrupt-solid-ui-react, :Solid-solid-auth-client, :Solid-query-ldflex, :Soukai-Solid;
+    skos:prefLabel "Solid library"@en.
 :Inrupt-solid-client-authn
-    a skos:Concept, So:Code-Stack, So:Solid-Library;
+    a skos:Concept, So:Solid-Library, So:Full-code-stack;
     skos:broader :Solid;
-    skos:prefLabel "Inrupt solid client authn"@en.
+    skos:prefLabel "@Inrupt/solid-client-authn"@en.
 :Inrupt-solid-client-js
-    a skos:Concept, So:Code-Stack, So:Solid-Library;
+    a skos:Concept, So:Solid-Library, So:Full-code-stack;
     skos:broader :Solid;
-    skos:prefLabel "Inrupt solid client js"@en.
+    skos:prefLabel "@Inrupt/solid-client-js"@en.
 :Inrupt-solid-ui-react
-    a skos:Concept, So:Code-Stack, So:Solid-Library;
+    a skos:Concept, So:Solid-Library, So:Full-code-stack;
     skos:broader :Solid;
-    skos:prefLabel "Inrupt solid ui react"@en.
+    skos:prefLabel "@Inrupt/solid-ui-react"@en.
 :Solid-query-ldflex
-    a skos:Concept, So:Code-Stack, So:Solid-Library;
+    a skos:Concept, So:Solid-Library, So:Full-code-stack;
     skos:broader :Solid;
-    skos:prefLabel "Solid query-ldflex"@en.
+    skos:prefLabel "Solid/query-ldflex"@en.
 :Solid-solid-auth-client
-    a skos:Concept, So:Code-Stack, So:Solid-Library;
+    a skos:Concept, So:Solid-Library, So:Full-code-stack;
     skos:broader :Solid;
-    skos:prefLabel "Solid solid auth client"@en.
+    skos:prefLabel "Solid/solid-auth-client"@en.
 :Soukai-Solid
-    a skos:Concept, So:Code-Stack, So:Solid-Library;
+    a skos:Concept, So:Solid-Library, So:Full-code-stack;
     skos:prefLabel "Soukai-Solid"@en;
-    skos:broader :Solid;
-    So:usedInApplication :Ramen.
+    skos:broader :Solid.
 
 #######################
 # Technical use cases #

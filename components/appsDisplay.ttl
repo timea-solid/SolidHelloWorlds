@@ -1,0 +1,86 @@
+@prefix ui: <https://www.w3.org/ns/ui#> .
+
+<#ExamplesApp>
+  a ui:App ;
+  ui:label "Solid Hello World Examples" ;
+  ui:title "Solid Hello World Examples" ;
+  ui:menu <#ExampleHelloWorldMenu> ;
+  
+  ui:orientation "vertical" ;
+  ui:position "left" ; 
+  ui:initialContent <#ExampleHelloWorlResults> .
+
+<#ExampleHelloWorldMenu>
+  a ui:Component ;
+  ui:label "What kind of code examples are you interested in?" ;
+  ui:template ui:AccordionMenu ;
+  ui:dataSource <#ExampleHelloWorlQuery> .
+
+<#ExampleHelloWorlQuery>
+  a ui:SparqlQuery ;
+  ui:endpoint </data/helloWorld.ttl> ;
+  ui:query """
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+    PREFIX So: <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#>
+    SELECT ?topic ?linkLabel ?linkUrl
+    WHERE {
+      VALUES (?class) { (So:Technical-Use-Case) (So:Semantic-Web-Library) (So:Solid-Library) (So:Code-Stack)} .
+      VALUES (?nameProperty) {(<http://purl.org/dc/terms/title>) (skos:prefLabel)} .
+      VALUES (?parentOf) {(skos:hasTopConcept) (skos:narrower)} .
+      ?thing
+        a ?class ;
+        ?nameProperty ?topic ;
+        ?parentOf ?linkUrl .
+      ?linkUrl skos:prefLabel ?linkLabel .
+    }
+    ORDER BY ?topic
+  """ .
+
+<#ExampleHelloWorlResults>
+  a ui:Component ;
+  ui:dataSource [
+    a ui:SparqlQuery ;
+    ui:endpoint </data/helloWorld.ttl> ;
+    ui:query """
+      PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+      PREFIX So: <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#>
+      SELECT  ?name ?demo ?repo ?author ?codeName ?useCaseName ?useCase ?codeStack
+      WHERE {
+        ?helloWorldApp a So:Example-Application .
+        ?helloWorldApp skos:prefLabel ?name .
+        
+        OPTIONAL {
+          ?helloWorldApp So:usesFullCodeStack ?codeStack .
+          ?codeStack skos:prefLabel ?codeName. 
+        }
+        OPTIONAL {
+          ?helloWorldApp So:showcasesUseCase ?useCase .
+          ?useCase skos:prefLabel ?useCaseName . 
+        }
+        OPTIONAL { ?helloWorldApp So:author ?author . }
+        OPTIONAL { ?helloWorldApp So:linkToDemo ?demo . }
+        OPTIONAL { ?helloWorldApp So:linkToRepo ?repo . }
+        OPTIONAL { ?helloWorldApp So:linkToRlinkToTutorialepo ?tutorial . }
+      }
+      ORDER BY ?name
+    """
+  ] ;
+  ui:template [
+    a ui:Template ;
+    ui:groupOn "name" ;
+    ui:recurring """
+      <div class="Example-Application" style="padding-bottom:1.5em;"
+        typeof="Example-Application" property="So:showcasesUseCase" value="${useCase}; ${codeStack}"
+      >
+        <div style="font-size:1.3em;font-weight:bold;"><a href="${demo}">${name}</a></div>
+        <div style="display:table-row">
+          <div><b>Author:</b> ${author}</div>
+          <div><b>Link to repo:</b> <a href="${repo}">${repo}</a></div>
+          <div><b>Code stack:</b> ${codeName}</div>
+          <div><b>Use case:</b> ${useCaseName}</div>
+        
+        </div>  
+        <hr>
+      </div>  
+          """ 
+  ] .

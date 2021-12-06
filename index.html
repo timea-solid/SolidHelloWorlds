@@ -20,18 +20,22 @@
     </header>
 
     <div class="main">
-        <p>Choose from:</p>
         <!-- Similar to React components, we load the ExampleTable component. Just that this componens are written in RDF (Turtle syntax) -->
-        <div data-solid_ui_component="/components/tables.ttl#ExamplesTable"></div>
+        <div data-solid_ui_component="/components/appsDisplay.ttl#ExamplesApp"></div>
+
+        <!-- <div data-solid_ui_component="/components/tables.ttl#ExamplesTable"></div> -->
     </div>
 
     <footer>
-        <a href="https://github.com/theRealImy/SolidHelloWorlds">source code</a> | <span class="footer-span">prototype v0.1</span>
+        <a href="https://github.com/theRealImy/SolidHelloWorlds">source code</a> | <span class="footer-span">prototype v0.2</span>
     </footer>
 
     <script src="https://rdf.js.org/comunica-browser/versions/1/packages/actor-init-sparql/comunica-browser.js"></script>
     <script src="https://solidcommunity.net/mashlib.js"></script>
-    <script src="https://jeff-zucker.solidcommunity.net/sp/src/solid-ui-components.js"></script>
+    <!-- for now we copy over the needed js from Jeff Zucker's project -->
+    <script src="/js/tabset.js"></script>
+    <script src="/js/solid-ui-components.js"></script>
+    <!-- <script src="https://jeff-zucker.solidcommunity.net/sp/src/solid-ui-components.js"></script> -->
     <script>solidUI.init();</script>
 
 </body>

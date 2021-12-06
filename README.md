@@ -35,8 +35,7 @@ The ontology extends the SKOS scheme with predicates that help further describe 
 
 ## Improvements & ideas
 
-* The table cannot display the Code Stack (for example) because the SPARQL query uses GROUP_CONCAT which give XMLSchema#string which is for some reason not render by the ui-components. 
-* The applciation is actually intented to be like a form or a QA service where a developer can select code stack, use cases and then be presented with the best fitting Solid code example for their needs. 
+* There are problems with usage of  GROUP_CONCAT which give XMLSchema#string in SPARQL queries. 
 * If you have improvement ideas or find bugs please open a Git Issue. 
 * Feel free to commit PRs. 
  

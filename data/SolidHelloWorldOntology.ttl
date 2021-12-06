@@ -17,6 +17,10 @@
 @prefix tags: <http://www.holygoat.co.uk/owl/redwood/0.1/tags/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+###
+# Ontology metadata
+###
+
 <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology> a owl:Ontology;
   dcterms:created "2021-12-01T13:26:10.093Z"^^xsd:dateTime;
   dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
@@ -41,6 +45,10 @@
   swc:languagePreferencePriority "0"^^xsd:int;
   swc:languagePreferenceValue "en" .
 
+###
+# Ontology classes
+###
+
 <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Example-Application> a owl:Class;
   dcterms:created "2021-12-01T13:26:49.271Z"^^xsd:dateTime;
   rdfs:label "Example Application" .
@@ -49,23 +57,33 @@
   dcterms:created "2021-12-01T13:32:38.273Z"^^xsd:dateTime;
   dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
   rdfs:label "Semantic Web Library";
-  rdfs:subClassOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Code-Stack> .
+  rdfs:subClassOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Full-Code-Stack> .
+
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Full-code-stack> a owl:Class;
+  dcterms:created "2021-12-01T13:27:02.710Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:label "Full Code Stack" .
 
 <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Code-Stack> a owl:Class;
   dcterms:created "2021-12-01T13:27:02.710Z"^^xsd:dateTime;
   dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
   rdfs:label "Code Stack" .
+  rdfs:subClassOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Full-Code-Stack> .
 
 <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Solid-Library> a owl:Class;
   dcterms:created "2021-12-01T13:32:53.989Z"^^xsd:dateTime;
   dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
   rdfs:label "Solid Library";
-  rdfs:subClassOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Code-Stack> .
+  rdfs:subClassOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Full-Code-Stack> .
 
 <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Technical-Use-Case> a owl:Class;
   dcterms:created "2021-12-01T13:27:09.574Z"^^xsd:dateTime;
   dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
   rdfs:label "Technical Use Case" .
+
+###
+# Ontology realationships.
+###
 
 <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usesSemWebLibrary> a owl:ObjectProperty;
   dcterms:created "2021-12-01T13:35:34.141Z"^^xsd:dateTime;
@@ -97,6 +115,13 @@
   rdfs:range <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Example-Application>;
   owl:inverseOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#showcasesUseCase> .
 
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usesFullCodeStack> a owl:ObjectProperty;
+  dcterms:created "2021-12-01T13:28:29.436Z"^^xsd:dateTime;
+  dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
+  rdfs:domain <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Example-Application>;
+  rdfs:label "usesFullCodeStack"@en;
+  rdfs:range <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Full-Code-Stack>.
+
 <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usesCodeStack> a owl:ObjectProperty;
   dcterms:created "2021-12-01T13:28:29.436Z"^^xsd:dateTime;
   dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
@@ -112,6 +137,10 @@
   rdfs:label "usedInApplication"@en;
   rdfs:range <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Example-Application>;
   owl:inverseOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#usesCodeStack> .
+
+###
+# Ontology attributes which are also realationships but range is rdfs:Resource or others.
+###
 
 <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#linkToTutorial> a owl:DatatypeProperty;
   dcterms:created "2021-12-01T13:39:22.022Z"^^xsd:dateTime;

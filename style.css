@@ -2,12 +2,15 @@ body {
     max-width: 70rem !important;
 }
 
+/* FIRST PAGE */
+
 .first-page h1 {
     text-align: center;
 }
 
 .first-page .logo-img {
     width: 7vw;
+    opacity: 1;
   }
 
 .first-page .registration {
@@ -16,13 +19,14 @@ body {
 
 .first-page table th {
     color: black;
-    background-color: grey;
+    background-color: #5B3FAA;
 }
 
 .first-column {
     width: 28%;
 }
 
+/* FOOTER */
 .footer-span {
     color: var(--accent);
 }
@@ -31,3 +35,33 @@ footer a {
     text-decoration: none;
 }
 
+/* SOLID-UI-COMPONENTS */
+
+.solid-uic-app > DIV > SPAN {color:white;}
+.solid-uic-app div {
+  background-color: #212121 !important;
+  color: white !important;
+}
+
+/* ACCORDION ITEM */
+
+.uic-accordion button {
+  background-color: #5B3FAA !important;
+  border-color: #5B3FAA !important;
+}
+.uic-accordion button:hover {
+  color: white !important;
+}
+
+.uic-accordion nav {
+  border-color: #5B3FAA !important;
+}
+
+.uic-accordion DIV:hover { 
+  background: #5B3FAA !important; 
+  color:white !important; 
+}
+.uic-accordion DIV.selected { 
+    background:#5B3FAA !important; 
+    color:white !important; 
+}
