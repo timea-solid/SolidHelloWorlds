@@ -59,3 +59,7 @@ footer a {
   color: black !important;
   background-color: #FFB300 !important;
 }
+
+nav {
+  font-size: var(--base-fontsize) !important;
+}
