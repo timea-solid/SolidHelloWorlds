@@ -5,15 +5,14 @@
   ui:label "Solid Hello World Examples" ;
   ui:title "Solid Hello World Examples" ;
   ui:menu <#ExampleHelloWorldMenu> ;
-  
   ui:orientation "vertical" ;
   ui:position "left" ; 
   ui:initialContent <#ExampleHelloWorlResults> .
 
 <#ExampleHelloWorldMenu>
-  a ui:Component ;
+  a ui:Accordion ;
   ui:label "What kind of code examples are you interested in?" ;
-  ui:template ui:AccordionMenu ;
+  ui:groupOn "topic" ;
   ui:dataSource <#ExampleHelloWorlQuery> .
 
 <#ExampleHelloWorlQuery>

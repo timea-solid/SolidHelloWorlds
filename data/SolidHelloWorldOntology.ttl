@@ -60,7 +60,7 @@
   rdfs:label "Semantic Web Library";
   rdfs:subClassOf <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Full-Code-Stack> .
 
-<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Full-Code-Ctack> a owl:Class;
+<https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#Full-Code-Stack> a owl:Class;
   dcterms:created "2021-12-01T13:27:02.710Z"^^xsd:dateTime;
   dcterms:creator <https://timea.solidcommunity.net/profile/card#me>;
   rdfs:label "Full Code Stack" .

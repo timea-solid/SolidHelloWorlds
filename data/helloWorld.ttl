@@ -115,76 +115,74 @@
     a skos:ConceptScheme, So:Full-code-stack;
     dct:title "Full code stack"@en;
     skos:hasTopConcept
-        :CSS, :HTML, :JavaScript, :JQuery, :Nodejs, :React, :Svelte, :Vuejs, :Bulma-CSS, :Simple-CSS,
-        :N3-rdfjs, :rdflib, :Inrupt-solid-client-authn, :Inrupt-solid-client-js,
-        :Inrupt-solid-ui-react, :Solid-solid-auth-client, :Solid-query-ldflex, :Soukai-Solid.
+        :Code-stack, :Semantic-Web, :Solid.
 
 :Code-stack
-    a skos:ConceptScheme, So:Code-Stack;
-    dct:title "Code stack"@en;
-    skos:hasTopConcept
+    a skos:Concept, So:Full-code-stack, So:Code-Stack;
+    skos:prefLabel "Code stack"@en;
+    skos:topConceptOf :Full-Code-stack;
+    skos:narrower
         :CSS, :HTML, :JavaScript, :JQuery, :Nodejs, :React, :Svelte, :Vuejs, :Bulma-CSS, :Simple-CSS.
 :CSS
     a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "CSS"@en;
-    skos:topConceptOf :Code-stack;
+    skos:broader :Code-stack;
     So:usedInApplication :Solid-To-Do-App-with-React.
 :Bulma-CSS
     a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "Bulma CSS"@en;
-    skos:topConceptOf :Code-stack;
     So:usedInApplication :Hello-Solid.
 :Simple-CSS
     a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "Simple CSS"@en;
-    skos:topConceptOf :Code-stack;
     So:usedInApplication :0data-Solid-Hello-World.
 :HTML
     a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "HTML"@en;
-    skos:topConceptOf :Code-stack;
+    skos:broader :Code-stack;
     So:usedInApplication :0data-Solid-Hello-World, :Hello-Solid.
 :JavaScript
     a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:exactMatch dbpedia:JavaScript;
     skos:prefLabel "JavaScript"@en;
-    skos:topConceptOf :Code-stack;
+    skos:broader :Code-stack;
     So:usedInApplication :0data-Solid-Hello-World, :Hello-Solid.
 :JQuery
     a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:exactMatch dbpedia:JQuery;
     skos:prefLabel "JQuery"@en;
-    skos:topConceptOf :Code-stack;
+    skos:broader :Code-stack;
     So:usedInApplication :Hello-Solid.
 :Svelte
     a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:exactMatch dbpedia:Svelte;
     skos:prefLabel "Svelte"@en;
-    skos:topConceptOf :Code-stack;
+    skos:broader :Code-stack;
     So:usedInApplication :Svelte-Solid-App.
 :Vuejs
     a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "Vuejs"@en;
-    skos:topConceptOf :Code-stack;
+    skos:broader :Code-stack;
     So:usedInApplication :Ramen.
 :Nodejs
     a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "Nodejs"@en;
-    skos:topConceptOf :Code-stack;
+    skos:broader :Code-stack;
     So:usedInApplication :Svelte-Solid-App.
 :React
     a skos:Concept, So:Code-Stack, So:Full-code-stack;
     skos:prefLabel "React"@en;
-    skos:topConceptOf :Code-stack;
+    skos:broader :Code-stack;
     So:usedInApplication :Solid-To-Do-App-with-React.
 
 ###
 # Semantic web libraries
-# TODO: missing inverse relatios for So:usesSemWebLibrary
+# TODO: missing inverse relations for So:usesSemWebLibrary
 ###
 :Semantic-Web
     a skos:Concept, So:Semantic-Web-Library, So:Full-code-stack;
     skos:narrower :N3-rdfjs, :rdflib;
+    skos:topConceptOf :Full-Code-stack;
     skos:prefLabel "Semantic web library"@en.
 :rdflib
     a skos:Concept, So:Semantic-Web-Library, So:Full-code-stack;
@@ -198,10 +196,11 @@
 
 ###
 # Solid libraries
-# TODO: missing inverse relatios for So:usesSolidLibrary
+# TODO: missing inverse relations for So:usesSolidLibrary
 ###
 :Solid
     a skos:Concept, So:Solid-Library, So:Full-code-stack;
+    skos:topConceptOf :Full-Code-stack;
     skos:narrower
         :Inrupt-solid-client-authn, :Inrupt-solid-client-js,
         :Inrupt-solid-ui-react, :Solid-solid-auth-client, :Solid-query-ldflex, :Soukai-Solid;

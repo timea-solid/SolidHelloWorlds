@@ -37,6 +37,7 @@ footer a {
 
 /* SOLID-UI-COMPONENTS */
 
+
 .solid-uic-app > DIV > SPAN {color:white;}
 .solid-uic-app div {
   background-color: #212121 !important;
@@ -45,23 +46,16 @@ footer a {
 
 /* ACCORDION ITEM */
 
-.uic-accordion button {
-  background-color: #5B3FAA !important;
-  border-color: #5B3FAA !important;
+.accordion > DIV > DIV {
+  border-color: #FFB300 !important;
 }
-.uic-accordion button:hover {
+
+.accordion button {
   color: white !important;
+  background-color: #212121 !important; 
 }
 
-.uic-accordion nav {
-  border-color: #5B3FAA !important;
-}
-
-.uic-accordion DIV:hover { 
-  background: #5B3FAA !important; 
-  color:white !important; 
-}
-.uic-accordion DIV.selected { 
-    background:#5B3FAA !important; 
-    color:white !important; 
+.accordion button:hover { 
+  color: black !important;
+  background-color: #FFB300 !important;
 }
