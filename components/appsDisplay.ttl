@@ -1,4 +1,4 @@
-@prefix ui: <https://www.w3.org/ns/ui#> .
+@prefix ui: <http://www.w3.org/ns/ui#> .
 
 <#ExamplesApp>
   a ui:App ;
