@@ -42,6 +42,14 @@ The ontology extends the SKOS scheme with predicates that help further describe 
 TODO:
 * make the data about the Solid code examples editable by the community.
  
+ ## How to deploy the code
+
+Locally, I make use of LiveServer in Visual Studio Code to run the code. 
+Otherwise, the running demo is simply on my Pod, in a HelloWorld folder. An example is: [https://timea.solidcommunity.net/HelloWorld/components/](https://timea.solidcommunity.net/HelloWorld/components/). I made sure the HelloWorld folder has public access.  
+
+### To configure in production
+
+In the `index.html` where I make use of solid ui components make sure to replace `data-solid_ui_component="https://timea.solidcommunity.net/HelloWorld/components/appsDisplay.ttl#ExamplesApp"` with the public location of where you deploy the components Turtle file (appsDisplay.ttl) if you use your own.
 # Attribution
 
 * [Jeff Zucker's solid-ui-components](https://github.com/jeff-zucker/solid-ui-components)
