@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Edit Solid Hello World data">
+    <meta name="keywords" content="Solid, Hello World">
+    <meta name="author" content="Timea Turdean">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solid Hello Worlds</title>
+    <link rel="shortcut icon" type="image/png" href="/images/solid-emblem.svg">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+
+<body class="second-page">
+
+    <header>
+        <img class="logo-img" src="../../images/solid-emblem.svg" />
+        <h1>Edit the Solid Hello World examples</h1>
+        <span>On this page you can add and edit Solid Hello World examples.</span>
+    </header>
+
+    <div class="main">
+        <!-- <div id="webId"><h4>First please login or get a Solid user</h4></div> -->
+        <div id="webId"><h4>Edit data by simply mofigying the input fields</h4></div>
+        <br>
+        <div id="loginBanner"></div>
+        <div id="app"></div>
+
+    </div>
+
+    <footer>
+        <a href="../../index.html"> back to main </a> | <a
+            href="https://github.com/timea-solid/SolidHelloWorlds">source code</a> | <span class="footer-span"> made
+            with ❤️ in Vienna </span>
+    </footer>
+
+    <script type="text/javascript"
+        src="https://rdf.js.org/comunica-browser/versions/1/packages/actor-init-sparql/comunica-browser.js"></script>
+    <script type="text/javascript" src="https://solidcommunity.net/mashlib.js"></script>
+    <script type="text/turtle" id="helloWorldFormText" src="helloWorldFormText.ttl"></script>
+    <script type="text/javascript" src="context.js"></script>
+    <script type="text/javascript" src="loadData.js"></script>
+    <script type="text/javascript" src="loginWithSolid.js"></script>
+
+</body>
+
+</html>
