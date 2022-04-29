@@ -23,7 +23,7 @@ function renderData(div, subject, form) {
 async function loadFormData() {
 
     // load Form data
-    const linkToForm = "https://timea.solidcommunity.net/HelloWorld/components/helloWorldForm.ttl"
+    const linkToForm = "https://timea.solidcommunity.net/HelloWorld/components/editData/helloWorldForm.ttl"
     linkToFormDoc = UI.rdf.sym(linkToForm)
     await UI.store.fetcher.load(linkToFormDoc)
     console.log("loaded form turtle")

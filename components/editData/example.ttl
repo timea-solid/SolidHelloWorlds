@@ -85,8 +85,14 @@
 
 # This is a big important form for one of a series of roles in the list.
 
-  :RoleMembershipForm a ui:Group; ui:weight 3; ui:parts ( :MembershipFormHeading :roleNameField
-        :escoOccupationField :orgField :RoleClassifier :RoleDatesForm :RoleDescriptionForm).
+  :RoleMembershipForm a ui:Group; ui:weight 3; ui:parts ( 
+    :MembershipFormHeading 
+    :roleNameField
+    :escoOccupationField 
+    :orgField 
+    :RoleClassifier 
+    :RoleDatesForm 
+    :RoleDescriptionForm).
 
      :MembershipFormHeading a ui:Heading; ui:contents "Details of this role"@en, "Détailes de ce rôle"@fr .
 
@@ -94,6 +100,7 @@
           ui:canMintNew true; ui:use :OrganizationCreationForm ;
           ui:property org:organization;
           ui:from vcard:Organization .
+     
      :roleNameField a ui:SingleLineTextField; ui:property vcard:role; ui:size 60 .
 
     :escoOccupationField a ui:AutocompleteField;
@@ -237,7 +244,8 @@ schema:ResearchOrganization a rdfs:Class; rdfs:label "Research Organization"@en,
       a ui:AutocompleteField; ui:label "Corporation in wikidata";
            ui:size 60;
            ui:targetClass  <http://www.wikidata.org/entity/Q6881511>; # Enterprise
-           ui:property solid:publicId; ui:dataSource :WikidataInstancesByName.
+           ui:property solid:publicId; 
+           ui:dataSource :WikidataInstancesByName.
 
       :WikidataInstancesByName a ui:DataSource ;
         schema:name "Wikidata instances by name";
