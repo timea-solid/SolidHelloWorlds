@@ -49,7 +49,7 @@ Otherwise, the running demo is simply on my Pod, in a HelloWorld folder. An exam
 
 ### To configure in production
 
-In the `index.html` where I make use of solid ui components make sure to replace `data-solid_ui_component="https://timea.solidcommunity.net/HelloWorld/components/appsDisplay.ttl#ExamplesApp"` with the public location of where you deploy the components Turtle file (appsDisplay.ttl) if you use your own.
+In the `index.html` where I make use of solid ui components make sure to replace `data-solid_ui_component="https://timea.solidcommunity.net/HelloWorld/components/facetedSearch/appsDisplay.ttl#ExamplesApp"` with the public location of where you deploy the components Turtle file (appsDisplay.ttl) if you use your own.
 
 # Attribution
 

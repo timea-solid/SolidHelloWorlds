@@ -21,18 +21,18 @@
 
     <div class="main">
         <!-- Similar to React components, we load the ExampleTable component. Just that this componens are written in RDF (Turtle syntax) -->
-        <div data-solid_ui_component="./components/appsDisplay.ttl#ExamplesApp"></div>
+        <div data-solid_ui_component="./components/facetedSearch/appsDisplay.ttl#ExamplesApp"></div>
     </div>
 
     <footer>
-        <a href="./components/edit/editData.html"> make changes to data </a> | <a href="https://github.com/timea-solid/SolidHelloWorlds">source code</a> | <span class="footer-span"> made with ❤️ in Vienna </span>
+        <a href="./components/editData/editData.html"> change data </a> | <a href="https://github.com/timea-solid/SolidHelloWorlds">source code</a> | <span class="footer-span"> made with ❤️ in Vienna </span>
     </footer>
 
     <script type="text/javascript" src="https://rdf.js.org/comunica-browser/versions/1/packages/actor-init-sparql/comunica-browser.js"></script>
     <script type="text/javascript" src="https://solidcommunity.net/mashlib.js"></script>
     <!-- for now we copy over the needed js from Jeff Zucker's project -->
     <!-- <script src="https://jeff-zucker.github.io/solid-ui-components/src/solid-ui-components.js"></script> -->
-    <script type="text/javascript" src="/scripts/solid-ui-components.js"></script>
+    <script type="text/javascript" src="./components/facetedSearch/solid-ui-components.js"></script>
     <script>solidUI.init();</script>
 
 </body>
