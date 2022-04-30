@@ -47,6 +47,7 @@ async function loadFormData() {
 
 function renderForm(subject, form) {
     const div = document.getElementById("app")
+    div.innerHTML = ""
     //if (UI.authn.currentUser()) {
       //  loggedInUser = UI.authn.currentUser().uri
        // console.log("------" + loggedInUser)

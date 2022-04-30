@@ -4,6 +4,11 @@
     text-align: center;
 }
 
+.first-page h2 {
+    display: block !important;
+    text-align: center;
+}
+
 .second-page .logo-img, .first-page .logo-img {
     width: 7vw;
     opacity: 1;
@@ -85,12 +90,20 @@ footer a {
   border-color: #FFB300 !important;
 }
 
-.accordion button {
+.first-page .accordion button {
   color: white !important;
   background-color: #212121 !important; 
 }
 
-.accordion button:hover { 
+.first-page .accordion button:focus, 
+.first-page .accordion button:active,
+.first-page .accordion button:hover,
+.first-page .accordion button:hover:active {
+  color: black !important;
+  background-color: #FFB300 !important;
+}
+
+.first-page .selected {
   color: black !important;
   background-color: #FFB300 !important;
 }
