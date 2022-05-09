@@ -102,6 +102,5 @@ document.addEventListener('DOMContentLoaded', async function () {
    
   } // showResults
 
-
   await showResults()
 })

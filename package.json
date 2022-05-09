@@ -7,6 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
+    "start": "npx vite",
+    "watch": "scripts/watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +27,11 @@
   },
   "homepage": "https://github.com/timea-solid/SolidHelloWorlds#readme",
   "devDependencies": {
+    "lerna": "^4.0.0",
     "vite": "^2.9.6"
+  },
+  "dependencies": {
+    "mashlib": "^1.8.3",
+    "solid-ui": "^2.4.22"
   }
 }

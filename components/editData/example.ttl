@@ -97,7 +97,8 @@
      :MembershipFormHeading a ui:Heading; ui:contents "Details of this role"@en, "Détailes de ce rôle"@fr .
 
      :orgField a ui:Choice; ui:label "Organization"@en, "Organization"@fr;
-          ui:canMintNew true; ui:use :OrganizationCreationForm ;
+          ui:canMintNew true; 
+          ui:use :OrganizationCreationForm ;
           ui:property org:organization;
           ui:from vcard:Organization .
      

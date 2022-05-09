@@ -1,0 +1,64 @@
+@prefix ui: <http://www.w3.org/ns/ui#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix So: <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#>.
+@prefix schema: <http://schema.org/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+
+@prefix : <#>.
+
+:this
+    <http://purl.org/dc/elements/1.1/title> "Solid example applications form" ;
+    a ui:Form ;
+    # ui:part :backgroundColor, :highlightColor;
+    ui:parts (
+       :projects
+      #:LinksHeading
+     # :pronounsForm
+     # :LanguagesPrompt :LanguagesForm
+     # :CVGroup
+     # :SkillsPrompt :SkillsForm
+      ).
+
+:projects a ui:Choice; 
+      ui:label "Select project"@en;
+      ui:canMintNew true; 
+      ui:use :projectCreationForm ;
+      ui:property skos:prefLabel;
+      ui:from So:Example-Application .
+
+
+:projectCreationForm a ui:Form; 
+      schema:name "Form for creating a new Project" ;
+      ui:parts ( 
+            :projectName
+            :projectDescription
+            :projectAuthor  
+      ) .
+
+
+# Project Name
+
+:projectName a ui:SingleLineTextField; 
+            ui:size 12; 
+            ui:property skos:prefLabel;
+            ui:label "Name of project"@en.
+
+# Project Description
+
+:projectDescription a ui:SingleLineTextField; 
+            ui:size 100; 
+            ui:property skos:definition;
+            ui:label "Short description"@en.
+
+# Project Author
+
+:projectAuthor a ui:SingleLineTextField; 
+            ui:size 100; 
+            ui:property So:author;
+            ui:label "Author"@en.
+
+
+#:LinksHeading a ui:Heading; ui:contents "Project links".
+
+
+# ENDS

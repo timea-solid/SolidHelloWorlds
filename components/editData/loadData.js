@@ -1,3 +1,5 @@
+
+
 function complainIfBad(ok, message) {
     if (ok) return
     div = document.getElementById("app")
