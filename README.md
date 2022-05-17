@@ -56,4 +56,4 @@ In the `index.html` where I make use of solid ui components make sure to replace
 * [Jeff Zucker's solid-ui-components](https://github.com/jeff-zucker/solid-ui-components)
 * [Simple CSS](https://simplecss.org/)
 * [Comunica - a knowedge graph querying framework for JavaScript](https://github.com/comunica/comunica)
-* [Mashlib - Solid compatible library for applciation-level functionality](https://github.com/solid/mashlib)
+* [Mashlib - Solid compatible library for application-level functionality](https://github.com/solid/mashlib)
