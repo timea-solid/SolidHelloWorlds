@@ -43,7 +43,7 @@
         :Write-to-Solid-Pod, :Update-on-Solid-Pod;
     So:usesFullCodeStack :Bulma-CSS, :HTML, :JavaScript, :JQuery, :CSS, :rdflib, :Solid-solid-auth-client, :Solid-query-ldflex;
     So:usesCodeStack :Bulma-CSS, :HTML, :JavaScript, :JQuery, :CSS;
-    So:usesSemWebLibrary :rdflib, :Solid-solid-auth-client, :Solid-query-ldflex ;
+    So:usesSemWebLibrary :rdflib;
     So:usesSolidLibrary :Solid-solid-auth-client, :Solid-query-ldflex.
 :0data-Solid-Hello-World
     a skos:Concept, So:Example-Application;
@@ -57,7 +57,7 @@
     :Authentication-on-Solid-using-library, :CRUD-operations-on-Solid;
     So:usesFullCodeStack :HTML, :JavaScript, :Simple-CSS, :CSS, :N3-rdfjs, :Inrupt-solid-client-authn;
     So:usesCodeStack :HTML, :JavaScript, :Simple-CSS, :CSS;
-    So:usesSemWebLibrary :N3-rdfjs, :Inrupt-solid-client-authn;
+    So:usesSemWebLibrary :N3-rdfjs;
     So:usesSolidLibrary :Inrupt-solid-client-authn.
 :Solid-To-Do-App-with-React
     a skos:Concept, So:Example-Application;
@@ -73,8 +73,6 @@
     So:usesFullCodeStack :CSS, :React, :Inrupt-solid-client-authn, :Inrupt-solid-client-js, :Inrupt-solid-ui-react;
     So:usesCodeStack :CSS, :React;
     So:usesSolidLibrary
-    :Inrupt-solid-client-authn, :Inrupt-solid-client-js, :Inrupt-solid-ui-react;
-    So:usesSemWebLibrary
     :Inrupt-solid-client-authn, :Inrupt-solid-client-js, :Inrupt-solid-ui-react.
 :Ramen
     a skos:Concept, So:Example-Application;
@@ -89,8 +87,7 @@
         :Write-to-Solid-Pod;
     So:usesFullCodeStack :Vuejs, :Inrupt-solid-client-authn, :Solid-solid-auth-client, :Soukai-Solid;
     So:usesCodeStack :Vuejs;
-    So:usesSolidLibrary :Inrupt-solid-client-authn, :Solid-solid-auth-client, :Soukai-Solid;
-    So:usesSemWebLibrary :Inrupt-solid-client-authn, :Solid-solid-auth-client, :Soukai-Solid.
+    So:usesSolidLibrary :Inrupt-solid-client-authn, :Solid-solid-auth-client, :Soukai-Solid.
 :Svelte-Solid-App
     a skos:Concept, So:Example-Application;
     skos:definition "Read/Write on a Pod with Svelte"@en;
@@ -104,8 +101,7 @@
         :Write-to-Solid-Pod;
     So:usesFullCodeStack :Nodejs, :Svelte, :Inrupt-solid-client-authn, :Inrupt-solid-client-js;
     So:usesCodeStack :Nodejs, :Svelte;
-    So:usesSolidLibrary :Inrupt-solid-client-authn, :Inrupt-solid-client-js;
-    So:usesSemWebLibrary :Inrupt-solid-client-authn, :Inrupt-solid-client-js.
+    So:usesSolidLibrary :Inrupt-solid-client-authn, :Inrupt-solid-client-js.
 
 ################
 # Code Stacks  #

@@ -7,23 +7,17 @@
 @prefix : <#>.
 
 :this
-    <http://purl.org/dc/elements/1.1/title> "Solid example applications form" ;
+    schema:name "Solid example applications form" ;
     a ui:Form ;
-    # ui:part :backgroundColor, :highlightColor;
     ui:parts (
        :projects
-      #:LinksHeading
-     # :pronounsForm
-     # :LanguagesPrompt :LanguagesForm
-     # :CVGroup
-     # :SkillsPrompt :SkillsForm
       ).
 
 :projects a ui:Choice; 
-      ui:label "Select project"@en;
-      ui:canMintNew true; 
-      ui:use :projectCreationForm ;
-      ui:property skos:prefLabel;
+      ui:label "Select project:"@en;
+      ui:canMintNew :true; 
+      ui:use :projectCreationForm;
+      ui:property skos:hasTopConcept;
       ui:from So:Example-Application .
 
 
@@ -32,9 +26,18 @@
       ui:parts ( 
             :projectName
             :projectDescription
-            :projectAuthor  
+            :projectAuthor
+            :linksHeading
+            :linkToDemo
+            :linkToRepo
+            :linkToTutorial
+            :techStackHeading
+            :solidTechStack
+            :semWebTechStack
+            :genericTechStack
+            :useCaseHeading
+            :showcasesUseCase 
       ) .
-
 
 # Project Name
 
@@ -57,8 +60,59 @@
             ui:property So:author;
             ui:label "Author"@en.
 
+# ------------ project links ------------- #
+:linksHeading a ui:Heading; ui:contents "Project links"@en.
 
-#:LinksHeading a ui:Heading; ui:contents "Project links".
+# Link to where the Demo is working/deployed
+
+:linkToDemo a ui:SingleLineTextField; 
+            ui:size 100; 
+            ui:property So:linkToDemo;
+            ui:label "Link to demo"@en.
+
+# Link to repository
+
+:linkToRepo a ui:SingleLineTextField; 
+            ui:size 100; 
+            ui:property So:linkToRepo;
+            ui:label "Link to repository"@en.
+
+# Link to tutorial
+
+:linkToTutorial a ui:SingleLineTextField; 
+            ui:size 100; 
+            ui:property So:linkToTutorial;
+            ui:label "Link to tutorial"@en.
 
 
-# ENDS
+# ------------ project tech stack ------------- #
+:techStackHeading a ui:Heading; ui:contents "Technical stack"@en.
+
+# drop down for solid tech stack
+:solidTechStack a ui:Choice; 
+      ui:label "Solid libraries used:"@en;
+      ui:property So:usesSolidLibrary;
+      ui:from So:Solid-Library.
+
+# drop down for semantic web tech stack
+:semWebTechStack a ui:Choice; 
+      ui:label "Semantic Web libraries used:"@en;
+      ui:property So:usesSemWebLibrary;
+      ui:from So:Semantic-Web-Library.
+
+# drop down for tech stack
+:genericTechStack a ui:Choice; 
+      ui:label "Generic technical stack used:"@en;
+      ui:property So:usesCodeStack;
+      ui:from So:Code-Stack.
+
+# ------------ project use cases -------------- #
+:useCaseHeading a ui:Heading; ui:contents "Use cases"@en.
+
+# drop down for use cases
+:showcasesUseCase a ui:Choice; 
+      ui:label "Select use case:"@en;
+      ui:property So:showcasesUseCase;
+      ui:from So:Technical-Use-Case.
+
+# END

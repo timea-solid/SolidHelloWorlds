@@ -27,14 +27,36 @@
     width: 28%;
 }
 
+.second-page h3 {
+  color: var(--text) !important;
+}
+
 .second-page .formFieldName {
   width: 11em !important;
 }
 
-.second-page .formFieldValue input {
-  width: 15em !important;
+.second-page .choiceBox-label {
+  width: 14em !important;
+}
+
+.second-page div {
+  border-color: var(--accent) !important; 
+}
+
+.second-page .choiceBox {
+  margin-right: 2em;
+  margin-bottom: 2em;
+}
+
+.second-page .formFieldValue input, .second-page .formFieldValue select, .second-page .formFieldValue select option {
+  width: 20em !important;
   border-color: var(--accent) !important;
-  background-color: inherit !important;
+  background-color: var(--bg) !important;
+}
+
+.second-page .formFieldValue select { 
+  margin-left: 0em !important;
+  width: 100% !important;
 }
 
 .second-page .formFieldName a {
