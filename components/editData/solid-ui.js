@@ -15172,7 +15172,7 @@ function slice(s, suffix) {
 
 function getWellKnownLabel(thing) {
   return _solidLogic.store.any(thing, UI.ns.ui('label')) || // Prioritize ui:label
-  _solidLogic.store.any(thing, UI.ns.link('message')) || _solidLogic.store.any(thing, UI.ns.vcard('fn')) || _solidLogic.store.any(thing, UI.ns.foaf('name')) || _solidLogic.store.any(thing, UI.ns.dct('title')) || _solidLogic.store.any(thing, UI.ns.dc('title')) || _solidLogic.store.any(thing, UI.ns.rss('title')) || _solidLogic.store.any(thing, UI.ns.contact('fullName')) || _solidLogic.store.any(thing, _solidLogic.store.sym('http://www.w3.org/2001/04/roadmap/org#name')) || _solidLogic.store.any(thing, UI.ns.cal('summary')) || _solidLogic.store.any(thing, UI.ns.foaf('nick')) || _solidLogic.store.any(thing, UI.ns.as('name')) || _solidLogic.store.any(thing, UI.ns.schema('name')) || _solidLogic.store.any(thing, UI.ns.rdfs('label'));
+  _solidLogic.store.any(thing, UI.ns.link('message')) || _solidLogic.store.any(thing, UI.ns.vcard('fn')) || _solidLogic.store.any(thing, UI.ns.foaf('name')) || _solidLogic.store.any(thing, UI.ns.dct('title')) || _solidLogic.store.any(thing, UI.ns.dc('title')) || _solidLogic.store.any(thing, UI.ns.rss('title')) || _solidLogic.store.any(thing, UI.ns.contact('fullName')) || _solidLogic.store.any(thing, _solidLogic.store.sym('http://www.w3.org/2001/04/roadmap/org#name')) || _solidLogic.store.any(thing, UI.ns.cal('summary')) || _solidLogic.store.any(thing, UI.ns.foaf('nick')) || _solidLogic.store.any(thing, UI.ns.as('name')) || _solidLogic.store.any(thing, UI.ns.schema('name')) || _solidLogic.store.any(thing, UI.ns.rdfs('label')) || _solidLogic.store.any(thing, _solidLogic.store.sym('http://www.w3.org/2004/02/skos/core#prefLabel'));
 }
 //# sourceMappingURL=label.js.map
 
@@ -15192,8 +15192,8 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.versionInfo = void 0;
 var versionInfo = {
-  buildTime: '2022-05-06T18:04:44Z',
-  commit: '8266d39f72f8792b6ef04e55024f8bf5f6ade07c',
+  buildTime: '2022-05-20T09:41:01Z',
+  commit: '4485d5d9aa24db1f33b7a2a1441a868b72cfa617',
   npmInfo: {
     'solid-ui': '2.4.22',
     npm: '8.3.1',
@@ -16282,6 +16282,7 @@ function openHrefInOutlineMode(e) {
 
   if (dom.outlineManager) {
     // @@ TODO Remove the use of document as a global object
+    // TODO fix dependency cycle to solid-panes by calling outlineManager
     ;
     dom.outlineManager.GotoSubject(_solidLogic.store.sym(uri), true, undefined, true, undefined);
   } else if (window && window.panes && window.panes.getOutliner) {
@@ -16409,6 +16410,7 @@ function linkButton(dom, object) {
   b.textContent = 'Goto ' + utils.label(object);
   b.addEventListener('click', function (_event) {
     // b.parentNode.removeChild(b)
+    // TODO fix dependency cycle to solid-panes by calling outlineManager
     ;
     dom.outlineManager.GotoSubject(object, true, undefined, true, undefined);
   }, true);
@@ -17149,6 +17151,7 @@ exports.findClosest = findClosest;
 exports.formsFor = formsFor;
 exports.makeDescription = makeDescription;
 exports.makeSelectForCategory = makeSelectForCategory;
+exports.makeSelectForChoice = makeSelectForChoice;
 exports.makeSelectForNestedCategory = makeSelectForNestedCategory;
 exports.makeSelectForOptions = makeSelectForOptions;
 exports.newButton = newButton;
@@ -17260,14 +17263,16 @@ _fieldFunction.field[ns.ui('Form').uri] = _fieldFunction.field[ns.ui('Group').ur
   var ui = ns.ui;
   if (container) container.appendChild(box); // Prevent loops
 
+  if (!form) return;
   var key = subject.toNT() + '|' + form.toNT();
 
   if (already[key]) {
     // been there done that
-    box.appendChild(dom.createTextNode('Group: see above ' + key));
-    var plist = [$rdf.st(subject, ns.owl('sameAs'), subject)]; // @@ need prev subject
+    box.appendChild(dom.createTextNode('Group: see above ' + key)); // TODO fix dependency cycle to solid-panes by calling outlineManager
+    // const plist = [$rdf.st(subject, ns.owl('sameAs'), subject)] // @@ need prev subject
+    // dom.outlineManager.appendPropertyTRs(box, plist)
+    // dom.appendChild(plist)
 
-    dom.outlineManager.appendPropertyTRs(box, plist);
     return box;
   }
 
@@ -17368,47 +17373,43 @@ _fieldFunction.field[ns.ui('Options').uri] = function (dom, container, already, 
     values = kb.each(subject, dependingOn);
   }
 
-  if (values.length === 0) {
-    box.appendChild((0, _error.errorMessageBlock)(dom, "Can't select subform as no value of: " + dependingOn));
-  } else {
-    for (var i = 0; i < cases.length; i++) {
-      var c = cases[i];
-      var tests = kb.each(c, ui('for'), null, formDoc); // There can be multiple 'for'
+  for (var i = 0; i < cases.length; i++) {
+    var c = cases[i];
+    var tests = kb.each(c, ui('for'), null, formDoc); // There can be multiple 'for'
 
-      var match = false;
+    var match = false;
 
-      for (var j = 0; j < tests.length; j++) {
-        var _iterator = _createForOfIteratorHelper(values),
-            _step;
+    for (var j = 0; j < tests.length; j++) {
+      var _iterator = _createForOfIteratorHelper(values),
+          _step;
 
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var value = _step.value;
-            var test = tests[j];
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var value = _step.value;
+          var test = tests[j];
 
-            if (value.sameTerm(tests) || value.termType === test.termType && value.value === test.value) {
-              match = true;
-            }
+          if (value.sameTerm(tests) || value.termType === test.termType && value.value === test.value) {
+            match = true;
           }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
         }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    }
+
+    if (match) {
+      var _field3 = kb.the(c, ui('use'));
+
+      if (!_field3) {
+        box.appendChild((0, _error.errorMessageBlock)(dom, 'No "use" part for case in form ' + form));
+        return box;
+      } else {
+        appendForm(dom, box, already, subject, _field3, dataDoc, callbackFunction);
       }
 
-      if (match) {
-        var _field3 = kb.the(c, ui('use'));
-
-        if (!_field3) {
-          box.appendChild((0, _error.errorMessageBlock)(dom, 'No "use" part for case in form ' + form));
-          return box;
-        } else {
-          appendForm(dom, box, already, subject, _field3, dataDoc, callbackFunction);
-        }
-
-        break;
-      }
+      break;
     }
   } // @@ Add box.refresh() to sync fields with values
 
@@ -17696,7 +17697,7 @@ _fieldFunction.field[ns.ui('Multiple').uri] = function (dom, container, already,
     // delete button and move buttons
 
     if (kb.updater.editable(dataDoc.uri)) {
-      buttons.deleteButtonWithCheck(dom, subField, utils.label(property), deleteThisItem);
+      buttons.deleteButtonWithCheck(dom, subField, multipleUIlabel, deleteThisItem);
 
       if (ordered) {
         // Add controsl in a frame
@@ -17747,7 +17748,7 @@ _fieldFunction.field[ns.ui('Multiple').uri] = function (dom, container, already,
 
         var _shim = dom.createElement('div');
 
-        _shim.appendChild(subField); // Subfield has its own laytout
+        _shim.appendChild(subField); // Subfield has its own layout
 
 
         frame.appendChild(_shim);
@@ -17796,6 +17797,8 @@ _fieldFunction.field[ns.ui('Multiple').uri] = function (dom, container, already,
     return shim;
   }
 
+  var multipleUIlabel = kb.any(form, ui('label'));
+  if (!multipleUIlabel) multipleUIlabel = utils.label(property);
   var min = kb.any(form, ui('min')); // This is the minimum number -- default 0
 
   min = min ? 0 + min.value : 0;
@@ -17836,10 +17839,9 @@ _fieldFunction.field[ns.ui('Multiple').uri] = function (dom, container, already,
     img.setAttribute('src', plusIconURI); //  plus sign
 
     img.setAttribute('style', 'margin: 0.2em; width: 1.5em; height:1.5em');
-    img.title = 'Click to add one or more ' + utils.predicateLabel(property, reverse);
-    var prompt = tail.appendChild(dom.createElement('span'));
-    prompt.textContent = (values.length === 0 ? 'Add one or more ' : 'Add more ') + utils.predicateLabel(property, reverse); // utils.label(property)
-
+    img.title = 'Click to add another ' + multipleUIlabel;
+    var prompt = dom.createElement('span');
+    prompt.textContent = (values.length === 0 ? 'Add another ' : 'Add ') + multipleUIlabel;
     tail.addEventListener('click', /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(_eventNotUsed) {
         return _regenerator["default"].wrap(function _callee5$(_context5) {
@@ -17861,6 +17863,7 @@ _fieldFunction.field[ns.ui('Multiple').uri] = function (dom, container, already,
         return _ref3.apply(this, arguments);
       };
     }(), true);
+    tail.appendChild(prompt);
   }
 
   function createListIfNecessary() {
@@ -18135,16 +18138,16 @@ _fieldFunction.field[ns.ui('Classifier').uri] = function (dom, container, alread
  ** -- radio buttons
  ** -- auto-complete typing
  **
- ** Todo: Deal with multiple.  Maybe merge with multiple code.
+ ** TODO: according to ontology ui:choice can also have ns.ui('default') - this is not implemented yet
  */
 
 
 _fieldFunction.field[ns.ui('Choice').uri] = function (dom, container, already, subject, form, dataDoc, callbackFunction) {
   var ui = ns.ui;
   var kb = _solidLogic.store;
-  var multiple = false;
   var formDoc = form.doc ? form.doc() : null; // @@ if blank no way to know
 
+  var multiSelect = false;
   var p;
   var box = dom.createElement('div');
   box.setAttribute('class', 'choiceBox'); // Set flexDirection column?
@@ -18173,79 +18176,79 @@ _fieldFunction.field[ns.ui('Choice').uri] = function (dom, container, already, s
 
   var follow = kb.anyJS(form, ui('follow'), null, formDoc); // data doc moves to new subject?
 
-  var possible = [];
-  var possibleProperties;
-  var firstSelectOptionText = '* Select for ' + utils.label(subject, true) + ' *';
   var opts = {
     form: form,
     subForm: subForm,
-    multiple: multiple,
-    firstSelectOptionText: firstSelectOptionText,
+    multiSelect: multiSelect,
     disambiguate: false
   };
-  possible = kb.each(undefined, ns.rdf('type'), uiFrom, formDoc);
 
-  for (var x in kb.findMembersNT(uiFrom)) {
-    possible.push(kb.fromNT(x));
-  } // Use rdfs
+  function getSelectorOptions() {
+    var possible = [];
+    var possibleProperties;
+    possible = kb.each(undefined, ns.rdf('type'), uiFrom, formDoc);
+
+    for (var x in kb.findMembersNT(uiFrom)) {
+      possible.push(kb.fromNT(x));
+    } // Use rdfs
 
 
-  if (uiFrom.sameTerm(ns.rdfs('Class'))) {
-    for (p in buttons.allClassURIs()) {
-      possible.push(kb.sym(p));
-    } // log.debug("%%% Choice field: possible.length 2 = "+possible.length)
+    if (uiFrom.sameTerm(ns.rdfs('Class'))) {
+      for (p in buttons.allClassURIs()) {
+        possible.push(kb.sym(p));
+      } // log.debug("%%% Choice field: possible.length 2 = "+possible.length)
 
-  } else if (uiFrom.sameTerm(ns.rdf('Property'))) {
-    possibleProperties = buttons.propertyTriage(kb);
+    } else if (uiFrom.sameTerm(ns.rdf('Property'))) {
+      possibleProperties = buttons.propertyTriage(kb);
 
-    for (p in possibleProperties.op) {
-      possible.push(kb.fromNT(p));
+      for (p in possibleProperties.op) {
+        possible.push(kb.fromNT(p));
+      }
+
+      for (p in possibleProperties.dp) {
+        possible.push(kb.fromNT(p));
+      }
+
+      opts.disambiguate = true; // This is a big class, and the labels won't be enough.
+    } else if (uiFrom.sameTerm(ns.owl('ObjectProperty'))) {
+      possibleProperties = buttons.propertyTriage(kb);
+
+      for (p in possibleProperties.op) {
+        possible.push(kb.fromNT(p));
+      }
+
+      opts.disambiguate = true;
+    } else if (uiFrom.sameTerm(ns.owl('DatatypeProperty'))) {
+      possibleProperties = buttons.propertyTriage(kb);
+
+      for (p in possibleProperties.dp) {
+        possible.push(kb.fromNT(p));
+      }
+
+      opts.disambiguate = true;
     }
 
-    for (p in possibleProperties.dp) {
-      possible.push(kb.fromNT(p));
-    }
+    var object = kb.any(subject, property);
+    if (object) possible.push(object);
+    return sortByLabel(possible);
+  } // TODO: this checks for any occurrence, regardless of true or false setting
 
-    opts.disambiguate = true; // This is a big class, and the labels won't be enough.
-  } else if (uiFrom.sameTerm(ns.owl('ObjectProperty'))) {
-    possibleProperties = buttons.propertyTriage(kb);
-
-    for (p in possibleProperties.op) {
-      possible.push(kb.fromNT(p));
-    }
-
-    opts.disambiguate = true;
-  } else if (uiFrom.sameTerm(ns.owl('DatatypeProperty'))) {
-    possibleProperties = buttons.propertyTriage(kb);
-
-    for (p in possibleProperties.dp) {
-      possible.push(kb.fromNT(p));
-    }
-
-    opts.disambiguate = true;
-  }
-
-  var sortedPossible = sortByLabel(possible); // TODO: this checks for any occurance regardles if it is set to true or false
 
   if (kb.any(form, ui('canMintNew'))) {
     opts.mint = '* Create new *'; // @@ could be better
   }
 
-  var selector = makeSelectForOptions(dom, kb, subject, property, sortedPossible, uiFrom, opts, dataDoc, callbackFunction);
-  rhs.appendChild(selector);
-  var object;
+  var selector;
 
-  if (selector.currentURI) {
-    object = $rdf.sym(selector.currentURI);
-  } else {
-    object = kb.any(subject, property);
-  }
+  rhs.refresh = function () {
+    var selectorOptions = getSelectorOptions();
+    selector = makeSelectForChoice(dom, rhs, kb, subject, property, selectorOptions, uiFrom, opts, dataDoc, callbackFunction);
+    rhs.innerHTML = '';
+    rhs.appendChild(selector);
+  };
 
-  if (object && subForm) {
-    removeNextSiblingsAfterElement(selector);
-    addSubFormChoice(dom, rhs, already, object, subForm, follow ? object.doc() : dataDoc, callbackFunction);
-  }
-
+  rhs.refresh();
+  if (selector && selector.refresh) selector.refresh();
   return box;
 };
 /**
@@ -18466,7 +18469,8 @@ function promptForNew(dom, kb, subject, predicate, theClass, form, dataDoc, call
       b.setAttribute('type', 'button');
       b.setAttribute('style', 'float: right;');
       b.innerHTML = 'Goto ' + utils.label(theClass);
-      b.addEventListener('click', function (_e) {
+      b.addEventListener('click', // TODO fix dependency cycle to solid-panes by calling outlineManager
+      function (_e) {
         dom.outlineManager.GotoSubject(theClass, true, undefined, true, undefined);
       }, false);
       return box;
@@ -18601,17 +18605,15 @@ function makeDescription(dom, kb, subject, predicate, dataDoc, callbackFunction)
 // @param subject - a term, the subject of the statement(s) being edited.
 // @param predicate - a term, the predicate of the statement(s) being edited
 // @param possible - a list of terms, the possible value the object can take
-// @param options.multiple - Boolean - Whether more than one at a time is allowed
-// @param options.firstSelectOptionText - a string to be displayed as the
+// @param options.nullLabel - a string to be displayed as the
 //                        option for none selected (for non multiple)
-// @param options.mint - User may create thing if this sent to the prompt string eg "New foo"
 // @param options.subForm - If mint, then the form to be used for minting the new thing
 // @param dataDoc - The web document being edited
 // @param callbackFunction - takes (boolean ok, string errorBody)
 */
 
 
-function makeSelectForOptions(dom, kb, subject, predicate, possible, uiFrom, options, dataDoc, callbackFunction) {
+function makeSelectForOptions(dom, kb, subject, predicate, possible, options, dataDoc, callbackFunction) {
   log.debug('Select list length now ' + possible.length);
   var n = 0;
   var uris = {}; // Count them
@@ -18628,7 +18630,7 @@ function makeSelectForOptions(dom, kb, subject, predicate, possible, uiFrom, opt
   } // uris is now the set of possible options
 
 
-  if (n === 0 && !options.mint) {
+  if (n === 0) {
     return (0, _error.errorMessageBlock)(dom, "Can't do selector with no options, subject= " + subject + ' property = ' + predicate + '.');
   }
 
@@ -18654,6 +18656,8 @@ function makeSelectForOptions(dom, kb, subject, predicate, possible, uiFrom, opt
   actual = getActual();
 
   var onChange = function onChange(_e) {
+    select.disabled = true; // until data written back - gives user feedback too
+
     var ds = [];
     var is = [];
 
@@ -18663,43 +18667,18 @@ function makeSelectForOptions(dom, kb, subject, predicate, possible, uiFrom, opt
       }
     };
 
-    var newObject;
-
     for (var _i = 0; _i < select.options.length; _i++) {
       var opt = select.options[_i];
-
-      if (opt.selected && opt.AJAR_mint) {
-        // not sure if this 'if' is used because I cannot find mintClass
-        if (options.mintClass) {
-          var thisForm = promptForNew(dom, kb, subject, predicate, options.mintClass, null, dataDoc, function (ok, body) {
-            if (!ok) {
-              callbackFunction(ok, body, {
-                change: 'new'
-              }); // @@ if ok, need some form of refresh of the select for the new thing
-            }
-          });
-          select.parentNode.appendChild(thisForm);
-          newObject = thisForm.AJAR_subject;
-        } else {
-          newObject = newThing(dataDoc);
-        }
-
-        is.push($rdf.st(subject, predicate, kb.sym(newObject), dataDoc));
-        if (uiFrom) is.push($rdf.st(newObject, ns.rdf('type'), kb.sym(uiFrom), dataDoc)); // not sure if this 'if' is used because I cannot find mintStatementsFun
-
-        if (options.mintStatementsFun) {
-          is = is.concat(options.mintStatementsFun(newObject));
-        }
-
-        select.currentURI = newObject;
-      }
-
       if (!opt.AJAR_uri) continue; // a prompt or mint
 
       if (opt.selected && !(opt.AJAR_uri in actual)) {
         // new class
         is.push($rdf.st(subject, predicate, kb.sym(opt.AJAR_uri), dataDoc));
-        select.currentURI = opt.AJAR_uri;
+      }
+
+      if (!opt.selected && opt.AJAR_uri in actual) {
+        // old class
+        removeValue(kb.sym(opt.AJAR_uri));
       }
 
       if (opt.selected) select.currentURI = opt.AJAR_uri;
@@ -18719,29 +18698,25 @@ function makeSelectForOptions(dom, kb, subject, predicate, possible, uiFrom, opt
       sel = sel.superSelect;
     }
 
-    log.info('selectForOptions: data doc = ' + dataDoc); // refresh subForm
+    log.info('selectForOptions: data doc = ' + dataDoc);
+    kb.updater.update(ds, is, function (uri, ok, body) {
+      actual = getActual(); // refresh
 
-    removeNextSiblingsAfterElement(select);
-    addSubFormChoice(dom, select.parentNode, {}, $rdf.sym(select.currentURI), options.subForm, dataDoc, function (ok, body) {
       if (ok) {
-        kb.updater.update(ds, is, function (uri, success, errorBody) {
-          actual = getActual(); // refresh
-
-          if (!success) select.parentNode.appendChild((0, _error.errorMessageBlock)(dom, 'Error updating select: ' + errorBody));
-        });
-        if (callbackFunction) callbackFunction(ok, {
-          widget: 'select',
-          event: 'new'
-        });
+        select.disabled = false; // data written back
       } else {
-        select.parentNode.appendChild((0, _error.errorMessageBlock)(dom, 'Error updating data in field of select: ' + body));
+        return select.parentNode.appendChild((0, _error.errorMessageBlock)(dom, 'Error updating data in select: ' + body));
       }
+
+      if (callbackFunction) callbackFunction(ok, {
+        widget: 'select',
+        event: 'change'
+      });
     });
   };
 
   var select = dom.createElement('select');
   select.setAttribute('style', style.formSelectSTyle);
-  if (options.multiple) select.setAttribute('multiple', 'true');
   select.currentURI = null;
 
   select.refresh = function () {
@@ -18784,22 +18759,11 @@ function makeSelectForOptions(dom, kb, subject, predicate, possible, uiFrom, opt
     select.appendChild(option);
   }
 
-  if (editable && options.mint) {
-    var mint = dom.createElement('option');
-    mint.appendChild(dom.createTextNode(options.mint));
-    mint.AJAR_mint = true; // Flag it
-
-    select.insertBefore(mint, select.firstChild);
-  }
-
-  if (!select.currentURI && !options.multiple) {
+  if (!select.currentURI) {
     var prompt = dom.createElement('option');
-    prompt.appendChild(dom.createTextNode(options.firstSelectOptionText));
-    prompt.disabled = true;
-    prompt.value = true;
-    prompt.hidden = true;
-    prompt.selected = true;
+    prompt.appendChild(dom.createTextNode(options.nullLabel));
     select.insertBefore(prompt, select.firstChild);
+    prompt.selected = true;
   }
 
   if (editable) {
@@ -18818,27 +18782,16 @@ function makeSelectForOptions(dom, kb, subject, predicate, possible, uiFrom, opt
 function makeSelectForCategory(dom, kb, subject, category, dataDoc, callbackFunction) {
   var du = kb.any(category, ns.owl('disjointUnionOf'));
   var subs;
-  var multiple = false;
 
   if (!du) {
     subs = kb.each(undefined, ns.rdfs('subClassOf'), category);
-    multiple = true;
   } else {
     subs = du.elements;
   }
 
   log.debug('Select list length ' + subs.length);
-
-  if (subs.length === 0) {
-    return (0, _error.errorMessageBlock)(dom, "Can't do " + (multiple ? 'multiple ' : '') + 'selector with no subclasses of category: ' + category);
-  }
-
-  if (subs.length === 1) {
-    return (0, _error.errorMessageBlock)(dom, "Can't do " + (multiple ? 'multiple ' : '') + 'selector with only 1 subclass of category: ' + category + ':' + subs[1]);
-  }
-
-  return makeSelectForOptions(dom, kb, subject, ns.rdf('type'), subs, null, {
-    multiple: multiple
+  return makeSelectForOptions(dom, kb, subject, ns.rdf('type'), subs, {
+    nullLabel: '* Select type *'
   }, dataDoc, callbackFunction);
 }
 /** Make SELECT element to select subclasses recurively
@@ -18872,8 +18825,7 @@ function makeSelectForNestedCategory(dom, kb, subject, category, dataDoc, callba
   function onChange(ok, body) {
     if (ok) update();
     callbackFunction(ok, body);
-  } // eslint-disable-next-line prefer-const
-
+  }
 
   var select = makeSelectForCategory(dom, kb, subject, category, dataDoc, onChange);
   container.appendChild(select);
@@ -19028,6 +18980,196 @@ function newThing(doc) {
   var now = new Date();
   return $rdf.sym(doc.uri + '#' + 'id' + ('' + now.getTime()));
 }
+/** Make SELECT element to select options
+//
+// @param subject - a term, the subject of the statement(s) being edited.
+// @param predicate - a term, the predicate of the statement(s) being edited
+// @param possible - a list of terms, the possible value the object can take
+// @param options.multiSelect - Boolean - Whether more than one at a time is allowed
+// @param options.uiMultipleInUse - signals that the ui:choise is used with a ui:multiple
+// @param options.mint - User may create thing if this sent to the prompt string eg "New foo"
+// @param options.subForm - If mint, then the form to be used for minting the new thing
+// @param dataDoc - The web document being edited
+// @param callbackFunction - takes (boolean ok, string errorBody)
+*/
+
+
+function makeSelectForChoice(dom, container, kb, subject, predicate, possible, uiFrom, options, dataDoc, callbackFunction) {
+  var n = 0;
+  var uris = {}; // Count them
+
+  var editable = kb.updater.editable(dataDoc.uri);
+
+  for (var i = 0; i < possible.length; i++) {
+    var sub = possible[i]; // @@ Maybe; make this so it works with blank nodes too
+
+    if (!sub.uri) debug.warn("makeSelectForOptions: option does not have an uri: ".concat(sub, ", with predicate: ").concat(predicate));
+    if (!sub.uri || sub.uri in uris) continue;
+    uris[sub.uri] = true;
+    n++;
+  } // uris is now the set of possible options
+
+
+  if (n === 0 && !options.mint) {
+    return (0, _error.errorMessageBlock)(dom, "Can't do selector with no options, subject= " + subject + ' property = ' + predicate + '.');
+  }
+
+  log.debug('makeSelectForOptions: dataDoc=' + dataDoc);
+
+  function determinFirstSelectOption() {
+    var firstSelectOptionText = '--- classify ---';
+    var option = dom.createElement('option');
+
+    if (predicate && !(predicate.termType === 'BlankNode')) {
+      firstSelectOptionText = '* Select for property: ' + utils.label(predicate) + ' *';
+    }
+
+    if (subject && !(subject.termType === 'BlankNode')) {
+      firstSelectOptionText = '* Select for ' + utils.label(subject, true) + ' *';
+    }
+
+    option.appendChild(dom.createTextNode(firstSelectOptionText));
+    option.disabled = true;
+    option.value = true;
+    option.hidden = true;
+    option.selected = true;
+    return option;
+  }
+
+  var onChange = function onChange(_e) {
+    select.refresh();
+  };
+
+  var select = dom.createElement('select');
+  select.setAttribute('style', style.formSelectSTyle);
+  if (options.multiSelect) select.setAttribute('multiSelect', 'true');
+  select.currentURI = null;
+
+  for (var uri in uris) {
+    select.appendChild(createOption(uri));
+  }
+
+  if (editable && options.mint) {
+    var mint = dom.createElement('option');
+    mint.appendChild(dom.createTextNode(options.mint));
+    mint.AJAR_mint = true; // Flag it
+
+    select.insertBefore(mint, select.firstChild);
+  }
+
+  if (select.children.length === 0) select.insertBefore(determinFirstSelectOption(), select.firstChild);
+
+  select.refresh = function () {
+    select.disabled = true; // unlocked any conflict we had got into
+
+    var ds = [];
+    var is = [];
+
+    var removeValue = function removeValue(t) {
+      if (kb.holds(subject, predicate, t, dataDoc)) {
+        ds.push($rdf.st(subject, predicate, t, dataDoc));
+      }
+    };
+
+    var newObject;
+
+    for (var _i3 = 0; _i3 < select.options.length; _i3++) {
+      var opt = select.options[_i3];
+
+      if (opt.selected && opt.AJAR_mint) {
+        // not sure if this 'if' is used because I cannot find mintClass
+        if (options.mintClass) {
+          var thisForm = promptForNew(dom, kb, subject, predicate, options.mintClass, null, dataDoc, function (ok, body) {
+            if (!ok) {
+              callbackFunction(ok, body, {
+                change: 'new'
+              }); // @@ if ok, need some form of refresh of the select for the new thing
+            }
+          });
+          select.parentNode.appendChild(thisForm);
+          newObject = thisForm.AJAR_subject;
+        } else {
+          newObject = newThing(dataDoc);
+        }
+
+        is.push($rdf.st(subject, predicate, kb.sym(newObject), dataDoc));
+        if (uiFrom) is.push($rdf.st(newObject, ns.rdf('type'), kb.sym(uiFrom), dataDoc)); // not sure if this 'if' is used because I cannot find mintStatementsFun
+
+        if (options.mintStatementsFun) {
+          is = is.concat(options.mintStatementsFun(newObject));
+        }
+
+        select.currentURI = newObject;
+      }
+
+      if (!opt.AJAR_uri) continue; // a prompt or mint
+
+      if (opt.selected) select.currentURI = opt.AJAR_uri;
+    }
+
+    var sel = select.subSelect; // All subclasses must also go
+
+    while (sel && sel.currentURI) {
+      removeValue(kb.sym(sel.currentURI));
+      sel = sel.subSelect;
+    }
+
+    sel = select.superSelect; // All superclasses are redundant
+
+    while (sel && sel.currentURI) {
+      removeValue(kb.sym(sel.currentURI));
+      sel = sel.superSelect;
+    }
+
+    log.info('selectForOptions: data doc = ' + dataDoc);
+
+    if (select.currentURI) {
+      removeNextSiblingsAfterElement(select);
+      addSubFormChoice(dom, container, {}, $rdf.sym(select.currentURI), options.subForm, dataDoc, function (ok, body) {
+        if (ok) {
+          kb.updater.update(ds, is, function (uri, success, errorBody) {
+            if (!success) container.appendChild((0, _error.errorMessageBlock)(dom, 'Error updating select: ' + errorBody));
+          });
+          if (callbackFunction) callbackFunction(ok, {
+            widget: 'select',
+            event: 'new'
+          }); // widgets.refreshTree(container)
+        } else {
+          container.appendChild((0, _error.errorMessageBlock)(dom, 'Error updating data in field of select: ' + body));
+        }
+      });
+    }
+
+    select.disabled = false;
+  };
+
+  function createOption(uri) {
+    var option = dom.createElement('option');
+    var c = kb.sym(uri);
+
+    if (options.disambiguate) {
+      option.appendChild(dom.createTextNode(utils.labelWithOntology(c, true))); // Init. cap
+    } else {
+      option.appendChild(dom.createTextNode(utils.label(c, true))); // Init.
+    }
+
+    var backgroundColor = kb.any(c, kb.sym('http://www.w3.org/ns/ui#backgroundColor'));
+
+    if (backgroundColor) {
+      option.setAttribute('style', 'background-color: ' + backgroundColor.value + '; ');
+    }
+
+    option.AJAR_uri = uri;
+    if (c.toString() === '' + select.currentURI) option.selected = true;
+    return option;
+  }
+
+  if (editable) {
+    select.addEventListener('change', onChange, false);
+  }
+
+  return select;
+} // makeSelectForChoice
 //# sourceMappingURL=forms.js.map
 
 /***/ }),
@@ -44632,8 +44774,8 @@ class N3Parser {
   _saveContext(type, graph, subject, predicate, object) {
     const n3Mode = this._n3Mode;
     this._contextStack.push({
-      subject: subject, predicate: predicate, object: object,
-      graph: graph, type: type,
+      type,
+      subject, predicate, object, graph,
       inverse: n3Mode ? this._inversePredicate : false,
       blankPrefix: n3Mode ? this._prefixes._ : '',
       quantified: n3Mode ? this._quantified : null,
@@ -44652,14 +44794,20 @@ class N3Parser {
 
   // ### `_restoreContext` restores the parent context
   // when leaving a scope (list, blank node, formula)
-  _restoreContext() {
-    const context = this._contextStack.pop(), n3Mode = this._n3Mode;
+  _restoreContext(type, token) {
+    // Obtain the previous context
+    const context = this._contextStack.pop();
+    if (!context || context.type !== type)
+      return this._error(`Unexpected ${token.type}`, token);
+
+    // Restore the quad of the previous context
     this._subject   = context.subject;
     this._predicate = context.predicate;
     this._object    = context.object;
     this._graph     = context.graph;
-    // The settings below only apply to N3 streams
-    if (n3Mode) {
+
+    // Restore N3 context settings
+    if (this._n3Mode) {
       this._inversePredicate = context.inverse;
       this._prefixes._ = context.blankPrefix;
       this._quantified = context.quantified;
@@ -44932,7 +45080,7 @@ class N3Parser {
 
     // Restore the parent context containing this blank node
     const empty = this._predicate === null;
-    this._restoreContext();
+    this._restoreContext('blank', token);
     // If the blank node was the object, restore previous context and read punctuation
     if (this._object !== null)
       return this._getContextEndReader();
@@ -44983,7 +45131,7 @@ class N3Parser {
       break;
     case ')':
       // Closing the list; restore the parent context
-      this._restoreContext();
+      this._restoreContext('list', token);
       // If this list is contained within a parent list, return the membership quad here.
       // This will be `<parent list element> rdf:first <this list>.`.
       if (stack.length !== 0 && stack[stack.length - 1].type === 'list')
@@ -45134,7 +45282,7 @@ class N3Parser {
       this._emit(this._subject, this._predicate, this._object, this._graph);
 
     // Restore the parent context containing this formula
-    this._restoreContext();
+    this._restoreContext('formula', token);
     // If the formula was the subject, continue reading the predicate.
     // If the formula was the object, read punctuation.
     return this._object === null ? this._readPredicate : this._getContextEndReader();
@@ -45343,7 +45491,7 @@ class N3Parser {
         // The list item is the remaining subejct after reading the path
         const item = this._subject;
         // Switch back to the context of the list
-        this._restoreContext();
+        this._restoreContext('item', token);
         // Output the list item
         this._emit(this._subject, this.RDF_FIRST, item, this._graph);
       }
@@ -45405,7 +45553,7 @@ class N3Parser {
     // Read the quad and restore the previous context
     const quad = this._quad(this._subject, this._predicate, this._object,
       this._graph || this.DEFAULTGRAPH);
-    this._restoreContext();
+    this._restoreContext('<<', token);
     // If the triple was the subject, continue by reading the predicate.
     if (this._subject === null) {
       this._subject = quad;
@@ -77014,20 +77162,25 @@ class RemoteJWKSet extends _local_js__WEBPACK_IMPORTED_MODULE_3__.LocalJWKSet {
             throw new TypeError('url must be an instance of URL');
         }
         this._url = new URL(url.href);
-        this._options = { agent: options === null || options === void 0 ? void 0 : options.agent };
+        this._options = { agent: options === null || options === void 0 ? void 0 : options.agent, headers: options === null || options === void 0 ? void 0 : options.headers };
         this._timeoutDuration =
             typeof (options === null || options === void 0 ? void 0 : options.timeoutDuration) === 'number' ? options === null || options === void 0 ? void 0 : options.timeoutDuration : 5000;
         this._cooldownDuration =
             typeof (options === null || options === void 0 ? void 0 : options.cooldownDuration) === 'number' ? options === null || options === void 0 ? void 0 : options.cooldownDuration : 30000;
+        this._cacheMaxAge = typeof (options === null || options === void 0 ? void 0 : options.cacheMaxAge) === 'number' ? options === null || options === void 0 ? void 0 : options.cacheMaxAge : 600000;
     }
     coolingDown() {
-        if (!this._cooldownStarted) {
-            return false;
-        }
-        return Date.now() < this._cooldownStarted + this._cooldownDuration;
+        return typeof this._jwksTimestamp === 'number'
+            ? Date.now() < this._jwksTimestamp + this._cooldownDuration
+            : false;
+    }
+    fresh() {
+        return typeof this._jwksTimestamp === 'number'
+            ? Date.now() < this._jwksTimestamp + this._cacheMaxAge
+            : false;
     }
     async getKey(protectedHeader, token) {
-        if (!this._jwks) {
+        if (!this._jwks || !this.fresh()) {
             await this.reload();
         }
         try {
@@ -77064,7 +77217,7 @@ class RemoteJWKSet extends _local_js__WEBPACK_IMPORTED_MODULE_3__.LocalJWKSet {
                     throw new _util_errors_js__WEBPACK_IMPORTED_MODULE_2__.JWKSInvalid('JSON Web Key Set malformed');
                 }
                 this._jwks = { keys: json.keys };
-                this._cooldownStarted = Date.now();
+                this._jwksTimestamp = Date.now();
                 this._pendingFetch = undefined;
             })
                 .catch((err) => {
@@ -78963,13 +79116,8 @@ const checkAudiencePresence = (audPayload, audOption) => {
     }
     const { currentDate } = options;
     const now = (0,_epoch_js__WEBPACK_IMPORTED_MODULE_2__["default"])(currentDate || new Date());
-    if (payload.iat !== undefined || options.maxTokenAge) {
-        if (typeof payload.iat !== 'number') {
-            throw new _util_errors_js__WEBPACK_IMPORTED_MODULE_0__.JWTClaimValidationFailed('"iat" claim must be a number', 'iat', 'invalid');
-        }
-        if (payload.exp === undefined && payload.iat > now + tolerance) {
-            throw new _util_errors_js__WEBPACK_IMPORTED_MODULE_0__.JWTClaimValidationFailed('"iat" claim timestamp check failed (it should be in the past)', 'iat', 'check_failed');
-        }
+    if ((payload.iat !== undefined || options.maxTokenAge) && typeof payload.iat !== 'number') {
+        throw new _util_errors_js__WEBPACK_IMPORTED_MODULE_0__.JWTClaimValidationFailed('"iat" claim must be a number', 'iat', 'invalid');
     }
     if (payload.nbf !== undefined) {
         if (typeof payload.nbf !== 'number') {
@@ -79776,7 +79924,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _util_errors_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/errors.js */ "./node_modules/jose/dist/browser/util/errors.js");
 
-const fetchJwks = async (url, timeout) => {
+const fetchJwks = async (url, timeout, options) => {
     let controller;
     let id;
     let timedOut = false;
@@ -79790,6 +79938,7 @@ const fetchJwks = async (url, timeout) => {
     const response = await fetch(url.href, {
         signal: controller ? controller.signal : undefined,
         redirect: 'manual',
+        headers: options.headers,
     }).catch((err) => {
         if (timedOut)
             throw new _util_errors_js__WEBPACK_IMPORTED_MODULE_0__.JWKSTimeout();
@@ -80557,17 +80706,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "isCryptoKey": () => (/* binding */ isCryptoKey)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (crypto);
-function isCryptoKey(key) {
-    try {
-        return (key != null &&
-            typeof key.extractable === 'boolean' &&
-            typeof key.algorithm.name === 'string' &&
-            typeof key.type === 'string');
-    }
-    catch (_a) {
-        return false;
-    }
-}
+const isCryptoKey = (key) => key instanceof CryptoKey;
 
 
 /***/ }),

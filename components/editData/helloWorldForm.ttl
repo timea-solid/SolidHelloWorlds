@@ -31,30 +31,27 @@
             :linkToDemo
             :linkToRepo
             :linkToTutorial
-            :techStackHeading
-            :solidTechStack
-            :semWebTechStack
-            :genericTechStack
-            :useCaseHeading
-            :showcasesUseCase 
-      ) .
+            #:techStackHeading
+            #:solidTechStack
+            #:semWebTechStack
+            #:genericTechStack
+            #:useCaseHeading
+            #:showcasesUseCase 
+      ).
 
 # Project Name
-
 :projectName a ui:SingleLineTextField; 
             ui:size 12; 
             ui:property skos:prefLabel;
             ui:label "Name of project"@en.
 
 # Project Description
-
 :projectDescription a ui:SingleLineTextField; 
             ui:size 100; 
             ui:property skos:definition;
             ui:label "Short description"@en.
 
 # Project Author
-
 :projectAuthor a ui:SingleLineTextField; 
             ui:size 100; 
             ui:property So:author;
@@ -64,21 +61,18 @@
 :linksHeading a ui:Heading; ui:contents "Project links"@en.
 
 # Link to where the Demo is working/deployed
-
 :linkToDemo a ui:SingleLineTextField; 
             ui:size 100; 
             ui:property So:linkToDemo;
             ui:label "Link to demo"@en.
 
 # Link to repository
-
 :linkToRepo a ui:SingleLineTextField; 
             ui:size 100; 
             ui:property So:linkToRepo;
             ui:label "Link to repository"@en.
 
 # Link to tutorial
-
 :linkToTutorial a ui:SingleLineTextField; 
             ui:size 100; 
             ui:property So:linkToTutorial;
