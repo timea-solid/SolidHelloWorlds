@@ -1,10 +1,15 @@
-/* FIRST PAGE */
+/* PAGEs */
 
-.first-page h1 {
+.second-page h1, .second-page h4, .first-page h1 {
     text-align: center;
 }
 
-.first-page .logo-img {
+.first-page h2 {
+    display: block !important;
+    text-align: center;
+}
+
+.second-page .logo-img, .first-page .logo-img {
     width: 7vw;
     opacity: 1;
   }
@@ -20,6 +25,67 @@
 
 .first-column {
     width: 28%;
+}
+
+.second-page h3 {
+  color: var(--text) !important;
+}
+
+.second-page .formFieldName {
+  width: 11em !important;
+}
+
+.second-page .choiceBox-label {
+  width: 14em !important;
+}
+
+.second-page div {
+  border-color: var(--accent) !important; 
+}
+
+.second-page .choiceBox {
+  margin-right: 2em;
+  margin-bottom: 2em;
+}
+
+.second-page .formFieldValue input, .second-page .formFieldValue select, .second-page .formFieldValue select option {
+  width: 20em !important;
+  border-color: var(--accent) !important;
+  background-color: var(--bg) !important;
+}
+
+.second-page .formFieldValue select { 
+  margin-left: 0em !important;
+  width: 100% !important;
+}
+
+.second-page .formFieldName a {
+  color: var(--accent) !important;
+}
+
+/* LOGIN */
+.SolidSignInOrSignUpBox {
+  display: grid !important;
+}
+
+.SolidSignInOrSignUpBox input:nth-child(1) {
+
+}
+.SolidSignInOrSignUpBox input:nth-child(2) {
+}
+
+.SolidSignInOrSignUpBox input {
+  
+}
+
+#webId, #loginBanner {
+  text-align: center;
+}
+
+#loginBanner input {
+  margin: auto auto 0.5em auto !important;
+  background-color: var(--accent) !important;
+  width: 30%;
 }
 
 /* FOOTER */
@@ -46,12 +112,20 @@ footer a {
   border-color: #FFB300 !important;
 }
 
-.accordion button {
+.first-page .accordion button {
   color: white !important;
   background-color: #212121 !important; 
 }
 
-.accordion button:hover { 
+.first-page .accordion button:focus, 
+.first-page .accordion button:active,
+.first-page .accordion button:hover,
+.first-page .accordion button:hover:active {
+  color: black !important;
+  background-color: #FFB300 !important;
+}
+
+.first-page .selected {
   color: black !important;
   background-color: #FFB300 !important;
 }

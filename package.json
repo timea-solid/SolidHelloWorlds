@@ -1,0 +1,32 @@
+{
+  "name": "solidhelloworlds",
+  "version": "1.0.0",
+  "description": "A collection od Solid examples",
+  "main": "index.html",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "npx vite",
+    "watch": "scripts/watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timea-solid/SolidHelloWorlds.git"
+  },
+  "keywords": [
+    "solid",
+    "knowledge graph",
+    "linked data"
+  ],
+  "author": "Timea Turdean",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timea-solid/SolidHelloWorlds/issues"
+  },
+  "homepage": "https://github.com/timea-solid/SolidHelloWorlds#readme",
+  "devDependencies": {
+    "vite": "^2.9.6"
+  }
+}
