@@ -108,7 +108,7 @@
 ################
 
 :Full-code-stack
-    a skos:ConceptScheme, So:Full-code-stack;
+    a skos:ConceptScheme;
     dct:title "Full code stack"@en;
     skos:hasTopConcept
         :Code-stack, :Semantic-Web, :Solid.
@@ -176,7 +176,7 @@
 # TODO: missing inverse relations for So:usesSemWebLibrary
 ###
 :Semantic-Web
-    a skos:Concept, So:Semantic-Web-Library, So:Full-code-stack;
+    a skos:Concept;
     skos:narrower :N3-rdfjs, :rdflib;
     skos:topConceptOf :Full-Code-stack;
     skos:prefLabel "Semantic web library"@en.
@@ -195,7 +195,7 @@
 # TODO: missing inverse relations for So:usesSolidLibrary
 ###
 :Solid
-    a skos:Concept, So:Solid-Library, So:Full-code-stack;
+    a skos:Concept;
     skos:topConceptOf :Full-Code-stack;
     skos:narrower
         :Inrupt-solid-client-authn, :Inrupt-solid-client-js,

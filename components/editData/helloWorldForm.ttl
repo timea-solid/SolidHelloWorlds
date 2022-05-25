@@ -31,12 +31,12 @@
             :linkToDemo
             :linkToRepo
             :linkToTutorial
-            #:techStackHeading
-            #:solidTechStack
-            #:semWebTechStack
-            #:genericTechStack
-            #:useCaseHeading
-            #:showcasesUseCase 
+            :techStackHeading
+            :solidTechStack
+            :semWebTechStack
+            :genericTechStack
+            :useCaseHeading
+            :showcasesUseCase 
       ).
 
 # Project Name
@@ -86,18 +86,21 @@
 :solidTechStack a ui:Choice; 
       ui:label "Solid libraries used:"@en;
       ui:property So:usesSolidLibrary;
+      ui:multiselect :true;
       ui:from So:Solid-Library.
 
 # drop down for semantic web tech stack
 :semWebTechStack a ui:Choice; 
       ui:label "Semantic Web libraries used:"@en;
       ui:property So:usesSemWebLibrary;
+      ui:multiselect :true;
       ui:from So:Semantic-Web-Library.
 
 # drop down for tech stack
 :genericTechStack a ui:Choice; 
       ui:label "Generic technical stack used:"@en;
       ui:property So:usesCodeStack;
+      ui:multiselect :true;
       ui:from So:Code-Stack.
 
 # ------------ project use cases -------------- #
@@ -107,6 +110,7 @@
 :showcasesUseCase a ui:Choice; 
       ui:label "Select use case:"@en;
       ui:property So:showcasesUseCase;
+      ui:multiselect :true;
       ui:from So:Technical-Use-Case.
 
 # END
