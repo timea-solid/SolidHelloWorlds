@@ -1,0 +1,157 @@
+.multiselect__container {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-shadow: 0 1px 3px 0 var(--accent), 0 0 0 1px var(--accent) !important;
+    box-shadow: 0 1px 3px 0 var(--accent), 0 0 0 1px var(--accent) !important;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 36px;
+    padding: 4px 8px 0 8px;
+    position: relative;
+    margin-bottom: 5px;
+    background-color: var(--bg) !important;
+}
+
+.multiselect__container:after {
+    content: '';
+    min-height: inherit;
+    font-size: 0;
+}
+
+.multiselect__container>* {
+    background-color: var(--bg) !important;
+    font-size: 14px;
+}
+
+.multiselect__wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+}
+
+.multiselect__clear-btn {
+    cursor: pointer;
+    align-items: center;
+    margin-bottom: 4px;
+    margin-left: 4px;
+}
+
+.multiselect__clear-btn svg {
+    height: 20px;
+    width: 20px;
+}
+
+.multiselect__options {
+    background-color: var(--bg) !important;
+    border-radius: 2px;
+    left: 0;
+    max-height: 0;
+    overflow: hidden;
+    position: absolute;
+    top: calc(100% + 3px);
+    z-index: 9999;
+    width: 100%;
+    opacity: 0;
+    transition: max-height 0.1s ease;
+}
+
+.multiselect__options.visible {
+    max-height: 200px;
+    -webkit-box-shadow: 0 1px 3px 0 var(--accent), 0 0 0 1px var(--accent) !important;
+    box-shadow: 0 1px 3px 0 var(--accent), 0 0 0 1px var(--accent) !important;
+    opacity: 1;
+    transition: max-height 0.2s ease;
+    background-color: var(--bg) !important;
+}
+
+
+.multiselect__options ul {
+    list-style: none;
+    margin: 0;
+    padding: 2px 0;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.multiselect__options ul li {
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+.multiselect__options ul li * {
+    pointer-events: none;
+}
+
+.multiselect__options ul p.multiselect__options--no-results,
+.multiselect__options ul p.multiselect__options--no-data {
+    margin: 0;
+    padding: 8px;
+    text-align: center;
+}
+
+.multiselect__options ul li.multiselect__options--selected {
+    background-color: var(--accent) !important;
+    color: var(--text) !important;
+}
+
+.multiselect__options ul li.multiselect__options--selected:hover {
+    background-color: var(--accent) !important;
+    color: var(--text) !important;
+}
+
+.multiselect__options ul li:hover {
+    background-color: var(--accent) !important;
+    color: var(--text) !important;
+}
+
+.multiselect__options ul li.arrow-selected {
+    border: 2px solid rgba(101, 101, 101, 0.5);
+}
+
+.multiselect__selected {
+    background-color: var(--accent) !important;
+    border-radius: 2px;
+    color: var(--text) !important;
+    margin-bottom: 4px;
+    margin-right: 4px;
+    padding: 4px 8px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.multiselect__selected .multiselect__remove-btn {
+    cursor: pointer;
+    display: flex;
+    margin-left: 6px;
+}
+
+.multiselect__selected .multiselect__remove-btn svg {
+    height: 16px;
+    width: 16px;
+}
+
+.multiselect__input {
+    border-color: var(--accent) !important;
+    -ms-flex-preferred-size: 40%;
+    flex-basis: 40%;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    margin-bottom: 4px;
+    min-width: 40%;
+    outline: none;
+    color: var(--text);
+    background-color: var(--bg) !important;
+}

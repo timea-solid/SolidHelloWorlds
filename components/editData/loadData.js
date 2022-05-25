@@ -26,8 +26,8 @@ function renderData(div, subject, form) {
 
 async function loadFormData() {
 
-    const LINK_TO_FORM = "https://timea.solidcommunity.net/HelloWorld/development/helloWorldForm.ttl"
-    const LINK_TO_KNOWLEDGE_GRAPH = "https://timea.solidcommunity.net/HelloWorld/development/helloWorld.ttl"
+    const LINK_TO_FORM = "https://timea.solidcommunity.net/HelloWorld/components/editData/helloWorldForm.ttl"
+    const LINK_TO_KNOWLEDGE_GRAPH = "https://timea.solidcommunity.net/HelloWorld/data/helloWorld.ttl"
     
     // load Form data
     linkToFormDoc = UI.rdf.sym(LINK_TO_FORM)
