@@ -15282,8 +15282,8 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.versionInfo = void 0;
 var versionInfo = {
-  buildTime: '2022-05-25T21:48:27Z',
-  commit: 'a05165ffe4ff65d5a5748e04ecfc1f3d88f7b25a',
+  buildTime: '2022-06-09T12:45:09Z',
+  commit: '78b3553416b2809ddb15ed7c7096d96ee54a319d',
   npmInfo: {
     'solid-ui': '2.4.22',
     npm: '8.3.1',
@@ -18328,14 +18328,14 @@ _fieldFunction.field[ns.ui('Choice').uri] = function (dom, container, already, s
 
   var multiSelect = kb.any(form, ui('multiselect')); // Optional
 
-  var selector; // from ui:property
-
-  var selectedOptions = kb.each(subject, property, null, dataDoc).map(function (object) {
-    return object.value;
-  });
+  var selector;
 
   rhs.refresh = function () {
-    // from ui:from + ui:property
+    // from ui:property
+    var selectedOptions = kb.each(subject, property, null, dataDoc).map(function (object) {
+      return object.value;
+    }); // from ui:from + ui:property
+
     var possibleOptions = getSelectorOptions();
     possibleOptions.push(selectedOptions);
     possibleOptions = sortByLabel(possibleOptions);
@@ -19126,7 +19126,7 @@ function makeSelectForChoice(dom, container, kb, subject, predicate, inputPossib
 
   log.debug('makeSelectForChoice: dataDoc=' + dataDoc);
 
-  function determineFitstSelectOptionText() {
+  function createDefaultSelectOptionText() {
     var firstSelectOptionText = '--- choice ---';
 
     if (predicate && !(predicate.termType === 'BlankNode')) {
@@ -19140,9 +19140,9 @@ function makeSelectForChoice(dom, container, kb, subject, predicate, inputPossib
     return firstSelectOptionText;
   }
 
-  function determinFirstSelectOption() {
+  function createDefaultSelectOption() {
     var option = dom.createElement('option');
-    option.appendChild(dom.createTextNode(determineFitstSelectOptionText()));
+    option.appendChild(dom.createTextNode(createDefaultSelectOptionText()));
     option.disabled = true;
     option.value = true;
     option.hidden = true;
@@ -19172,7 +19172,7 @@ function makeSelectForChoice(dom, container, kb, subject, predicate, inputPossib
     select.insertBefore(mint, select.firstChild);
   }
 
-  if (select.children.length === 0) select.insertBefore(determinFirstSelectOption(), select.firstChild);
+  if (select.children.length === 0) select.insertBefore(createDefaultSelectOption(), select.firstChild);
 
   select.update = function (newSelectedOptions) {
     selectedOptions = newSelectedOptions;
@@ -19181,7 +19181,7 @@ function makeSelectForChoice(dom, container, kb, subject, predicate, inputPossib
 
     var removeValue = function removeValue(t) {
       if (kb.holds(subject, predicate, t, dataDoc)) {
-        ds.push($rdf.st(subject, predicate, t, dataDoc)); // console.log("----value removed " + t)
+        ds.push($rdf.st(subject, predicate, t, dataDoc));
       }
     };
 
@@ -19278,13 +19278,13 @@ function makeSelectForChoice(dom, container, kb, subject, predicate, inputPossib
         select.currentURI = opt.AJAR_uri;
       }
 
-      if (!containsObject(opt.AJAR_uri, selectedOptions)) opt.setAttribute('selected', 'false');
+      if (!containsObject(opt.AJAR_uri, selectedOptions)) opt.removeAttribute('selected');
       if (containsObject(opt.AJAR_uri, selectedOptions)) opt.setAttribute('selected', 'true');
     }
 
     log.info('selectForOptions: data doc = ' + dataDoc);
 
-    if (select.currentURI) {
+    if (select.currentURI && options.subForm) {
       addSubFormChoice(dom, container, {}, $rdf.sym(select.currentURI), options.subForm, dataDoc, function (ok, body) {
         if (ok) {
           kb.updater.update([], is, function (uri, success, errorBody) {
@@ -19325,8 +19325,7 @@ function makeSelectForChoice(dom, container, kb, subject, predicate, inputPossib
 
     option.AJAR_uri = uri;
 
-    if (c.value === '' + select.currentURI || containsObject(c.value, selectedOptions)) {
-      option.selected = true;
+    if (containsObject(c.value, selectedOptions)) {
       option.setAttribute('selected', 'true');
     }
 
@@ -45816,8 +45815,8 @@ class N3Parser {
   _saveContext(type, graph, subject, predicate, object) {
     const n3Mode = this._n3Mode;
     this._contextStack.push({
-      type,
-      subject, predicate, object, graph,
+      subject: subject, predicate: predicate, object: object,
+      graph: graph, type: type,
       inverse: n3Mode ? this._inversePredicate : false,
       blankPrefix: n3Mode ? this._prefixes._ : '',
       quantified: n3Mode ? this._quantified : null,
@@ -45836,20 +45835,14 @@ class N3Parser {
 
   // ### `_restoreContext` restores the parent context
   // when leaving a scope (list, blank node, formula)
-  _restoreContext(type, token) {
-    // Obtain the previous context
-    const context = this._contextStack.pop();
-    if (!context || context.type !== type)
-      return this._error(`Unexpected ${token.type}`, token);
-
-    // Restore the quad of the previous context
+  _restoreContext() {
+    const context = this._contextStack.pop(), n3Mode = this._n3Mode;
     this._subject   = context.subject;
     this._predicate = context.predicate;
     this._object    = context.object;
     this._graph     = context.graph;
-
-    // Restore N3 context settings
-    if (this._n3Mode) {
+    // The settings below only apply to N3 streams
+    if (n3Mode) {
       this._inversePredicate = context.inverse;
       this._prefixes._ = context.blankPrefix;
       this._quantified = context.quantified;
@@ -46122,7 +46115,7 @@ class N3Parser {
 
     // Restore the parent context containing this blank node
     const empty = this._predicate === null;
-    this._restoreContext('blank', token);
+    this._restoreContext();
     // If the blank node was the object, restore previous context and read punctuation
     if (this._object !== null)
       return this._getContextEndReader();
@@ -46173,7 +46166,7 @@ class N3Parser {
       break;
     case ')':
       // Closing the list; restore the parent context
-      this._restoreContext('list', token);
+      this._restoreContext();
       // If this list is contained within a parent list, return the membership quad here.
       // This will be `<parent list element> rdf:first <this list>.`.
       if (stack.length !== 0 && stack[stack.length - 1].type === 'list')
@@ -46324,7 +46317,7 @@ class N3Parser {
       this._emit(this._subject, this._predicate, this._object, this._graph);
 
     // Restore the parent context containing this formula
-    this._restoreContext('formula', token);
+    this._restoreContext();
     // If the formula was the subject, continue reading the predicate.
     // If the formula was the object, read punctuation.
     return this._object === null ? this._readPredicate : this._getContextEndReader();
@@ -46533,7 +46526,7 @@ class N3Parser {
         // The list item is the remaining subejct after reading the path
         const item = this._subject;
         // Switch back to the context of the list
-        this._restoreContext('item', token);
+        this._restoreContext();
         // Output the list item
         this._emit(this._subject, this.RDF_FIRST, item, this._graph);
       }
@@ -46595,7 +46588,7 @@ class N3Parser {
     // Read the quad and restore the previous context
     const quad = this._quad(this._subject, this._predicate, this._object,
       this._graph || this.DEFAULTGRAPH);
-    this._restoreContext('<<', token);
+    this._restoreContext();
     // If the triple was the subject, continue by reading the predicate.
     if (this._subject === null) {
       this._subject = quad;
@@ -78204,25 +78197,20 @@ class RemoteJWKSet extends _local_js__WEBPACK_IMPORTED_MODULE_3__.LocalJWKSet {
             throw new TypeError('url must be an instance of URL');
         }
         this._url = new URL(url.href);
-        this._options = { agent: options === null || options === void 0 ? void 0 : options.agent, headers: options === null || options === void 0 ? void 0 : options.headers };
+        this._options = { agent: options === null || options === void 0 ? void 0 : options.agent };
         this._timeoutDuration =
             typeof (options === null || options === void 0 ? void 0 : options.timeoutDuration) === 'number' ? options === null || options === void 0 ? void 0 : options.timeoutDuration : 5000;
         this._cooldownDuration =
             typeof (options === null || options === void 0 ? void 0 : options.cooldownDuration) === 'number' ? options === null || options === void 0 ? void 0 : options.cooldownDuration : 30000;
-        this._cacheMaxAge = typeof (options === null || options === void 0 ? void 0 : options.cacheMaxAge) === 'number' ? options === null || options === void 0 ? void 0 : options.cacheMaxAge : 600000;
     }
     coolingDown() {
-        return typeof this._jwksTimestamp === 'number'
-            ? Date.now() < this._jwksTimestamp + this._cooldownDuration
-            : false;
-    }
-    fresh() {
-        return typeof this._jwksTimestamp === 'number'
-            ? Date.now() < this._jwksTimestamp + this._cacheMaxAge
-            : false;
+        if (!this._cooldownStarted) {
+            return false;
+        }
+        return Date.now() < this._cooldownStarted + this._cooldownDuration;
     }
     async getKey(protectedHeader, token) {
-        if (!this._jwks || !this.fresh()) {
+        if (!this._jwks) {
             await this.reload();
         }
         try {
@@ -78259,7 +78247,7 @@ class RemoteJWKSet extends _local_js__WEBPACK_IMPORTED_MODULE_3__.LocalJWKSet {
                     throw new _util_errors_js__WEBPACK_IMPORTED_MODULE_2__.JWKSInvalid('JSON Web Key Set malformed');
                 }
                 this._jwks = { keys: json.keys };
-                this._jwksTimestamp = Date.now();
+                this._cooldownStarted = Date.now();
                 this._pendingFetch = undefined;
             })
                 .catch((err) => {
@@ -80158,8 +80146,13 @@ const checkAudiencePresence = (audPayload, audOption) => {
     }
     const { currentDate } = options;
     const now = (0,_epoch_js__WEBPACK_IMPORTED_MODULE_2__["default"])(currentDate || new Date());
-    if ((payload.iat !== undefined || options.maxTokenAge) && typeof payload.iat !== 'number') {
-        throw new _util_errors_js__WEBPACK_IMPORTED_MODULE_0__.JWTClaimValidationFailed('"iat" claim must be a number', 'iat', 'invalid');
+    if (payload.iat !== undefined || options.maxTokenAge) {
+        if (typeof payload.iat !== 'number') {
+            throw new _util_errors_js__WEBPACK_IMPORTED_MODULE_0__.JWTClaimValidationFailed('"iat" claim must be a number', 'iat', 'invalid');
+        }
+        if (payload.exp === undefined && payload.iat > now + tolerance) {
+            throw new _util_errors_js__WEBPACK_IMPORTED_MODULE_0__.JWTClaimValidationFailed('"iat" claim timestamp check failed (it should be in the past)', 'iat', 'check_failed');
+        }
     }
     if (payload.nbf !== undefined) {
         if (typeof payload.nbf !== 'number') {
@@ -80966,7 +80959,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _util_errors_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/errors.js */ "./node_modules/jose/dist/browser/util/errors.js");
 
-const fetchJwks = async (url, timeout, options) => {
+const fetchJwks = async (url, timeout) => {
     let controller;
     let id;
     let timedOut = false;
@@ -80980,7 +80973,6 @@ const fetchJwks = async (url, timeout, options) => {
     const response = await fetch(url.href, {
         signal: controller ? controller.signal : undefined,
         redirect: 'manual',
-        headers: options.headers,
     }).catch((err) => {
         if (timedOut)
             throw new _util_errors_js__WEBPACK_IMPORTED_MODULE_0__.JWKSTimeout();
@@ -81748,7 +81740,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "isCryptoKey": () => (/* binding */ isCryptoKey)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (crypto);
-const isCryptoKey = (key) => key instanceof CryptoKey;
+function isCryptoKey(key) {
+    try {
+        return (key != null &&
+            typeof key.extractable === 'boolean' &&
+            typeof key.algorithm.name === 'string' &&
+            typeof key.type === 'string');
+    }
+    catch (_a) {
+        return false;
+    }
+}
 
 
 /***/ }),
