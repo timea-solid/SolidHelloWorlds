@@ -21,7 +21,9 @@
 
     <div class="main">
         <!-- Similar to React components, we load the ExampleTable component. Just that this componens are written in RDF (Turtle syntax) -->
-        <div data-solid_ui_component="./components/facetedSearch/appsDisplay.ttl#ExamplesApp"></div>
+        <div data-solid_ui_component="./components/facetedSearch/appsDisplay.ttl#ExamplesApp">
+            <span id="loading-span">Loading...</span>
+        </div>
     </div>
 
     <footer>
@@ -33,8 +35,11 @@
     <script type="text/javascript" src="https://solidcommunity.net/mashlib.js"></script>
     <!-- for now we copy over the needed js from Jeff Zucker's project -->
     <!-- <script src="https://jeff-zucker.github.io/solid-ui-components/src/solid-ui-components.js"></script> -->
-   <script type="text/javascript" src="./components/facetedSearch/solid-ui-components.js"></script>
-   <script>solidUI.init();</script>
+    <script type="text/javascript" src="./components/facetedSearch/solid-ui-components.js"></script>
+    <script>
+        solidUI.init()
+        document.getElementById("loading-span").hidden = true
+    </script>
 
 </body>
 </html>
