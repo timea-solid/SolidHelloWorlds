@@ -176,10 +176,10 @@
 # TODO: missing inverse relations for So:usesSemWebLibrary
 ###
 :Semantic-Web
-    a skos:Concept;
+    a skos:Concept, So:Semantic-Web-Library;
     skos:narrower :N3-rdfjs, :rdflib;
     skos:topConceptOf :Full-Code-stack;
-    skos:prefLabel "Semantic web library"@en.
+    skos:prefLabel "A semantic web library"@en.
 :rdflib
     a skos:Concept, So:Semantic-Web-Library, So:Full-code-stack;
     skos:broader :Semantic-Web;
@@ -195,12 +195,12 @@
 # TODO: missing inverse relations for So:usesSolidLibrary
 ###
 :Solid
-    a skos:Concept;
+    a skos:Concept, So:Solid-Library;
     skos:topConceptOf :Full-Code-stack;
     skos:narrower
         :Inrupt-solid-client-authn, :Inrupt-solid-client-js,
         :Inrupt-solid-ui-react, :Solid-solid-auth-client, :Solid-query-ldflex, :Soukai-Solid;
-    skos:prefLabel "Solid library"@en.
+    skos:prefLabel "A solid library"@en.
 :Inrupt-solid-client-authn
     a skos:Concept, So:Solid-Library, So:Full-code-stack;
     skos:broader :Solid;
@@ -232,7 +232,7 @@
 
 :Technical-use-case
     a skos:ConceptScheme, So:Technical-Use-Case;
-    dct:title "Technical use case"@en;
+    dct:title "A technical use case"@en;
     skos:hasTopConcept
         :Authentication-on-Solid-using-library,
         :Authentication-using-React-library, :CRUD-operations-on-Solid,
