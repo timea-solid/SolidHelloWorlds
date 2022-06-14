@@ -64,3 +64,9 @@ function renderForm(subject, form) {
         renderData(div, subject, form)
     //}
 }
+
+async function loadData() {
+    await loadFormData()
+}
+
+loadData()
