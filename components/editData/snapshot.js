@@ -46,14 +46,17 @@ async function loadOrCreateContainer(store, containerNode) {
             }
             delete store.fetcher.requested[containerNode] // delete cached 404 error
         } else {
-            const msg =  'createIfNotExists doc load error NOT 404:  ' + containerNode + ': ' + err
+            const msg = 'createIfNotExists doc load error NOT 404:  ' + containerNode + ': ' + err
             throw new Error(msg) // @@ add nested errors
         }
     }
 }
 
 async function createSnapshot(store, currentKG, nameOfSnapshot) {
-    const docName = nameOfSnapshot +"-"+ (new Date()).getTime() + ".ttl"
+    const docName = nameOfSnapshot + "-" + (new Date()).getTime() + ".ttl"
+    if (UI.authn.currentUser()) {
+        docName = nameOfSnapshot + "-" + UI.authn.currentUser().value + "-" + (new Date()).getTime()+".ttl"
+    }
     await createResource(store, currentKG.responseText, docName)
     return docName
 }
@@ -113,8 +116,8 @@ function getContainerElements(store, containerNode) {
 
 function deleteOlderSnapshots(store, snapshots, threshold) {
     snapshots.sort(function (x, y) {
-    const timestampx = x.substring(x.indexOf('-')+1, x.indexOf('.ttl'))
-    const timestampy = y.substring(y.indexOf('-')+1, y.indexOf('.ttl'))
+    const timestampx = x.substring(x.lastIndexOf('-')+1, x.indexOf('.ttl'))
+    const timestampy = y.substring(y.lastIndexOf('-')+1, y.indexOf('.ttl'))
     return timestampx - timestampy;
     })
     for (let i = 0; i < snapshots.length-threshold; i++) {
