@@ -9,9 +9,9 @@ function complainIfBad(ok, message) {
 function renderData(div, subject, form) {
     const formThis = UI.rdf.sym(form.doc().uri+"#this")
     const newSubject = UI.rdf.sym(subject.doc().uri + "#Examples")
-    console.log('\nAppending form now:')
-    console.log(`form ${formThis}\n  subject:  ${newSubject}`)
-    console.log(`resource:  ${newSubject.doc()}`)
+    console.log('appending form now')
+    // console.log(`form ${formThis}\n  subject:  ${newSubject}`)
+    // console.log(`resource:  ${newSubject.doc()}`)
     var ele = UI.widgets.appendForm(
         document,
         div,
@@ -37,7 +37,7 @@ async function loadFormData() {
     const formTitel = UI.store.statementsMatching(undefined, undefined, UI.rdf.sym('http://www.w3.org/2004/02/skos/core#prefLabel'))
     for (let i=0; i<formTitel.length;i++) {
         let title = formTitel[i]
-        console.log(title.subject.uri +" "+title.predicate.uri + " has skos:prefLabel ") // the WebID of a friend
+        // console.log(title.subject.uri +" "+title.predicate.uri + " has skos:prefLabel ") // the WebID of a friend
     }
     
     // load Solid example knowledge graph
@@ -48,7 +48,7 @@ async function loadFormData() {
     const examples = UI.store.statementsMatching(undefined, undefined, UI.rdf.sym('https://wkokgit.github.io/hellosolid/'))
     for (let i=0; i<examples.length;i++) {
         let example = examples[i]
-        console.log(example.subject.uri +" "+example.predicate.uri + " have the desired link") // the WebID of a friend
+        // console.log(example.subject.uri +" "+example.predicate.uri + " have the desired link") // the WebID of a friend
     } 
     
     renderForm(linkToSolidExampleKnowledgeGraphDoc, linkToFormDoc)
