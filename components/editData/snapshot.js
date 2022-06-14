@@ -1,8 +1,13 @@
 async function manageSnapshots(LINK_TO_KNOWLEDGE_GRAPH, LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS, LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOT_NAME, threshold) {
 
+    // this is the resource we make snapshots for
     if (!LINK_TO_KNOWLEDGE_GRAPH) LINK_TO_KNOWLEDGE_GRAPH = "https://timea.solidcommunity.net/HelloWorld/data/helloWorld.ttl"
+    // this is the container where we place the snapshots
     if (!LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS) LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS = "https://timea.solidcommunity.net/HelloWorld/data/snapshots/"
-    if (!LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOT_NAME) LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOT_NAME = LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS+"helloWorld"
+    // this is the basename of the created snapshots to which we add the timestamp and the filetype .ttl 
+    // TODO: automatised to identify the filetype from the input file type
+    if (!LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOT_NAME) LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOT_NAME = LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS + "helloWorld"
+    // how many maximim snapshots we should maintain
     if (!threshold) threshold = 20
     
     const store = UI.store
