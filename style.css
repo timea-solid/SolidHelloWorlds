@@ -1,6 +1,6 @@
 /* PAGEs */
 
-.second-page h1, .second-page h4, .first-page h1 {
+.third-page h4, .third-page h1, .second-page h1, .second-page h4, .first-page h1 {
     text-align: center;
 }
 
@@ -9,7 +9,7 @@
     text-align: center;
 }
 
-.second-page .logo-img, .first-page .logo-img {
+.third-page .logo-img, .second-page .logo-img, .first-page .logo-img {
     width: 7vw;
     opacity: 1;
   }
@@ -132,4 +132,58 @@ footer a {
 
 nav {
   font-size: var(--base-fontsize) !important;
+}
+
+.adminDiv {
+  text-align: center;
+}
+
+.adminDivButton {
+  text-align: center;
+}
+
+.adminDivButton button {
+  margin: 1em;
+}
+
+.snapshotTable {
+  width: fit-content;
+  text-align: center;
+  margin-left: -11em;
+}
+.snapshotTable ul {
+  list-style-type: decimal;
+}
+
+.snapshotLi {
+  width: max-content;
+}
+
+.snapshotLiDiv, .createNewDiv {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.snapshotLiButton {
+  margin: 1em;
+}
+
+.spanshotMessage {
+  color: var(--accent) !important;
+  vertical-align: -webkit-baseline-middle;
+}
+
+.spanshotCreateMessage {
+  color: var(--accent) !important;
+  vertical-align: -webkit-baseline-middle;
+  padding-left: 2em;
+}
+
+.timstampDiv {
+  min-width: fit-content;
+}
+
+.nameDiv {
+  padding-left: 2em;
+  min-width: 22em;
 }

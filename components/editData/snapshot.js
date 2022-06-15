@@ -53,11 +53,14 @@ async function loadOrCreateContainer(store, containerNode) {
 }
 
 async function createSnapshot(store, currentKG, nameOfSnapshot) {
-    const docName = nameOfSnapshot + "-" + (new Date()).getTime() + ".ttl"
+    const now = new Date()
+    const timestamp = now.getTime()
+    let docName = nameOfSnapshot + "-" + timestamp + ".ttl"
+    let versioningTriples = ":this <http://purl.org/dc/terms/modified> \"" + now.toISOString()+"\"^^<http://www.w3.org/2001/XMLSchema#dateTime> ."
     if (UI.authn.currentUser()) {
-        docName = nameOfSnapshot + "-" + UI.authn.currentUser().value + "-" + (new Date()).getTime()+".ttl"
+        versioningTriples += "\n" + ":this <http://purl.org/dc/terms/creator> "+ UI.authn.currentUser() +" ."
     }
-    await createResource(store, currentKG.responseText, docName)
+    await createResource(store, currentKG.responseText + versioningTriples, docName)
     return docName
 }
 
@@ -66,7 +69,7 @@ async function createResource(store, currentKG, docName) {
         await store.fetcher?.webOperation('PUT', docName, { data: currentKG, contentType: 'text/turtle' })
     } catch (err) {
         const msg = 'createIfNotExists: PUT FAILED: ' + docName + ': ' + err
-        throw new Error(msg)
+        throw new Error(msg + ' '+ err)
     }
     console.info("created snapshot")
 }
@@ -78,7 +81,7 @@ function isContainer(url) {
 async function createContainer (store, url) {
     if (!isContainer(url)) {
         const msg = 'not a container URL '+url
-        throw new Error(msg);
+        throw new Error(msg)
     }
 
     try {
