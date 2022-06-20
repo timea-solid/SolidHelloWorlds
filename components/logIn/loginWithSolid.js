@@ -17,7 +17,7 @@ function loggedInFrontend(session, store) {
         snapshotTable.setAttribute('id', 'snapshotTableId')
         snapshotTable.innerHTML = "Loading..."
         parentDiv.appendChild(snapshotTable)
-        adminSnapshots(snapshotTable)
+        manageSnapshots(snapshotTable)
       },
       false
     )

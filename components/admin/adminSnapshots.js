@@ -1,4 +1,4 @@
-async function adminSnapshots(snapshotTable) {
+async function manageSnapshots(snapshotTable) {
     // from snapshot.js
     // this is the resource we make snapshots for
     LINK_TO_KNOWLEDGE_GRAPH = "https://timea.solidcommunity.net/HelloWorld/data/helloWorld.ttl"
@@ -67,7 +67,7 @@ async function adminSnapshots(snapshotTable) {
             useButton.addEventListener(
                 'click',
                 function (_event) {
-                    switchSnapshot(store, sortedSnapshotFileNames[i], timestamp)
+                    switchSnapshot(store, sortedSnapshotFileNames[i], document.getElementById('span'+timestamp))
                 },
                 false
             )
@@ -80,7 +80,7 @@ async function adminSnapshots(snapshotTable) {
             deleteButton.addEventListener(
                 'click',
                 function (_event) {
-                    deleteSnapshot(store, sortedSnapshotFileNames[i], timestamp)
+                    deleteSnapshot(store, sortedSnapshotFileNames[i], document.getElementById('span'+timestamp))
                 },
                 false
             )
@@ -115,11 +115,11 @@ async function adminSnapshots(snapshotTable) {
     createSnapDiv.setAttribute('class', 'createNewDiv')
     
     const createSnapshotButton = document.createElement('button')
-    createSnapshotButton.textContent = 'Create snpashot now'
+    createSnapshotButton.textContent = 'Create snapshot now'
     createSnapshotButton.addEventListener(
         'click',
         function (_event) {
-            createSnapshotNow(store, LINK_TO_KNOWLEDGE_GRAPH, LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOT_NAME, sortedSnapshotFileNames)
+            createSnapshotNow(store, LINK_TO_KNOWLEDGE_GRAPH, LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOT_NAME, sortedSnapshotFileNames, document.getElementById('createSnap'))
         },
         false
     )
@@ -133,37 +133,5 @@ async function adminSnapshots(snapshotTable) {
     snapshotTable.appendChild(createSnapDiv)
 
 }
-    
-    
-function deleteSnapshot(store, url, timestamp) {
-    console.info('deleting '+url)
-    store.fetcher?.webOperation('DELETE', UI.rdf.sym(url))
-    document.getElementById('span'+timestamp).textContent = "Successful"
-}
 
-async function switchSnapshot(store, url, timestamp) {
-    console.info("switching to version from " + (new Date(parseInt(timestamp))).toISOString())
-    try {
-        const snapshotKG = await store.fetcher?.load(url)
-        await store.fetcher?.webOperation('DELETE', UI.rdf.sym(LINK_TO_KNOWLEDGE_GRAPH))
-        await store.fetcher?.webOperation('PUT', LINK_TO_KNOWLEDGE_GRAPH, { data: snapshotKG.responseText, contentType: 'text/turtle', Link: '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"' })
-        const currentKG = await store.fetcher?.load(LINK_TO_KNOWLEDGE_GRAPH)
-    } catch (err) {
-        const msg = 'could not switch snapshot '
-        throw new Error(msg);
-    }
-    document.getElementById('span'+timestamp).textContent = "Successful"
-}
 
-async function createSnapshotNow(store, linkToCurrentKG, snapName, sortedSnapshotFileNames) {
-    document.getElementById('createSnap').textContent = 'Working...'
-    try {
-        const currentKG = await store.fetcher?.load(linkToCurrentKG)
-        sortedSnapshotFileNames.push(await createSnapshot(store, currentKG, snapName))
-    } catch (err) {
-        const msg = 'Something went wrong'
-        document.getElementById('createSnap').textContent = msg
-        throw new Error(msg + ' ' + err)
-    }
-    document.getElementById('createSnap').textContent = 'Successful'
-}

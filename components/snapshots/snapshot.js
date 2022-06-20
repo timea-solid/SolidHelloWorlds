@@ -1,4 +1,4 @@
-async function manageSnapshots(LINK_TO_KNOWLEDGE_GRAPH, LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS, LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOT_NAME, threshold) {
+async function snapshotsLogic(LINK_TO_KNOWLEDGE_GRAPH, LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS, LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOT_NAME, threshold) {
 
     // this is the resource we make snapshots for
     if (!LINK_TO_KNOWLEDGE_GRAPH) LINK_TO_KNOWLEDGE_GRAPH = "https://timea.solidcommunity.net/HelloWorld/data/helloWorld.ttl"
@@ -33,24 +33,6 @@ async function manageSnapshots(LINK_TO_KNOWLEDGE_GRAPH, LINK_TO_KNOWLEDGE_GRAPH_
     }
 
 }
-async function loadOrCreateContainer(store, containerNode) {
-    try {
-        const response = await store.fetcher?.load(containerNode)
-    } catch (err) {
-        if (err.response && err.response.status === 404) {
-            try {
-                await createContainer(store, containerNode)
-            } catch (err) {
-                const msg = 'createContainer: PUT FAILED: ' + doc + ': ' + err
-                throw new Error(msg)
-            }
-            delete store.fetcher.requested[containerNode] // delete cached 404 error
-        } else {
-            const msg = 'createIfNotExists doc load error NOT 404:  ' + containerNode + ': ' + err
-            throw new Error(msg) // @@ add nested errors
-        }
-    }
-}
 
 async function createSnapshot(store, currentKG, nameOfSnapshot) {
     const now = new Date()
@@ -64,59 +46,6 @@ async function createSnapshot(store, currentKG, nameOfSnapshot) {
     return docName
 }
 
-async function createResource(store, currentKG, docName) {
-    try {
-        await store.fetcher?.webOperation('PUT', docName, { data: currentKG, contentType: 'text/turtle' })
-    } catch (err) {
-        const msg = 'createIfNotExists: PUT FAILED: ' + docName + ': ' + err
-        throw new Error(msg + ' '+ err)
-    }
-    console.info("created snapshot")
-}
-
-function isContainer(url) {
-    return url.charAt(url.length-1) === "/";
-}
-
-async function createContainer (store, url) {
-    if (!isContainer(url)) {
-        const msg = 'not a container URL '+url
-        throw new Error(msg)
-    }
-
-    try {
-        await store.fetcher?.webOperation('PUT', url, { data: '', contentType: 'text/turtle', Link: '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"' })
-    } catch (err) {
-        const msg = `not OK: got ${result.status} response while creating container at ${url}`
-        throw new Error(msg)
-    }
-    console.info('created snapshot container') 
-}
-
-function getContainerElements (store, containerNode) {
-return store
-    .statementsMatching(
-    containerNode,
-    UI.rdf.sym("http://www.w3.org/ns/ldp#contains"),
-    undefined,
-    )
-    .map((st) => st.object);
-}
-
-async function getContainerMembers (store, containerNode) {
-    return getContainerElements(store, containerNode);
-}
-
-function getContainerElements(store, containerNode) {
-    return store
-    .statementsMatching(
-        containerNode,
-        UI.rdf.sym("http://www.w3.org/ns/ldp#contains"),
-        undefined,
-    )
-    .map((st) => st.object);
-}
-
 function deleteOlderSnapshots(store, snapshots, threshold) {
     snapshots.sort(function (x, y) {
     const timestampx = x.substring(x.lastIndexOf('-')+1, x.indexOf('.ttl'))
@@ -127,4 +56,47 @@ function deleteOlderSnapshots(store, snapshots, threshold) {
         console.info('deleting '+snapshots[i])
         store.fetcher?.webOperation('DELETE', UI.rdf.sym(snapshots[i]))
     }
+}
+
+function deleteSnapshot(store, url, element) {
+    console.info('deleting ' + url)
+    element.textContent = 'Working...'
+    try {
+        store.fetcher?.webOperation('DELETE', UI.rdf.sym(url))
+    } catch (err) {
+        const msg = 'Something went wrong'
+        element.textContent = msg
+        throw new Error(msg + ' ' + err)
+    }
+    element.textContent = "Successful"
+}
+
+async function createSnapshotNow(store, linkToCurrentKG, snapName, sortedSnapshotFileNames, element) {
+    console.info('creating snapshot')
+    element.textContent = 'Working...'
+    try {
+        const currentKG = await store.fetcher?.load(linkToCurrentKG)
+        sortedSnapshotFileNames.push(await createSnapshot(store, currentKG, snapName))
+    } catch (err) {
+        const msg = 'Something went wrong'
+        element.textContent = msg
+        throw new Error(msg + ' ' + err)
+    }
+    element.textContent = 'Successful'
+}
+
+async function switchSnapshot(store, url, element) {
+    console.info("switching snapshot")
+    element.textContent = 'Working...'
+    try {
+        const snapshotKG = await store.fetcher?.load(url)
+        await store.fetcher?.webOperation('DELETE', UI.rdf.sym(LINK_TO_KNOWLEDGE_GRAPH))
+        await store.fetcher?.webOperation('PUT', LINK_TO_KNOWLEDGE_GRAPH, { data: snapshotKG.responseText, contentType: 'text/turtle', Link: '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"' })
+        const currentKG = await store.fetcher?.load(LINK_TO_KNOWLEDGE_GRAPH)
+    } catch (err) {
+        const msg = 'could not switch snapshot '
+        element.textContent = msg
+        throw new Error(msg);
+    }
+    element.textContent = "Successful"
 }
