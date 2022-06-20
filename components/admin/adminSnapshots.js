@@ -156,6 +156,7 @@ async function switchSnapshot(store, url, timestamp) {
 }
 
 async function createSnapshotNow(store, linkToCurrentKG, snapName, sortedSnapshotFileNames) {
+    document.getElementById('createSnap').textContent = 'Working...'
     try {
         const currentKG = await store.fetcher?.load(linkToCurrentKG)
         sortedSnapshotFileNames.push(await createSnapshot(store, currentKG, snapName))

@@ -56,7 +56,7 @@ async function createSnapshot(store, currentKG, nameOfSnapshot) {
     const now = new Date()
     const timestamp = now.getTime()
     let docName = nameOfSnapshot + "-" + timestamp + ".ttl"
-    let versioningTriples = ":this <http://purl.org/dc/terms/modified> \"" + now.toISOString()+"\"^^<http://www.w3.org/2001/XMLSchema#dateTime> ."
+    let versioningTriples = ":this <http://purl.org/dc/terms/modified> \"" + now.toISOString() + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime> ."
     if (UI.authn.currentUser()) {
         versioningTriples += "\n" + ":this <http://purl.org/dc/terms/creator> "+ UI.authn.currentUser() +" ."
     }

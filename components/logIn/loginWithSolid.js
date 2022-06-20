@@ -1,12 +1,10 @@
-async function finishLogin() {
-  await UI.authn.authSession.handleIncomingRedirect()
-  const session = UI.authn.authSession
+function loggedInFrontend(session, store) {
   if (session.info.isLoggedIn) {
     webId.innerHTML = "<h4>Welcome: <span id='name'></span></h4>"
-    setName(UI.store, document.getElementById('name'), UI.authn.currentUser())
+    setName(store, document.getElementById('name'), UI.authn.currentUser())
 
     const adminManagementDiv = document.createElement('div')
-    adminManagementDiv.setAttribute('class','adminDivButton')
+    adminManagementDiv.setAttribute('class', 'adminDivButton')
     const snapshotButton = document.createElement('button')
     snapshotButton.textContent = 'Manage snapshots'
     snapshotButton.addEventListener(
@@ -26,24 +24,19 @@ async function finishLogin() {
     const thesaurusButton = document.createElement('button')
     thesaurusButton.textContent = 'Manage data'
     thesaurusButton.addEventListener(
-        'click',
-        function (_event) {
-            adminThesaurus()
-        },
-        false
+      'click',
+      function (_event) {
+        adminThesaurus()
+      },
+      false
     )
     adminManagementDiv.appendChild(snapshotButton)
     adminManagementDiv.appendChild(thesaurusButton)
 
     document.getElementById('adminDiv').appendChild(adminManagementDiv)
-  } else {
-    const loginBanner = document.getElementById("loginBanner")
-    const webId = document.getElementById("webId")
-    webId.innerHTML = "<h4>First please login or get a Solid user and then register as admin</h4>"
-    loginBanner.appendChild(UI.login.loginStatusBox(document, null, {}));
   }
 }
-
+  
 function setName (store, element, webID) {
   const findName = function (x) {
     const name =
@@ -61,4 +54,14 @@ function setName (store, element, webID) {
   }
 }
 
-finishLogin();
+const session = UI.authn.authSession
+const store = UI.store
+
+session.handleIncomingRedirect(
+  {
+    restorePreviousSession: true
+  }).then((info) => {
+    console.log(`Logged in with WebID [${info.webId}]`)
+    loginBanner.appendChild(UI.login.loginStatusBox(document, null, {}));
+    loggedInFrontend(session, store)
+  })
