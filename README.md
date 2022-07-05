@@ -10,7 +10,7 @@ Demo is running on my Solid Pod: [https://timea.solidcommunity.net/HelloWorld](h
 - [Data Model](#Data-model)
   - [Solid Hello World Thesaurus](#Solid-Hello-World-Thesaurus)
   - [Solid Hello World Ontology](#Solid-Hello-World-Ontology)
-- [Improvements & ideas](#Improvements-&-ideas)
+- [Improvements & ideas](#Improvements-and-ideas)
 - [How to deploy the code](#How-to-deploy-the-code)
   - [To configure in production](#To-configure-in-production)
 - [Attribution](#Attribution)
@@ -66,7 +66,7 @@ The ontology extends the SKOS scheme with predicates that help further describe 
 ![Solid Hello Worlds ontology](/docs/SolidHelloWorldsOntology.png)
 
 
-# Improvements & ideas
+# Improvements and ideas
 
 * There are problems with usage of GROUP_CONCAT which give XMLSchema#string in SPARQL queries. However the SPARQL queries and the thesaurus structure was changed to overcome this need.
 * If you have improvement ideas or find bugs please open a Git Issue. 
