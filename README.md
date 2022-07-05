@@ -5,14 +5,14 @@ Demo is running on my Solid Pod: [https://timea.solidcommunity.net/HelloWorld](h
 **Note:** This project is build on prototype libraries. And it serves multiple goals.
 
 # Table of contents:
-- [Purpose of Demo](#-Purpose-of-demo)
-- [Code Stack](#-Code-Stack)
+- [Purpose of Demo](#Purpose-of-demo)
+- [Code Stack](#Code-Stack)
   - [Data Model](#Data-model)
     - [Solid Hello World Thesaurus](#Solid-Hello-World-Thesaurus)
     - [Solid Hello World Ontology](#Solid-Hello-World-Ontology)
   - [Improvements & ideas](#Improvements-&-ideas)
   - [How to deploy the code](#How-to-deploy-the-code)
-   - [To configure in production](#To-configure-in-production)
+    - [To configure in production](#To-configure-in-production)
 - [Attribution](#Attribution)
 
 # Purpose of Demo
