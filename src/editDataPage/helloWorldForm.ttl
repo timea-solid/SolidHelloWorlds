@@ -87,30 +87,88 @@
       ui:label "Solid libraries used:"@en;
       ui:property So:usesSolidLibrary;
       ui:multiselect :true;
+      ui:canMintNew :true;
+      ui:use :solidTechStackCreationForm;
       ui:from So:Solid-Library.
 
+:solidTechStackCreationForm a ui:Form; 
+      schema:name "Add a new Solid lib" ;
+      ui:parts ( 
+            :solidTechStackName
+      ).
+
+# Solid Tech Stack Name
+:solidTechStackName a ui:SingleLineTextField; 
+            ui:size 12; 
+            ui:property skos:prefLabel;
+            ui:label "Name of Solid lib"@en.
+
+###########################################
 # drop down for semantic web tech stack
 :semWebTechStack a ui:Choice; 
       ui:label "Semantic Web libraries used:"@en;
       ui:property So:usesSemWebLibrary;
       ui:multiselect :true;
+      ui:canMintNew :true;
+      ui:use :semWebTechStackCreationForm;
       ui:from So:Semantic-Web-Library.
 
+:semWebTechStackCreationForm a ui:Form; 
+      schema:name "Add a new Sementic Web lib" ;
+      ui:parts ( 
+            :semWebTechStackName
+      ).
+
+# Sem Web Lib Name
+:semWebTechStackName a ui:SingleLineTextField; 
+            ui:size 12; 
+            ui:property skos:prefLabel;
+            ui:label "Name of Semantic Web lib"@en.
+
+###########################################
 # drop down for tech stack
 :genericTechStack a ui:Choice; 
       ui:label "Generic technical stack used:"@en;
       ui:property So:usesCodeStack;
       ui:multiselect :true;
+      ui:canMintNew :true;
+      ui:use :genericTechStackCreationForm;
       ui:from So:Code-Stack.
+
+:genericTechStackCreationForm a ui:Form; 
+      schema:name "Add a new Generic Tech Stack" ;
+      ui:parts ( 
+            :genericTechStackName
+      ).
+
+# Generic tech stack name
+:genericTechStackName a ui:SingleLineTextField; 
+            ui:size 12; 
+            ui:property skos:prefLabel;
+            ui:label "Name of generic tech stack"@en.
 
 # ------------ project use cases -------------- #
 :useCaseHeading a ui:Heading; ui:contents "Use cases"@en.
 
 # drop down for use cases
 :showcasesUseCase a ui:Choice; 
+      ui:canMintNew :true;      
       ui:label "Select use case:"@en;
       ui:property So:showcasesUseCase;
       ui:multiselect :true;
+      ui:use :usecaseCreationForm;
       ui:from So:Technical-Use-Case.
+
+:usecaseCreationForm a ui:Form; 
+      schema:name "Form for creating a new Use case" ;
+      ui:parts ( 
+            :useCaseName
+      ).
+
+# Use case Name
+:useCaseName a ui:SingleLineTextField; 
+            ui:size 12; 
+            ui:property skos:prefLabel;
+            ui:label "Name of use case"@en.
 
 # END

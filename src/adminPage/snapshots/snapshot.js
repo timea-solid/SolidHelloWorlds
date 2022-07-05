@@ -16,7 +16,7 @@ async function snapshotsLogic(LINK_TO_KNOWLEDGE_GRAPH, LINK_TO_KNOWLEDGE_GRAPH_S
     const snapshots = await getContainerMembers(store, UI.rdf.sym(LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS))
     const sortedSnapshotFileNames = snapshots.map(snapshot => snapshot.value).sort() // the first element contains the oldest content
     
-    const currentKG = await store.fetcher?.load(LINK_TO_KNOWLEDGE_GRAPH)
+    const currentKG = await store.fetcher.load(LINK_TO_KNOWLEDGE_GRAPH)
 
     if (sortedSnapshotFileNames && sortedSnapshotFileNames.length === 0) {
         sortedSnapshotFileNames.push(await createSnapshot(store, currentKG, LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOT_NAME))

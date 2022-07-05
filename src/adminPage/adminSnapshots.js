@@ -14,7 +14,7 @@ async function manageSnapshots(snapshotTable) {
     const store = UI.store
 
     try {
-        const response = await store.fetcher?.load(LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS)
+        const response = await store.fetcher.load(LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS)
     } catch (err) {
         const msg = 'could not load '+LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS
         throw new Error(msg)

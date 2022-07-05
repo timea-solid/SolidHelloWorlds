@@ -1,7 +1,7 @@
 {
   "name": "solidhelloworlds",
   "version": "1.0.0",
-  "description": "A collection od Solid examples",
+  "description": "A collection of Solid examples",
   "main": "index.html",
   "directories": {
     "doc": "docs"
@@ -18,7 +18,8 @@
   "keywords": [
     "solid",
     "knowledge graph",
-    "linked data"
+    "linked data",
+    "UI"
   ],
   "author": "Timea Turdean",
   "license": "MIT",

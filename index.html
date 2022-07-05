@@ -7,39 +7,32 @@
     <meta name="author" content="Timea Turdean">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solid Hello Worlds</title>
-    <link rel="shortcut icon" type="image/png" href="./images/solid-emblem.svg">
-    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/png" href="./static/images/solid-emblem.svg">
+    <link rel="stylesheet" href="./src/style.css">
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css"> 
 </head>
 <body class="first-page">
     
     <header>
-        <img class="logo-img" src="./images/solid-emblem.svg" /> 
+        <img class="logo-img" src="./static/images/solid-emblem.svg" /> 
         <h1>Hello! Welcome to Solidverse</h1>
         <span>On this page you will find different intro Solid code examples to fit your knowledge level.</span>
     </header>
 
     <div class="main">
         <!-- Similar to React components, we load the ExampleTable component. Just that this componens are written in RDF (Turtle syntax) -->
-        <div data-solid_ui_component="./components/facetedSearch/appsDisplay.ttl#ExamplesApp">
+        <div data-solid_ui_component="./src/facetedSearchPage/appsDisplay.ttl#ExamplesApp">
             <span id="loading-span">Loading...</span>
         </div>
     </div>
 
     <footer>
-        <a href="./components/editData/editData.html"> change data </a> | <a href="./components/admin/admin.html"> admin </a> | <a href="https://github.com/timea-solid/SolidHelloWorlds" target="_blank">source code</a> | <span class="footer-span"> made with ❤️  in Vienna </span>
+        <a href="./src/editDataPage/editData.html"> change data </a> | <a href="./src/adminPage/admin.html"> admin </a> | <a href="https://github.com/timea-solid/SolidHelloWorlds" target="_blank">source code</a> | <span class="footer-span"> made with ❤️  in Vienna </span>
     </footer>
 
     
     <script type="text/javascript" src="https://rdf.js.org/comunica-browser/versions/1/packages/actor-init-sparql/comunica-browser.js"></script>
-    <!-- for now we copy over the needed js from Jeff Zucker's project -->
-    <!-- <script src="https://jeff-zucker.github.io/solid-ui-components/src/solid-ui-components.js"></script> -->
-    <script type="text/javascript" src="./lib/solid-ui.js"></script>
-    <script type="text/javascript" src="./lib/solid-ui-components.js"></script>
-    <script>
-        solidUI.init()
-        document.getElementById("loading-span").hidden = true
-    </script>
+    <script type="module" src="./src/facetedSearchPage/index.js"></script>
 
 </body>
 </html>

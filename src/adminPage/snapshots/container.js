@@ -1,6 +1,6 @@
 async function loadOrCreateContainer(store, containerNode) {
     try {
-        const response = await store.fetcher?.load(containerNode)
+        const response = await store.fetcher.load(containerNode)
     } catch (err) {
         if (err.response && err.response.status === 404) {
             try {
@@ -38,7 +38,7 @@ async function createContainer (store, url) {
     }
 
     try {
-        await store.fetcher?.webOperation('PUT', url, { data: '', contentType: 'text/turtle', Link: '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"' })
+        await store.fetcher.webOperation('PUT', url, { data: '', contentType: 'text/turtle', Link: '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"' })
     } catch (err) {
         const msg = `not OK: got ${result.status} response while creating container at ${url}`
         throw new Error(msg)
@@ -58,14 +58,4 @@ return store
 
 async function getContainerMembers (store, containerNode) {
     return getContainerElements(store, containerNode);
-}
-
-function getContainerElements(store, containerNode) {
-    return store
-    .statementsMatching(
-        containerNode,
-        UI.rdf.sym("http://www.w3.org/ns/ldp#contains"),
-        undefined,
-    )
-    .map((st) => st.object);
 }
