@@ -34,7 +34,7 @@ This Web App makes use of HTML, Simple CSS, RDF and basic javascript. The heavy 
 * Details:
   - [facetedSearchPage](https://github.com/timea-solid/SolidHelloWorlds/tree/master/src/facetedSearchPage) is the simplest example: it theoretically ONLY needs a html and a RDF file (and CSS if you want to make it shinnier) and the solid-ui (or mashlib) and solid-ui-components libs. This example makes use of Jeff's solid-ui-components lib which has elements like accordion. appsDisplay.ttl is the RDF from which the Frontend if generated and it is of course mapped to the data model (ontology) used in the data we want displayed (which is also in RDF, stored on a Pod).
   - [editDataPage](https://github.com/timea-solid/SolidHelloWorlds/tree/master/src/editDataPage) is based on same principles: you have an RDF file, helloWorldForm.ttl based on which the frontend, a form in this case, is rendered. Again it is based on the data model (ontology) the raw data is using. Here we make use of the original solid-ui forms lib developed by Sir Tim erners-Lee. We use this lib here because one can also EDIT the data in place. 
-  - [adminPage](https://github.com/timea-solid/SolidHelloWorlds/tree/master/src/adminPage) is a nothing to see here page not making use of any UI rendered from RDF functionality. This page uses Solid Login to gove access to some admin activities such as checking snapshots of our data. 
+  - [adminPage](https://github.com/timea-solid/SolidHelloWorlds/tree/master/src/adminPage) is a "nothing to see here page" because it is not making use of any UI rendered from RDF functionality. This page uses Solid Login to give access to some admin activities such as checking snapshots of our data. 
 
 
 # Data Model
@@ -84,6 +84,7 @@ The ontology extends the SKOS scheme with predicates that help further describe 
 * add a user manual
 * add further thesaurus admin management
 * connect login with ACP
+* adminPage does not work when app deployed on a Pod
  
 # How to deploy the code
 
