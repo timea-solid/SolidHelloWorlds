@@ -11,6 +11,7 @@ Demo is running on my Solid Pod: [https://timea.solidcommunity.net/HelloWorld](h
   - [Solid Hello World Thesaurus](#Solid-Hello-World-Thesaurus)
   - [Solid Hello World Ontology](#Solid-Hello-World-Ontology)
 - [Improvements & ideas](#Improvements-and-ideas)
+  - [Known TODOs](#Known-TODOs) 
 - [How to deploy the code](#How-to-deploy-the-code)
   - [To configure in production](#To-configure-in-production)
 - [Attribution](#Attribution)
@@ -71,6 +72,18 @@ The ontology extends the SKOS scheme with predicates that help further describe 
 * There are problems with usage of GROUP_CONCAT which give XMLSchema#string in SPARQL queries. However the SPARQL queries and the thesaurus structure was changed to overcome this need.
 * If you have improvement ideas or find bugs please open a Git Issue. 
 * Feel free to commit PRs. 
+
+## Known TODOs:
+
+* create a properties file for where the KG and other resources are located
+* improve snapshot file type
+* improve login box styling
+* add callback on spanshot functions
+* improve js libs imports 
+* clean code further
+* add a user manual
+* add further thesaurus admin management
+* connect login with ACP
  
 # How to deploy the code
 
