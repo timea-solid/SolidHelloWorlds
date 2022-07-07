@@ -19,7 +19,7 @@ Demo is running on my Solid Pod: [https://timea.solidcommunity.net/HelloWorld](h
 # Purpose of Demo
 
 This demo server multiple goals.
-1) A collection of beginner friendly Solid code examples. The Solid community survey identified this as one of the highest needs in the community.
+1) A collection of beginner friendly Solid code examples. The Solid community survey identified this as one of the biggest needs in the Solid community.
 2) A reply to a conversation over at the [Solid forum](https://forum.solidproject.org/t/yet-another-solid-hello-world/4883/38).
 3) Create a Solid Web App with low-code by defining the Web App UI in RDF (no need to know any frontend framework). 
 4) Showcase how the 'Single point of truth' can be achieved and used with Solid.
