@@ -99,7 +99,7 @@
 
 # Solid Tech Stack Name
 :solidTechStackName a ui:SingleLineTextField; 
-            ui:size 12; 
+            ui:size 100; 
             ui:property skos:prefLabel;
             ui:label "Name of Solid lib"@en.
 
@@ -121,7 +121,7 @@
 
 # Sem Web Lib Name
 :semWebTechStackName a ui:SingleLineTextField; 
-            ui:size 12; 
+            ui:size 100; 
             ui:property skos:prefLabel;
             ui:label "Name of Semantic Web lib"@en.
 
@@ -143,7 +143,7 @@
 
 # Generic tech stack name
 :genericTechStackName a ui:SingleLineTextField; 
-            ui:size 12; 
+            ui:size 100; 
             ui:property skos:prefLabel;
             ui:label "Name of generic tech stack"@en.
 
@@ -167,7 +167,7 @@
 
 # Use case Name
 :useCaseName a ui:SingleLineTextField; 
-            ui:size 12; 
+            ui:size 100; 
             ui:property skos:prefLabel;
             ui:label "Name of use case"@en.
 
