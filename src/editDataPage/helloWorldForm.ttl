@@ -41,7 +41,7 @@
 
 # Project Name
 :projectName a ui:SingleLineTextField; 
-            ui:size 12; 
+            ui:size 100; 
             ui:property skos:prefLabel;
             ui:label "Name of project"@en.
 
