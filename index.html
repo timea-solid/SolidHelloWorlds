@@ -27,12 +27,22 @@
     </div>
 
     <footer>
-        <a href="./src/editDataPage/editData.html"> change data </a> | <a href="./src/adminPage/admin.html"> admin </a> | <a href="https://github.com/timea-solid/SolidHelloWorlds" target="_blank">source code</a> | <span class="footer-span"> made with ❤️  in Vienna </span>
+        <a href="./src/editDataPage/editData.html"> change data </a> |
+        <!--| <a href="./src/adminPage/admin.html"> admin </a> | -->
+        <a href="https://github.com/timea-solid/SolidHelloWorlds" target="_blank">source code</a> | 
+        <span class="footer-span"> made with ❤️  in Vienna </span>
     </footer>
 
     
     <script type="text/javascript" src="https://rdf.js.org/comunica-browser/versions/1/packages/actor-init-sparql/comunica-browser.js"></script>
-    <script type="module" src="./src/facetedSearchPage/index.js"></script>
+    <!-- for now we copy over the needed js from Jeff Zucker's project -->
+    <!-- <script src="https://jeff-zucker.github.io/solid-ui-components/src/solid-ui-components.js"></script> -->
+    <script type="text/javascript" src="./lib/solid-ui.js"></script>
+    <script type="text/javascript" src="./lib/solid-ui-components.js"></script>
+    <script>
+        solidUI.init()
+        document.getElementById("loading-span").hidden = true
+    </script>
 
 </body>
 </html>
