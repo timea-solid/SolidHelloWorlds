@@ -52,7 +52,6 @@ async function manageSnapshots(snapshotTable) {
 
             const userDiv = document.createElement('div')
             userDiv.setAttribute('class', 'nameDiv')
-            const snapshotKG = await store.fetcher?.load(sortedSnapshotFileNames[i])
             const snapshotCreator = store.any(UI.rdf.sym(sortedSnapshotFileNames[i]+"#this"), UI.rdf.sym('http://purl.org/dc/terms/creator'), null)
             if (snapshotCreator) {
                 userDiv.textContent = snapshotCreator.value
@@ -92,6 +91,12 @@ async function manageSnapshots(snapshotTable) {
             messageDivSpan.setAttribute('id','span'+timestamp)
             messageDivSpan.setAttribute('class','spanshotMessage')
             messageDiv.appendChild(messageDivSpan)
+
+            try {
+                await store.fetcher.load(sortedSnapshotFileNames[i])
+            } catch (err) {
+                messageDivSpan.textContent = "This snapshot has a parse error"
+            }
             
             liDiv.appendChild(timestampDiv)
             liDiv.appendChild(userDiv)
