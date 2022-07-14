@@ -47,6 +47,9 @@
   margin-right: 2em;
   margin-bottom: 2em;
 }
+.second-page .formFieldValue input {
+  min-width: 0;
+}
 
 .second-page .formFieldValue input, .second-page .formFieldValue select, .second-page .formFieldValue select option {
   width: 20em !important;
