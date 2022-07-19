@@ -12,7 +12,6 @@
 
 # Table of contents
 
-- [Welcome to Solid Hello Worlds! <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28">](#welcome-to-solid-hello-worlds-)
 - [Table of contents](#table-of-contents)
 - [Purpose of App](#purpose-of-app)
 - [About the code](#about-the-code)
