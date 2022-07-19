@@ -1,25 +1,29 @@
-# Welcome to Solid Hello World! <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28">
+# Welcome to Solid Hello Worlds! <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28">
 
-Demo is running on my Solid Pod: [https://timea.solidcommunity.net/HelloWorld](https://timea.solidcommunity.net/HelloWorld) and on [GitHub pages](https://timea-solid.github.io/SolidHelloWorlds/)
+* The App is running on my Solid Pod: [https://timea.solidcommunity.net/HelloWorld](https://timea.solidcommunity.net/HelloWorld) and on [GitHub pages](https://timea-solid.github.io/SolidHelloWorlds/)
+
+* The [user manual](https://github.com/timea-solid/SolidHelloWorlds/blob/master/docs/UserManual.md) is under docs.
+
+* Tutorial will be posted soon.
+
+* The App is part of the Blog post series of the SolidOS team
 
 **Note:** This project is build on prototype libraries. And it serves multiple goals.
 
 # Table of contents
 
-- [Welcome to Solid Hello World! <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28">](#welcome-to-solid-hello-world-)
-- [Table of contents](#table-of-contents)
-- [Purpose of Demo](#purpose-of-demo)
-- [Code Stack](#code-stack)
+- [Purpose of App](#purpose-of-app)
+- [About the code](#about-the-code)
 - [Data Model](#data-model)
-  - [Solid Hello World Thesaurus](#solid-hello-world-thesaurus)
-  - [Solid Hello World Ontology](#solid-hello-world-ontology)
+  - [Solid Hello Worlds Thesaurus](#solid-hello-worlds-thesaurus)
+  - [Solid Hello Worlds Ontology](#solid-hello-worlds-ontology)
 - [Improvements and ideas](#improvements-and-ideas)
   - [Known TODOs](#known-todos)
 - [How to deploy the code](#how-to-deploy-the-code)
   - [To configure in production](#to-configure-in-production)
 - [Attribution](#attribution)
 
-# Purpose of Demo
+# Purpose of App
 
 This demo server multiple goals.
 
@@ -28,11 +32,11 @@ This demo server multiple goals.
 3) Create a Solid Web App with low-code by defining the Web App UI in RDF (no need to know any frontend framework).
 4) Showcase how the 'Single point of truth' can be achieved and used with Solid.
 
-# Code Stack
+# About the code
 
 This Web App makes use of HTML, Simple CSS, RDF and basic javascript. The heavy lifting (rendering the UI from RDF) is taken care of libraries one can simply reuse such as: Comunica, Mashlib, solid-ui-components, see [attributions](#Attribution) for links.
 
-- Initially, the application was intended to be a one page web application. It all starts at `index.html`. However, because I make use of different libs, I added additional pages but kept them completely separate in order to easier follow how to use the libs best.
+- Initially, the application was intended to be a one page web application. It all starts at `index.html`. However, because I make use of different libs, I added additional pages but kept them in separate folders in the structure in order to easier follow how to use the libs best.
 
 - Details:
   - [facetedSearchPage](https://github.com/timea-solid/SolidHelloWorlds/tree/master/src/facetedSearchPage) is the simplest example: it theoretically ONLY needs a html and a RDF file (and CSS if you want to make it shinnier) and the solid-ui (or mashlib) and solid-ui-components libs. This example makes use of Jeff's solid-ui-components lib which has elements like accordion. appsDisplay.ttl is the RDF from which the Frontend if generated and it is of course mapped to the data model (ontology) used in the data we want displayed (which is also in RDF, stored on a Pod).
@@ -41,34 +45,40 @@ This Web App makes use of HTML, Simple CSS, RDF and basic javascript. The heavy 
 
 # Data Model
 
-The Solid Hello World is a Knowledge Graph which consists of:
+The Solid Hello Worlds is a Knowledge Graph which consists of:
 
-- a [Solid Hello World Thesaurus](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/helloWorld.ttl)
-- a [Solid Hello World Ontology](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/SolidHelloWorldOntology.ttl)
+- a [Solid Hello Worlds Thesaurus](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/helloWorld.ttl)
+- a [Solid Hello Worlds Ontology](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/SolidHelloWorldOntology.ttl)
 
-## Solid Hello World Thesaurus
+## Solid Hello Worlds Thesaurus
 
-- The raw data, saved in the repo only to serve as an example, [helloWorld.ttl](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/helloWorld.ttl) is a Thesaurus about Solid code examples (aka. Solid Hello World). This data can be on any Pod.
-- The Solid Hello World Thesaurus, helloWorld.ttl, is described with the help of [SKOS](https://www.w3.org/2004/02/skos/) and an own created ontology.
+- The raw data, saved in the repo only to serve as an example, [helloWorld.ttl](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/helloWorld.ttl) is a Thesaurus about Solid code examples (aka. Solid Hello Worlds). This data can be on any Pod.
+- The Solid Hello Worlds Thesaurus, [helloWorld.ttl](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/helloWorld.ttl), is described with the help of [SKOS](https://www.w3.org/2004/02/skos/) and an own created ontology.
 
-The Solid Hello World Thesaurus is based on [SKOS](https://www.w3.org/2004/02/skos/) and contains skos:concepts that describe:
+The Solid Hello Worlds Thesaurus is based on [SKOS](https://www.w3.org/2004/02/skos/) and contains skos:concepts that describe:
 
 - Solid code examples (Examples)
 - Code stacks divided in:
-  - Generic Code Stack, Solid library and Semantic Web library (see thesaurus image).
+  - Code Stack, Solid library and Semantic Web library (see thesaurus image).
 - Technical use cases
 
-The Solid Hello World Thesaurus structure drives the facests/the accordion menu on the search (main page). When I say the structure drives the menu it technically means a SPARQL query executed on the Solid Hello World Thesaurus `appsDisplay.ttl` automatically fills the search oprions for each accordion.
+The Solid Hello Worlds Thesaurus structure drives the facests/the accordion menu on the search (main page). When I say the structure drives the menu it technically means a SPARQL query executed on the Solid Hello Worlds Thesaurus `appsDisplay.ttl` automatically fills the search oprions for each accordion.
 
-The Solid Hello World Thesaurus looks like:
+The Solid Hello Worlds Thesaurus looks like:
 
-![Solid Hello Worlds SKOS Thesaurus](/docs/resources/knowledgeGraph/SolidHelloWorldsSKOSThesaurus.png)
+<p align="center">
+   <img width="25%" src="/docs/resources/knowledgeGraph/SolidHelloWorldsSKOSThesaurus.png">
+   </br>Solid Hello Worlds Thesaurus
+</p>
 
-## Solid Hello World Ontology
+## Solid Hello Worlds Ontology
 
 The ontology extends the SKOS scheme with predicates that help further describe or connect/descriove the skos:concepts. The onotology looks like:
 
-![Solid Hello Worlds ontology](/docs/resources/knowledgeGraph/SolidHelloWorldsOntology.png)
+<p align="center">
+   <img width="25%" src="/docs/resources/knowledgeGraph/SolidHelloWorldsOntology.png">
+    </br>Solid Hello Worlds Ontology
+</p>
 
 # Improvements and ideas
 
@@ -84,7 +94,6 @@ The ontology extends the SKOS scheme with predicates that help further describe 
 - add callback on spanshot functions
 - improve js libs imports
 - clean code further
-- add a user manual
 - add further thesaurus admin management
 - connect login with ACP
 - adminPage does not work when app deployed on a Pod
@@ -92,11 +101,11 @@ The ontology extends the SKOS scheme with predicates that help further describe 
 # How to deploy the code
 
 Locally, I make use of LiveServer in Visual Studio Code to run the project.
-Otherwise, the running demo is simply on my Pod, in a HelloWorld folder. An example is: [https://timea.solidcommunity.net/HelloWorld/components/](https://timea.solidcommunity.net/HelloWorld/components/). I made sure the HelloWorld folder has public access.  
+Otherwise, the running demo is simply on my Pod, in a HelloWorld folder. An example is: [https://timea.solidcommunity.net/HelloWorld/components/](https://timea.solidcommunity.net/HelloWorld/src/). I made sure the HelloWorld folder has public access.  
 
 ## To configure in production
 
-In the `index.html` where I make use of solid ui components make sure to replace `data-solid_ui_component="https://timea.solidcommunity.net/HelloWorld/components/facetedSearch/appsDisplay.ttl#ExamplesApp"` with the public location of where you deploy the components Turtle file (appsDisplay.ttl) if you use your own.
+In the `index.html` where I call the solid-ui-components make sure to replace `data-solid_ui_component="https://timea.solidcommunity.net/HelloWorld/src/facetedSearchPage/appsDisplay.ttl#ExamplesApp"` with the public location of where you deploy the forms Turtle file (appsDisplay.ttl) if you use your own.
 
 # Attribution
 
