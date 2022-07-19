@@ -17,7 +17,7 @@
 
 <#ExampleHelloWorlQuery>
   a ui:SparqlQuery ;
-  ui:endpoint <../../data/helloWorld.ttl> ;
+  ui:endpoint <https://timea.solidcommunity.net/HelloWorld/data/helloWorld.ttl> ;
   ui:query """
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     PREFIX So: <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#>
@@ -39,7 +39,7 @@
   a ui:Component ;
   ui:dataSource [
     a ui:SparqlQuery ;
-    ui:endpoint <../../data/helloWorld.ttl> ;
+    ui:endpoint <https://timea.solidcommunity.net/HelloWorld/data/helloWorld.ttl> ;
     ui:query """
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
       PREFIX So: <https://timea.solidcommunity.net/HelloWorld/data/SolidHelloWorldOntology#>
