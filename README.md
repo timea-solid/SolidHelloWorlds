@@ -27,7 +27,7 @@
 
 # Purpose of App
 
-This demo server multiple goals.
+This demo serves multiple goals.
 
 1) A collection of beginner friendly Solid code examples. The Solid community survey identified this as one of the biggest needs in the Solid community.
 2) A reply to a conversation over at the [Solid forum](https://forum.solidproject.org/t/yet-another-solid-hello-world/4883/38).
