@@ -12,6 +12,7 @@
 
 # Table of contents
 
+- [Welcome to Solid Hello Worlds! <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28">](#welcome-to-solid-hello-worlds-)
 - [Table of contents](#table-of-contents)
 - [Purpose of App](#purpose-of-app)
 - [About the code](#about-the-code)
@@ -111,6 +112,8 @@ The ontology extends the SKOS scheme with predicates that help further describe 
 
 # How to deploy the code
 
+Read about my [experiements with deployments of the app](./docs/deploymentExperiments.md).
+
 ## Run on a Pod
 
 1. Create a folder on your Pod and [make it public](https://github.com/SolidOS/userguide/blob/main/views/sharing/userguide.md#add).
@@ -135,7 +138,9 @@ Example: my running demo is simply on my Pod, in a HelloWorld folder over at: [h
 8. Change the link to your KG in the appsDisplay.ttl [L20](https://github.com/timea-solid/SolidHelloWorlds/blob/9bcb50f34c1e457427c0c72393f1ca4976005254/src/facetedSearchPage/appsDisplay.ttl#L20) and [L42](https://github.com/timea-solid/SolidHelloWorlds/blob/9bcb50f34c1e457427c0c72393f1ca4976005254/src/facetedSearchPage/appsDisplay.ttl#L42)
 9. Navigate to your project on your platform and you should see the index.html rendered.
 
-Example: my running demo is simply on two of my Pods. Main code is over at HelloWorld folder on [https://timea.solidcommunity.net/HelloWorld/components/](https://timea.solidcommunity.net/HelloWorld/src/). The data and forms are on another Pod over at: [https://solidweb.me/timeacss/public/SolidHelloWorlds/](https://solidweb.me/timeacss/public/SolidHelloWorlds/). I made sure the SolidHelloWorlds folder has public access because this is where the single point of truth (the KG) is.  
+***NOTE*** the adminPage is not working on a Pod deployment due to mashlib.
+
+Example: my running demo is simply on two of my Pods. Main code is over at HelloWorld folder on [https://timea.solidcommunity.net/SolidHelloWorldDistributed/](https://timea.solidcommunity.net/HelloWorld/src/). The data and forms are on another Pod over at: [https://solidweb.me/timeacss/public/SolidHelloWorlds/](https://solidweb.me/timeacss/public/SolidHelloWorlds/). I made sure the SolidHelloWorlds folder has public access because this is where the single point of truth (the KG) is.  
 
 # Attribution
 
