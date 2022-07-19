@@ -12,7 +12,6 @@
 
 # Table of contents
 
-- [Table of contents](#table-of-contents)
 - [Purpose of App](#purpose-of-app)
 - [About the code](#about-the-code)
 - [Data Model](#data-model)
