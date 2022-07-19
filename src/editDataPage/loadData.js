@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    snapshotsLogic()
+    snapshotsLogic(appConfig.LINK_TO_KNOWLEDGE_GRAPH, appConfig.LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS, appConfig.KNOWLEDGE_GRAPH_SNAPSHOT_NAME, appConfig.NUMBER_OF_SNAPSHOTS )
     loadData()
         }, false)
 
@@ -13,8 +13,6 @@ function renderData(div, subject, form) {
     const formThis = UI.store.sym(form.doc().uri+"#this")
     const newSubject = UI.store.sym(subject.doc().uri + "#Examples")
     console.log('appending form now')
-    // console.log(`form ${formThis}\n  subject:  ${newSubject}`)
-    // console.log(`resource:  ${newSubject.doc()}`)
     var ele = UI.widgets.appendForm(
         document,
         div,
@@ -29,11 +27,8 @@ function renderData(div, subject, form) {
 
 async function loadFormData() {
 
-    const LINK_TO_FORM = "https://timea.solidcommunity.net/HelloWorld/components/editData/helloWorldForm.ttl"
-    const LINK_TO_KNOWLEDGE_GRAPH = "https://timea.solidcommunity.net/HelloWorld/data/helloWorld.ttl"
-    
     // load Form data
-    const linkToFormDoc = UI.store.sym(LINK_TO_FORM)
+    const linkToFormDoc = UI.store.sym(appConfig.LINK_TO_EDIT_FORM)
     await UI.store.fetcher.load(linkToFormDoc)
     console.log("loaded form turtle")
     // just a test to see that it is loaded
@@ -44,7 +39,7 @@ async function loadFormData() {
     }
     
     // load Solid example knowledge graph
-    const linkToSolidExampleKnowledgeGraphDoc = UI.rdf.sym(LINK_TO_KNOWLEDGE_GRAPH)
+    const linkToSolidExampleKnowledgeGraphDoc = UI.rdf.sym(appConfig.LINK_TO_KNOWLEDGE_GRAPH)
     await UI.store.fetcher.load(linkToSolidExampleKnowledgeGraphDoc)
     console.log("loaded knowledge graph")
     // just a test to see that it is loaded

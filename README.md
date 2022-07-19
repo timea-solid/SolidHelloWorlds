@@ -47,13 +47,13 @@ This Web App makes use of HTML, Simple CSS, RDF and basic javascript. The heavy 
 
 The Solid Hello Worlds is a Knowledge Graph which consists of:
 
-- a [Solid Hello Worlds Thesaurus](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/helloWorld.ttl)
+- a [Solid Hello Worlds Thesaurus](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/example-helloWorlds.ttl)
 - a [Solid Hello Worlds Ontology](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/SolidHelloWorldOntology.ttl)
 
 ## Solid Hello Worlds Thesaurus
 
-- The raw data, saved in the repo only to serve as an example, [helloWorld.ttl](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/helloWorld.ttl) is a Thesaurus about Solid code examples (aka. Solid Hello Worlds). This data can be on any Pod.
-- The Solid Hello Worlds Thesaurus, [helloWorld.ttl](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/helloWorld.ttl), is described with the help of [SKOS](https://www.w3.org/2004/02/skos/) and an own created ontology.
+- The raw data, saved in the repo only to serve as an example, [example-helloWorlds.ttl](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/example-helloWorlds.ttl) is a Thesaurus about Solid code examples (aka. Solid Hello Worlds). This data can be on any Pod.
+- The Solid Hello Worlds Thesaurus, [example-helloWorlds.ttl](https://github.com/timea-solid/SolidHelloWorlds/blob/master/data/example-helloWorlds.ttl), is described with the help of [SKOS](https://www.w3.org/2004/02/skos/) and an own created ontology.
 
 The Solid Hello Worlds Thesaurus is based on [SKOS](https://www.w3.org/2004/02/skos/) and contains skos:concepts that describe:
 

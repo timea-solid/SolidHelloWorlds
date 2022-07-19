@@ -1,12 +1,4 @@
 async function manageSnapshots(snapshotTable) {
-    // from snapshot.js
-    // this is the resource we make snapshots for
-    LINK_TO_KNOWLEDGE_GRAPH = "https://timea.solidcommunity.net/HelloWorld/data/helloWorld.ttl"
-    // this is the container where we place the snapshots
-    LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS = "https://timea.solidcommunity.net/HelloWorld/data/snapshots/"
-    // this is the basename of the created snapshots to which we add the timestamp and the filetype .ttl 
-    // TODO: automatised to identify the filetype from the input file type
-    LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOT_NAME = LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS + "helloWorld"
 
     const parentDiv = document.getElementById('adminDiv')
     snapshotTable.innerHTML = ""
@@ -14,13 +6,13 @@ async function manageSnapshots(snapshotTable) {
     const store = UI.store
 
     try {
-        const response = await store.fetcher.load(LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS)
+        const response = await store.fetcher.load(appConfig.LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS)
     } catch (err) {
-        const msg = 'could not load '+LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS
+        const msg = 'could not load '+appConfig.LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS
         throw new Error(msg)
     }
 
-    const snapshots = await getContainerMembers(store, UI.rdf.sym(LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS))
+    const snapshots = await getContainerMembers(store, UI.rdf.sym(appConfig.LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS))
     const sortedSnapshotFileNames = snapshots.map(snapshot => snapshot.value).sort() // the first element contains the oldest content
     if (sortedSnapshotFileNames && sortedSnapshotFileNames.length !== 0) {
 
@@ -66,7 +58,7 @@ async function manageSnapshots(snapshotTable) {
             useButton.addEventListener(
                 'click',
                 function (_event) {
-                    switchSnapshot(store, sortedSnapshotFileNames[i], document.getElementById('span'+timestamp))
+                    switchSnapshot(store, sortedSnapshotFileNames[i], document.getElementById('span'+timestamp), appConfig.LINK_TO_KNOWLEDGE_GRAPH)
                 },
                 false
             )
@@ -124,7 +116,7 @@ async function manageSnapshots(snapshotTable) {
     createSnapshotButton.addEventListener(
         'click',
         function (_event) {
-            createSnapshotNow(store, LINK_TO_KNOWLEDGE_GRAPH, LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOT_NAME, sortedSnapshotFileNames, document.getElementById('createSnap'))
+            createSnapshotNow(store, appConfig.LINK_TO_KNOWLEDGE_GRAPH, appConfig.KNOWLEDGE_GRAPH_SNAPSHOT_NAME, sortedSnapshotFileNames, document.getElementById('createSnap'))
         },
         false
     )

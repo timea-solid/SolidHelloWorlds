@@ -1,5 +1,5 @@
 ###
-# Solid Hello World example applications - 2021-12-02
+# Solid Hello Worlds example applications - 2021-12-02
 ###
 
 @prefix : <#>.
