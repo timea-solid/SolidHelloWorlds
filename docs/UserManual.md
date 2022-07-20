@@ -49,6 +49,8 @@ First, you can select from the drop down menu the example project one wants to e
   </br>Figure 5: Select project menu item
 </p>
 
+### Edit
+
 After selecting an option, the information is displayed right under: name of the project, short description, author are all text fields. The project links expect URLs. And the technical stack are multi select fields.
 A multi select field is depicted in Figure 6. If one wants to remove an option, you click on the x of the options. One can delete all options by clicking on the rightmost x. When clicking on *Select…* a drop down menu is extended where one can add other options.
 
@@ -56,6 +58,8 @@ A multi select field is depicted in Figure 6. If one wants to remove an option, 
   <img width="40%" src="/docs/resources/MultiSelect.png">
   </br>Figure 6: Multi-select input field
 </p>
+
+### Add
 
 In all select input fields there is an options named *Create new*.
 When this option is selected a brand new element is created in the background. As soon as the following input field is edited, the new element is auto-saved. (to be exact, as soon as one clicks outside of an input field the data is saved). This specific feature makes it so that there is no more SAVE button necessary anymore (much like your experience of writing in Google Docs), the reason why it is missing entirely. After each edit: adding to an input field, editing a field, deleting text in a field, the data is autosaved for you. However, to see the new options part of the drop down fields one might need to refresh the page entirely.
@@ -66,5 +70,9 @@ There are cases when concepts are missing. In that situation we recommend to sel
   <img width="50%" src="/docs/resources//Creating%20a%20new%20code%20stack.png">
   </br>Figure 7: Input field for creating a new generic technical stack
 </p>
+
+### Delete
+
+There is, on purpose, no delete option in the edit interface. For now, if one wants to delete a record entirely you can open a Git Issue on this repo. Or, one can completely edit an existing record, basically replacing an existing one. 
 
 For feedback or missing information please consider opening a PR or a git issue in the [GitHub repository](https://github.com/timea-solid/SolidHelloWorlds).
