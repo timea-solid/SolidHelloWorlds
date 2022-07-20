@@ -1,12 +1,12 @@
 # Welcome to Solid Hello Worlds! <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28">
 
-* The App is running on my Solid Pod: [https://timea.solidcommunity.net/HelloWorld](https://timea.solidcommunity.net/HelloWorld) and on [GitHub pages](https://timea-solid.github.io/SolidHelloWorlds/)
+* The App is running on my Solid Pod: [https://timea.solidcommunity.net/HelloWorld](https://timea.solidcommunity.net/HelloWorld) and on [GitHub pages](https://timea-solid.github.io/SolidHelloWorlds/).
 
 * The [user manual](https://github.com/timea-solid/SolidHelloWorlds/blob/master/docs/UserManual.md) is under docs.
 
-* Tutorial will be posted soon.
+* [Tutorial for Solid Hello Worlds](https://timea.solidcommunity.net/Blog%20posts/2022/Solid%20Hello%20Worlds%20-%20tutorial/).
 
-* The App is part of the Blog post series of the SolidOS team
+* The App is part of the *Linked Data driven frontends* blog post series from SolidOS team.
 
 **Note:** This project is build on prototype libraries. And it serves multiple goals.
 
