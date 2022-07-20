@@ -111,6 +111,6 @@ async function getSnapshotWithoutAdditionalTriples(store, linkToResource) {
     return loadedResource
 }
 
-async function getTimestampFromSnapshot(snapshot) {
+function getTimestampFromSnapshot(snapshot) {
     return snapshot.substring(snapshot.lastIndexOf('-')+1, snapshot.indexOf('.ttl'))
 }
