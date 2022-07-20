@@ -24,8 +24,8 @@ async function manageSnapshots(snapshotTable) {
         snapshotTable.appendChild(snapshotsUL)
 
         sortedSnapshotFileNames.reverse(function (x, y) {
-            const timestampx = x.substring(x.lastIndexOf('-')+1, x.indexOf('.ttl'))
-            const timestampy = y.substring(y.lastIndexOf('-')+1, y.indexOf('.ttl'))
+            const timestampx = getTimestampFromSnapshot(x)
+            const timestampy = getTimestampFromSnapshot(y)
             return timestampx - timestampy;
         })
 
@@ -39,7 +39,7 @@ async function manageSnapshots(snapshotTable) {
 
             const timestampDiv = document.createElement('div')
             timestampDiv.setAttribute('class', 'timstampDiv')
-            const timestamp = sortedSnapshotFileNames[i].substring(sortedSnapshotFileNames[i].lastIndexOf('-') + 1, sortedSnapshotFileNames[i].indexOf('.ttl'))
+            const timestamp = getTimestampFromSnapshot(sortedSnapshotFileNames[i])
             timestampDiv.textContent = (new Date(parseInt(timestamp))).toISOString()
 
             const userDiv = document.createElement('div')
