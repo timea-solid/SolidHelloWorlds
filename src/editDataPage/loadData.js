@@ -1,7 +1,9 @@
-document.addEventListener('DOMContentLoaded', function () {
-    snapshotsLogic(appConfig.LINK_TO_KNOWLEDGE_GRAPH, appConfig.LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS, appConfig.KNOWLEDGE_GRAPH_SNAPSHOT_NAME, appConfig.NUMBER_OF_SNAPSHOTS )
-    loadData()
-        }, false)
+window.onload = function() {
+    if (window.location.href.indexOf('editData.html') > -1) {
+        snapshotsLogic(appConfig.LINK_TO_KNOWLEDGE_GRAPH, appConfig.LINK_TO_KNOWLEDGE_GRAPH_SNAPSHOTS, appConfig.KNOWLEDGE_GRAPH_SNAPSHOT_NAME, appConfig.NUMBER_OF_SNAPSHOTS)
+        loadData()
+    }
+}
 
 function complainIfBad(ok, message) {
     if (ok) return

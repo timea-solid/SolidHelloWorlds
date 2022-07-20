@@ -149,6 +149,12 @@ nav {
   margin: 1em;
 }
 
+.noSnapshots {
+  width: fit-content;
+  text-align: center;
+  margin-left: 12em;
+}
+
 .snapshotTable {
   width: fit-content;
   text-align: center;

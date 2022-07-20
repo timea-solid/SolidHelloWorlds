@@ -44,7 +44,8 @@ async function manageSnapshots(snapshotTable) {
 
             const userDiv = document.createElement('div')
             userDiv.setAttribute('class', 'nameDiv')
-            const snapshotCreator = store.any(UI.rdf.sym(sortedSnapshotFileNames[i]+"#this"), UI.rdf.sym('http://purl.org/dc/terms/creator'), null)
+            await store.fetcher.load(sortedSnapshotFileNames[i])
+            const snapshotCreator = await store.any(UI.rdf.sym(sortedSnapshotFileNames[i]+'#this'), UI.rdf.sym('http://purl.org/dc/terms/creator'), null, UI.rdf.sym(sortedSnapshotFileNames[i]))
             if (snapshotCreator) {
                 userDiv.textContent = snapshotCreator.value
             } else {
@@ -102,10 +103,13 @@ async function manageSnapshots(snapshotTable) {
         }
         
     } else {
+        const noSnapMessageDiv = document.createElement('div')
         const message = document.createElement('span')
         message.setAttribute('id', 'spanMessage')
         message.textContent = "The system has no snapshots yet"
-        snapshotTable.appendChild(message)
+        noSnapMessageDiv.appendChild(message)
+        snapshotTable.appendChild(noSnapMessageDiv)
+        snapshotTable.setAttribute('class', 'noSnapshots')
     }
 
     const createSnapDiv = document.createElement('div')
@@ -124,6 +128,7 @@ async function manageSnapshots(snapshotTable) {
     const messageCreateSpan = document.createElement('span')
     messageCreateSpan.setAttribute('class', 'spanshotCreateMessage')
     messageCreateSpan.setAttribute('id', 'createSnap')
+
     createSnapDiv.appendChild(createSnapshotButton)
     createSnapDiv.appendChild(messageCreateSpan)
     
