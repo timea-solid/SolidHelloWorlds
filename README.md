@@ -101,13 +101,7 @@ The ontology extends the SKOS scheme with predicates that help further describe 
 
 ## Known TODOs
 
-* improve snapshot file type
-* improve login box styling
-* add callback on spanshot functions
-* clean code further
-* add further thesaurus admin management
-* connect login with ACP
-* adminPage does not work when app deployed on a Pod
+* see [Git Issues](https://github.com/timea-solid/SolidHelloWorlds/issues)
 
 # How to deploy the code
 
