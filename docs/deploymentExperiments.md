@@ -8,4 +8,4 @@ I did this like described in the [readme](https://github.com/timea-solid/SolidHe
 
 So far, deploying the app on GitHub Pages seems to work fastest. 
 
-My conclusion is that Pods are not best used as hosting platforms for web apps. And tha the loading of a KG or forms from a Pod is also not the best and fastest. 
+The problem was all along that some of my libs, my app depends on, solid-ui.js, in particular was loading slow (3.5M). I added a minified version of it and now the WebApp works fast enough on all deployment flavours. 
