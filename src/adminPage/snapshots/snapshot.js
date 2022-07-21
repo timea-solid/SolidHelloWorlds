@@ -48,8 +48,8 @@ async function createSnapshot(store, currentKG, nameOfSnapshot) {
 
 function deleteOlderSnapshots(store, snapshots, threshold) {
     snapshots.sort(function (x, y) {
-    const timestampx = x.substring(x.lastIndexOf('-')+1, x.indexOf('.ttl'))
-    const timestampy = y.substring(y.lastIndexOf('-')+1, y.indexOf('.ttl'))
+    const timestampx = getTimestampFromSnapshot(x)
+    const timestampy = getTimestampFromSnapshot(y)
     return timestampx - timestampy;
     })
     for (let i = 0; i < snapshots.length-threshold; i++) {
@@ -109,4 +109,8 @@ async function getSnapshotWithoutAdditionalTriples(store, linkToResource) {
     loadedResource = await store.fetcher.load(linkToResource)
     await store.updater.update([], creator.concat(modified))
     return loadedResource
+}
+
+function getTimestampFromSnapshot(snapshot) {
+    return snapshot.substring(snapshot.lastIndexOf('-')+1, snapshot.lastIndexOf('.'))
 }
