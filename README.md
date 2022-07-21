@@ -1,7 +1,7 @@
 # Welcome to Solid Hello Worlds! <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28">
 
 * The App is running in PRODUCTION on my Solid Pod for now: [https://timea.solidcommunity.net/HelloWorld](https://timea.solidcommunity.net/HelloWorld)
-* For development purposes you can see the [GitHub pages](https://timea-solid.github.io/SolidHelloWorlds/) - which is updated with every push to master branch.
+* The App is running in DEVELOPMENT on [GitHub pages](https://timea-solid.github.io/SolidHelloWorlds/) - which is updated with every push to master branch.
 
 * The [user manual](https://github.com/timea-solid/SolidHelloWorlds/blob/master/docs/UserManual.md) is under docs.
 
