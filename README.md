@@ -118,6 +118,7 @@ Read about my [experiements with deployments of the app](./docs/deploymentExperi
 
 Example: my running demo is simply on my Pod, in a HelloWorld folder over at: [https://timea.solidcommunity.net/HelloWorld/components/](https://timea.solidcommunity.net/HelloWorld/src/). I made sure the HelloWorld folder has public access.  
 
+***NOTE*** make sure to use minified versions of the libs (solid-ui, mashlib especially) otherwise the app load quite slow.
 ***NOTE*** the adminPage is not working on a Pod deployment due to mashlib.
 ***NOTE*** Unfortunately solid-ui only works with absolute URLs reason why the development KG and forms are the ones deployed on my Pod. 
 
@@ -132,10 +133,11 @@ Example: my running demo is simply on my Pod, in a HelloWorld folder over at: [h
 8. Change the link to your KG in the appsDisplay.ttl [L20](https://github.com/timea-solid/SolidHelloWorlds/blob/9bcb50f34c1e457427c0c72393f1ca4976005254/src/facetedSearchPage/appsDisplay.ttl#L20) and [L42](https://github.com/timea-solid/SolidHelloWorlds/blob/9bcb50f34c1e457427c0c72393f1ca4976005254/src/facetedSearchPage/appsDisplay.ttl#L42)
 9. Navigate to your project on your platform and you should see the index.html rendered.
 
+***NOTE*** make sure to use minified versions of the libs (solid-ui, mashlib especially) otherwise the app load quite slow.
 ***NOTE*** the adminPage is not working on a Pod deployment due to mashlib.
 ***NOTE*** Unfortunately solid-ui only works with absolute URLs reason why in the config.js we need full URLs. 
 
-Example: my running demo is simply on two of my Pods. Main code is over at HelloWorld folder on [https://timea.solidcommunity.net/SolidHelloWorldDistributed/](https://timea.solidcommunity.net/HelloWorld/src/). The data and forms are on another Pod over at: [https://solidweb.me/timeacss/public/SolidHelloWorlds/](https://solidweb.me/timeacss/public/SolidHelloWorlds/). I made sure the SolidHelloWorlds folder has public access because this is where the single point of truth (the KG) is.  
+Example: my running demo is deployed, in this case, on two of my Pods. Main code is over at HelloWorld folder on [https://timea.solidcommunity.net/SolidHelloWorldDistributed/](https://timea.solidcommunity.net/HelloWorld/src/). The data and forms are on another Pod over at: [https://solidweb.me/timeacss/public/SolidHelloWorlds/](https://solidweb.me/timeacss/public/SolidHelloWorlds/). I made sure the SolidHelloWorlds folder has public access because this is where the single point of truth (the KG) is.  
 
 # Attribution
 
