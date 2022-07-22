@@ -48,8 +48,10 @@
         ?helloWorldApp a So:Example-Application .
         ?helloWorldApp skos:prefLabel ?name .
         
+        VALUES (?hasCode) { (So:usesCodeStack) (So:usesSemWebLibrary) (So:usesSolidLibrary) } .
+
         OPTIONAL {
-          ?helloWorldApp So:usesFullCodeStack ?codeStack .
+          ?helloWorldApp ?hasCode ?codeStack .
           ?codeStack skos:prefLabel ?codeName. 
         }
         OPTIONAL {
