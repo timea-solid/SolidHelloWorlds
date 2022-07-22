@@ -7,7 +7,7 @@
 
 * [Tutorial for Solid Hello Worlds](https://timea.solidcommunity.net/Blog%20posts/2022/Solid%20Hello%20Worlds%20-%20tutorial/).
 
-* The App is part of the *Linked Data driven frontends* blog post series from SolidOS team.
+* The App is part of the *[Linked Data-driven frontends](https://solidos.solidcommunity.net/)* blog post series from SolidOS team.
 
 **Note:** This project is build on prototype libraries. And it serves multiple goals.
 
