@@ -59,6 +59,13 @@ A multi select field is depicted in Figure 6. If one wants to remove an option, 
   </br>Figure 6: Multi-select input field
 </p>
 
+If you do not know exactly what lib is used, there is for each field a generic name you can select from:
+
+* Solid libraries used: A Solid library
+* Semantic Web libraries used: A Semantic Web library
+* Generic technical stack used: Code Stack
+* Select use case: A technical use case
+
 ### Add
 
 In all select input fields there is an options named *Create new*.
