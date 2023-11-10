@@ -37,12 +37,12 @@ This demo serves multiple goals.
 
 # About the code
 
-This Web App makes use of HTML, Simple CSS, RDF, and basic javascript. The heavy lifting (rendering the UI from RDF) is taken care of libraries one can simply reuse such as Comunica, Mashlib, and solid-ui-components, see [attributions](#Attribution) for links.
+This Web App makes use of HTML, Simple CSS, RDF, and basic JavaScript. The heavy lifting (rendering the UI from RDF) is taken care of libraries one can simply reuse such as Comunica, Mashlib, and solid-ui-components, see [attributions](#Attribution) for links.
 
 * Initially, the application was intended to be a one-page web application. It all starts at `index.html`. However, because I make use of different libs, I added additional pages but kept them in separate folders in the structure in order to follow how to use the libs best.
 
 * Details:
-  * [facetedSearchPage](https://github.com/timea-solid/SolidHelloWorlds/tree/master/src/facetedSearchPage) is the simplest example: it theoretically ONLY needs an HTML and an RDF file (and CSS if you want to make it shinier) and the solid-ui (or mashlib) and solid-ui-components libs. This part of the app makes use of Jeff's solid-ui-components lib which has elements for menus, like accordions. [appsDisplay.ttl](https://github.com/timea-solid/SolidHelloWorlds/blob/master/src/facetedSearchPage/appsDisplay.ttl) is the RDF form which the frontend is generated from, and it is of course mapped to the data model (Knowledge Graph and Ontology) used in the data we want displayed (which is also in RDF, stored on a Pod).
+  * [facetedSearchPage](https://github.com/timea-solid/SolidHelloWorlds/tree/master/src/facetedSearchPage) is the simplest example: it theoretically ONLY needs an HTML and an RDF file (and CSS if you want to make it shinier) and the [solid-ui](https://github.com/SolidOS/solid-ui) (or [mashlib](https://github.com/SolidOS/mashlib)) and solid-ui-components libs. This part of the app makes use of Jeff's solid-ui-components lib which has elements for menus, like accordions. [appsDisplay.ttl](https://github.com/timea-solid/SolidHelloWorlds/blob/master/src/facetedSearchPage/appsDisplay.ttl) is the RDF form which the frontend is generated from, and it is of course mapped to the data model (Knowledge Graph and Ontology) used in the data we want displayed (which is also in RDF, stored on a Pod).
   * [editDataPage](https://github.com/timea-solid/SolidHelloWorlds/tree/master/src/editDataPage) is based on same principles: you have an RDF file, [helloWorldForm.ttl](https://github.com/timea-solid/SolidHelloWorlds/blob/master/src/editDataPage/helloWorldForm.ttl), a form, based on which the frontend is rendered. Again it is based on the data model (ontology) the raw data is using. Here we make use of the original solid-ui forms lib developed by Sir Tim Berners-Lee. This lib allows us to EDIT the data in place.
   * [adminPage](https://github.com/timea-solid/SolidHelloWorlds/tree/master/src/adminPage) uses Solid Login to give access to some admin activities such as checking snapshots of our data.
   * ***Note** adminPage does not work when app is deployed on a Pod due to mashlib. If deployed on another platform it should work.
@@ -87,9 +87,9 @@ The ontology extends the SKOS scheme with predicates that help further describe 
 # How to run the code locally
 
 1. Git clone repo.
-2. OPTIONAL: Change the links to the data model and forms over in the [config.js](https://github.com/timea-solid/SolidHelloWorlds/blob/master/src/config.js). Defaults are the KG and form of the project.
+2. OPTIONAL: Change the links to the data model and forms over in the [config.js](https://github.com/timea-solid/SolidHelloWorlds/blob/master/src/config.js). Defaults are the Knowledge Graph (KG) and form of the project.
 3. OPTIONAL: Change the link to the appsDisplay.ttl over in the [index.html](https://github.com/timea-solid/SolidHelloWorlds/blob/9bcb50f34c1e457427c0c72393f1ca4976005254/index.html#L24)
-4. OPTIONAL: Change the link to your KG in the appsDisplay.ttl [L20](https://github.com/timea-solid/SolidHelloWorlds/blob/9bcb50f34c1e457427c0c72393f1ca4976005254/src/facetedSearchPage/appsDisplay.ttl#L20) and [L42](https://github.com/timea-solid/SolidHelloWorlds/blob/9bcb50f34c1e457427c0c72393f1ca4976005254/src/facetedSearchPage/appsDisplay.ttl#L42)
+4. OPTIONAL: Change the link to your Knowledge Graph (KG) in the appsDisplay.ttl [L20](https://github.com/timea-solid/SolidHelloWorlds/blob/9bcb50f34c1e457427c0c72393f1ca4976005254/src/facetedSearchPage/appsDisplay.ttl#L20) and [L42](https://github.com/timea-solid/SolidHelloWorlds/blob/9bcb50f34c1e457427c0c72393f1ca4976005254/src/facetedSearchPage/appsDisplay.ttl#L42)
 5. Run with `npm run start` or `npx vite`.
 
 ***NOTE*** Unfortunately solid-ui only works with absolute URLs reason why the development KG and forms are the ones deployed on my Pod. 
@@ -112,16 +112,18 @@ Read about my [experiements with deployments of the app](./docs/deploymentExperi
 
 1. Create a folder on your Pod and [make it public](https://github.com/SolidOS/userguide/blob/main/views/sharing/userguide.md#add).
 2. Deploy the data from this project to the Pod in the same exact structure. Be sure to have data, src, lib, static, index.html, and their contents on your Pod.
-3. Change the links to the data model and forms over in the [config.js](https://github.com/timea-solid/SolidHelloWorlds/blob/master/src/config.js). Defaults are the KG and form of the project which will not work.
+3. Change the links to the data model and forms over in the [config.js](https://github.com/timea-solid/SolidHelloWorlds/blob/master/src/config.js). Defaults are the Knowledge Graph (KG) and form of the project which will not work.
 4. Change the link to the appsDisplay.ttl over in the [index.html](https://github.com/timea-solid/SolidHelloWorlds/blob/9bcb50f34c1e457427c0c72393f1ca4976005254/index.html#L24)
 5. Change the link to your KG in the appsDisplay.ttl [L20](https://github.com/timea-solid/SolidHelloWorlds/blob/9bcb50f34c1e457427c0c72393f1ca4976005254/src/facetedSearchPage/appsDisplay.ttl#L20) and [L42](https://github.com/timea-solid/SolidHelloWorlds/blob/9bcb50f34c1e457427c0c72393f1ca4976005254/src/facetedSearchPage/appsDisplay.ttl#L42)
 6. Navigate to the Pod folder name you created for your project and you should see the index.html rendered.
 
-Example: my running demo is simply on my Pod, in a HelloWorld folder over at: [https://timea.solidcommunity.net/HelloWorld/components/](https://timea.solidcommunity.net/HelloWorld/src/). I made sure the HelloWorld folder has public access.  
+Example: my running demo is simply on my Pod, in a HelloWorld folder over at [https://timea.solidcommunity.net/HelloWorld/components/](https://timea.solidcommunity.net/HelloWorld/src/). I made sure the HelloWorld folder has public access.  
 
 ***NOTE*** make sure to use minified versions of the libs (solid-ui, mashlib especially) otherwise the app loads quite slowly.
+
 ***NOTE*** the adminPage is not working on a Pod deployment due to mashlib.
-***NOTE*** Unfortunately solid-ui only works with absolute URLs reason why the development KG and forms are the ones deployed on my Pod. 
+
+***NOTE*** Unfortunately solid-ui only works with absolute URLs reason why the development Knowledge Graph (KG) and forms are the ones deployed on my Pod. 
 
 ## Run as a distributed system
 
@@ -135,10 +137,12 @@ Example: my running demo is simply on my Pod, in a HelloWorld folder over at: [h
 9. Navigate to your project on your platform and you should see the index.html rendered.
 
 ***NOTE*** make sure to use minified versions of the libs (solid-ui, mashlib especially) otherwise the app loads quite slowly.
+
 ***NOTE*** the adminPage is not working on a Pod deployment due to mashlib.
+
 ***NOTE*** Unfortunately solid-ui only works with absolute URLs reason why in the config.js we need full URLs. 
 
-Example: my running demo is deployed, in this case, on two of my Pods. The main code is over in the HelloWorld folder on [https://timea.solidcommunity.net/SolidHelloWorldDistributed/](https://timea.solidcommunity.net/HelloWorld/src/). The data and forms are on another Pod over at [https://solidweb.me/timeacss/public/SolidHelloWorlds/](https://solidweb.me/timeacss/public/SolidHelloWorlds/). I made sure the SolidHelloWorlds folder has public access because this is where the single point of truth (the KG) is.  
+Example: my running demo is deployed, in this case, on two of my Pods. The main code is over in the HelloWorld folder on [https://timea.solidcommunity.net/SolidHelloWorldDistributed/](https://timea.solidcommunity.net/HelloWorld/src/). The data and forms are on another Pod over at [https://solidweb.me/timeacss/public/SolidHelloWorlds/](https://solidweb.me/timeacss/public/SolidHelloWorlds/). I made sure the SolidHelloWorlds folder has public access because this is where the single point of truth (the Knowledge Graph (KG)) is.  
 
 # Attribution
 
